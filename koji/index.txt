@@ -1,0 +1,10 @@
+V	310224105016Z		01	unknown	/C=CN/ST=BeiJing/O=TurboLinux/CN=kojira/emailAddress=jian.li@turbolinux.com.cn
+V	310224105030Z		02	unknown	/C=CN/ST=BeiJing/O=TurboLinux/CN=kojiweb/emailAddress=jian.li@turbolinux.com.cn
+V	310224105044Z		03	unknown	/C=CN/ST=BeiJing/O=TurboLinux/CN=kojihub/emailAddress=jian.li@turbolinux.com.cn
+V	310224105101Z		04	unknown	/C=CN/ST=BeiJing/O=TurboLinux/CN=kojibuilder1/emailAddress=jian.li@turbolinux.com.cn
+V	310224105117Z		05	unknown	/C=CN/ST=BeiJing/O=TurboLinux/CN=kojibuilder2/emailAddress=jian.li@turbolinux.com.cn
+V	310224105127Z		06	unknown	/C=CN/ST=BeiJing/O=TurboLinux/CN=kojibuilder3/emailAddress=jian.li@turbolinux.com.cn
+V	310224105138Z		07	unknown	/C=CN/ST=BeiJing/O=TurboLinux/CN=kojibuilder4/emailAddress=jian.li@turbolinux.com.cn
+V	310224105148Z		08	unknown	/C=CN/ST=BeiJing/O=TurboLinux/CN=kojibuilder5/emailAddress=jian.li@turbolinux.com.cn
+V	310224105159Z		09	unknown	/C=CN/ST=BeiJing/O=TurboLinux/CN=kojiadmin/emailAddress=jian.li@turbolinux.com.cn
+V	310224105232Z		0A	unknown	/C=CN/ST=BeiJing/O=TurboLinux/CN=kojiuser/emailAddress=jian.li@turbolinux.com.cn
