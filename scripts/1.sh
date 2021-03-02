@@ -1,9 +1,24 @@
 #!/bin/bash
 
 set -e
-[ -e /etc/pki/koji ] && mv /etc/pki/koji /etc/pki/koji-${RANDOM}
-mkdir -p /etc/pki/koji || true
-cd /etc/pki/koji/ 
+
+cat > /etc/selinux/config << EOF
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of these three values:
+#     targeted - Targeted processes are protected,
+#     minimum - Modification of targeted policy. Only selected processes are protected. 
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+EOF
+
+
+[ -e /etc/pki/koji ] && mv /etc/pki/koji /tmp/koji-${RANDOM}
+mkdir -p /etc/pki/koji && cd /etc/pki/koji/ 
 
 cat > /etc/pki/koji/ssl.cnf << EOF
 HOME                    = .
@@ -14,20 +29,20 @@ default_ca              = ca_default
 
 [ca_default]
 dir                     = .
-certs                   = $dir/certs
-crl_dir                 = $dir/crl
-database                = $dir/index.txt
-new_certs_dir           = $dir/newcerts
-certificate             = $dir/%s_ca_cert.pem
-private_key             = $dir/private/%s_ca_key.pem
-serial                  = $dir/serial
-crl                     = $dir/crl.pem
+certs                   = \$dir/certs
+crl_dir                 = \$dir/crl
+database                = \$dir/index.txt
+new_certs_dir           = \$dir/newcerts
+certificate             = \$dir/%s_ca_cert.pem
+private_key             = \$dir/private/%s_ca_key.pem
+serial                  = \$dir/serial
+crl                     = \$dir/crl.pem
 x509_extensions         = usr_cert
 name_opt                = ca_default
 cert_opt                = ca_default
 default_days            = 3650
 default_crl_days        = 30
-default_md              = md5
+default_md              = sha256
 preserve                = no
 policy                  = policy_match
 
@@ -99,6 +114,6 @@ echo "Common Name fill with koji"
 openssl req -config ssl.cnf -new -x509 -days 3650 -key private/${caname}_ca_cert.key -out ${caname}_ca_cert.crt -extensions v3_ca
 
 echo "All done!"
-
+tree
 ls -alh private/${caname}_ca_cert.key
 
