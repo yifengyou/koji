@@ -1327,7 +1327,7 @@ to the file system.
 * ``/etc/httpd/conf.d/ssl.conf`` (when using ssl auth)
 
 ### Install koji-hub 安装koji-hub
-----------------
+
 ```
 Install the ``koji-hub`` package along with mod_ssl
 ```
@@ -1546,6 +1546,8 @@ chown apache.apache *
 
 Configure SELinux to allow Apache write access to ``/mnt/koji``
 
+如果启用了SELinux，则需要配置Apache访问/mnt/koji目录的权限，命令如下：
+
 ```
 root@localhost$ setsebool -P allow_httpd_anon_write=1
 root@localhost$ semanage fcontext -a -t public_content_rw_t "/mnt/koji(/.*)?"
@@ -1557,67 +1559,106 @@ If you've placed ``/mnt/koji`` on an NFS share, enable a separate boolean to
 allow Apache access to NFS
 ```
 
+如果使用NFS，同样需要使能Apache访问NFS权限
+
 ```
 root@localhost$ setsebool -P httpd_use_nfs=1
 ```
 
 
-Check Your Configuration
-^^^^^^^^^^^^^^^^^^^^^^^^
+## Check Your Configuration
 
+```
 At this point, you can now restart apache and you should have at least minimal
 operation.  The admin user should be able to connect via the command line
 client, add new users, etc.  It's possible at this time to undertake initial
 administrative steps such as adding users and hosts to the koji database.
 
 So we will need a working client to test with.
+```
 
-Koji cli - The standard client
-==============================
+* 现在可以重新启动apache，进行必要测试
+* 管理员用户应该能够通过命令行客户端进行连接，添加新用户等。可以执行初始管理步骤，例如将用户和主机添加到koji数据库。
 
+因此，我们需要一个可以工作的客户进行测试。
+
+## Koji cli - The standard client
+
+```
 The koji cli is the standard client. It can perform most tasks and is essential
 to the successful use of any koji environment.
+```
 
+默认koji就是指代koji cli，属于标准终端型客户端，可以执行大多数任务，学习和掌握koji不可获取、必备技能。
+
+```
 Ensure that your client is configured to work with your server. The system-wide
 koji client configuration file is ``/etc/koji.conf``, and the user-specific one
 is in ``~/.koji/config``. You may also use the ``-c`` option when using the
 Koji client to specify an alternative configuration file.
+```
 
+* 必须确保客户端和服务端拥有匹配的配置，至少证书啥的都匹配，不然鉴权就会报错
+* 系统范围的koji客户端配置文件为/etc/koji.conf，
+* 用户特有的配置文件位于中~/.koji/config
+* -c参数用于指定特定配置文件
+
+
+```
 If you are using SSL for authentication, you will need to edit the Koji client
 configuration to tell it which URLs to use for the various Koji components and
 where their SSL certificates can be found.
 
 For a simple test, all we need is the ``server`` and authentication sections.
+```
 
 
+* 如果您使用SSL进行身份验证，则需要编辑Koji客户端配置，以告知其用于各种Koji组件的URL以及在何处可以找到其SSL证书。
+* 如果是Kerberos鉴权方式，则需要 kinit 登陆获取凭证
 
-    [koji]
 
-    ;url of XMLRPC server
-    server = http://koji-hub.example.com/kojihub
+下列是koji cli ssl鉴权的样例配置文件
 
-    ;url of web interface
-    weburl = http://koji-web.example.com/koji
+```
+[koji]
 
-    ;url of package download site
-    topurl = http://koji-filesystem.example.com/kojifiles
+;url of XMLRPC server
+server = http://koji-hub.example.com/kojihub
 
-    ;path to the koji top directory
-    topdir = /mnt/koji
+;url of web interface
+weburl = http://koji-web.example.com/koji
 
-    ; configuration for SSL athentication
+;url of package download site
+topurl = http://koji-filesystem.example.com/kojifiles
 
-    ;client certificate
-    cert = ~/.koji/client.crt
+;path to the koji top directory
+topdir = /mnt/koji
 
-    ;certificate of the CA that issued the HTTP server certificate
-    serverca = ~/.koji/serverca.crt
+; configuration for SSL athentication
 
+;client certificate
+cert = ~/.koji/client.crt
+
+;certificate of the CA that issued the HTTP server certificate
+serverca = ~/.koji/serverca.crt
+```
+
+* 其中koji-hub.example.com，就是FQDN，koji-hub的域名
+* 这里配置将kojihub kojiweb放到一起， kojira分开部署
+
+```
 The following command will test your login to the hub:
+```
 
+校验鉴权通过，最好的例子就是moshimoshi一下，当然hello也是可以的
 
+```
+root@localhost$ koji moshimoshi
 
-    root@localhost$ koji moshimoshi
+root@localhost$ koji hello
+```
+
+![20210519_092641_21](image/20210519_092641_21.png)
 
 ## Koji Web - Interface for the Masses
 
