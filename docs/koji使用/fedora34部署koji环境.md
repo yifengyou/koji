@@ -2187,5 +2187,9 @@ operating a koji server.
 * Apache mod_ssl: <https://httpd.apache.org/docs/trunk/mod/mod_ssl.html#ssloptions>
 
 
+## 参考
+
+* <https://blog.csdn.net/leapmotion/article/details/115433407?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162138682616780271565438%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=162138682616780271565438&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-5-115433407.first_rank_v2_pc_rank_v29&utm_term=koji>
+* <https://blog.csdn.net/zhangna20151015/article/details/86236281?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162138682616780271583721%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=162138682616780271583721&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-86236281.first_rank_v2_pc_rank_v29&utm_term=koji>
 
 ---
