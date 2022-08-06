@@ -1,0 +1,33 @@
+#
+# python compilation artifacts
+*.pyc
+*.pyo
+cli/kojic
+builder/kojidc
+util/kojirac
+util/koji-gcc
+util/koji-shadowc
+#
+# coverage artifacts
+.coverage
+.coverage[23]
+htmlcov/
+*,cover
+#
+# build artifacts
+koji-[0-9]*.tar.bz2
+koji-[0-9]*.src.rpm
+koji-[0-9]*[0-9]/
+koji.egg-info/
+noarch/
+docs/build/
+#
+# misc
+*.swp
+.idea
+.vscode
+.DS_STORE
+.vagrant
+.gitreview
+devtools/*.conf
+.tox

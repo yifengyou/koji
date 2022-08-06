@@ -1,0 +1,18 @@
+[run]
+data_file = .coverage2
+
+omit =
+    setup.py
+    /usr/*
+    hub/*
+    plugins/hub/*
+    tests/*
+    .tox/*
+
+[report]
+exclude_lines =
+    pragma: no cover
+    no cover: 2.x
+
+[html]
+directory = htmlcov/py2

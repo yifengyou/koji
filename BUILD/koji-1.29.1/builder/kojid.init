@@ -1,0 +1,99 @@
+#! /bin/sh
+#
+# kojid       Start/Stop kojid
+#
+# chkconfig: 345 99 99
+# description: kojid server
+# processname: kojid
+
+# This is an interactive program, we need the current locale
+
+# Source function library.
+. /etc/init.d/functions
+
+# Check that we're a privileged user
+[ `id -u` = 0 ] || exit 0
+
+[ -f /etc/sysconfig/kojid ] && . /etc/sysconfig/kojid
+
+prog="kojid"
+
+# Check that networking is up.
+if [ "$NETWORKING" = "no" ]
+then
+    exit 0
+fi
+
+[ -f /usr/sbin/kojid ] || exit 0
+
+RETVAL=0
+
+start() {
+    echo -n $"Starting $prog: "
+    cd /
+    ARGS=""
+    [ "$FORCE_LOCK" == "Y" ] && ARGS="$ARGS --force-lock"
+    [ "$KOJID_DEBUG" == "Y" ] && ARGS="$ARGS --debug"
+    [ "$KOJID_VERBOSE" == "Y" ] && ARGS="$ARGS --verbose"
+    # XXX Fix for make download-checks in kernel builds
+    # Remove once we're running the buildSRPMFromSCM task
+    # as an unprivileged user with their own environment
+    export HOME="/root"
+    daemon /usr/sbin/kojid $ARGS
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch /var/lock/subsys/kojid
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc kojid
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/kojid
+    return $RETVAL
+}
+
+restart() {
+    stop
+    start
+}
+
+graceful() {
+    #SIGUSR1 initiates a graceful restart
+    pid=$(pidofproc kojid)
+    if test -z "$pid"
+    then
+        echo $"$prog not running"
+    else
+        kill -10 $pid
+    fi
+}
+
+# See how we were called.
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  status)
+        status $prog
+        ;;
+  reload|graceful)
+        graceful
+        ;;
+  restart|reload|force-reload)
+        restart
+        ;;
+  condrestart|try-restart)
+        [ -f /var/lock/subsys/kojid ] && restart || :
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|status|restart|condrestart|try-restart|reload|force-reload|graceful}"
+        exit 1
+esac
+
+exit $?
