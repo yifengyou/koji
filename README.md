@@ -1,7 +1,7 @@
 # Rocky Linux koji-1.29.1
 
 
-![20220806_231000_79](image/20220806_231000_79.png) 
+![20220806_231000_79](image/20220806_231000_79.png)
 
 ```
 Something I hope you know before go into the coding~
@@ -39,5 +39,6 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
     * [帮助信息](docs/koji玩耍指南/帮助信息.md)
     * [玩起来](docs/koji玩耍指南/玩起来.md)
     * [入口解析](docs/koji玩耍指南/入口解析.md)
+    * [koji如何通过krb5鉴权](docs/koji玩耍指南/koji如何通过krb5鉴权.md)
 
 ---
