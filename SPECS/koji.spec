@@ -202,6 +202,15 @@ sed -e '/util\/koji/g' -e '/koji_cli_plugins/g' -i setup.py
 %build
 %py3_build_wheel
 
+# 宏展开
+# %py3_build_wheel() %{expand:\\\
+#   CFLAGS="${CFLAGS:-${RPM_OPT_FLAGS}}" LDFLAGS="${LDFLAGS:-${RPM_LD_FLAGS}}"\\\
+#   %{__python3} %{py_setup} %{?py_setup_args} bdist_wheel %{?*}
+#   sleep 1
+# }
+# bdist             create a built (binary) distribution
+# python3 setup.py bdist
+
 %install
 %py3_install_wheel %{name}-%{version}-py3-none-any.whl
 mkdir -p %{buildroot}/etc/koji.conf.d

@@ -2,3 +2,13 @@
 SRPMS
 RPMS
 BUILDROOT
+
+BUILD/koji-1.29.1/build/
+BUILD/koji-1.29.1/debugfiles.list
+BUILD/koji-1.29.1/debuglinks.list
+BUILD/koji-1.29.1/debugsourcefiles.list
+BUILD/koji-1.29.1/debugsources.list
+BUILD/koji-1.29.1/dist/
+BUILD/koji-1.29.1/elfbins.list
+BUILD/koji-1.29.1/vm/kojikamid
+
