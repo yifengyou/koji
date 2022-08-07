@@ -48,12 +48,14 @@ import warnings
 import weakref
 import xml.sax
 import xml.sax.handler
+
 try:
     import importlib
     import importlib.machinery
 except ImportError:  # pragma: no cover
     # importlib not available for PY2, so we fall back to using imp
     import imp as imp
+
     importlib = None
 from fnmatch import fnmatch
 
@@ -73,6 +75,7 @@ from koji.xmlrpcplus import Fault, dumps, getparser, loads, xmlrpc_client
 from koji.util import deprecated
 from . import util
 from . import _version
+
 __version__ = _version.__version__
 __version_info__ = _version.__version_info__
 
@@ -88,7 +91,6 @@ try:
 except ImportError:
     rpm = None
 
-
 PROFILE_MODULES = {}  # {module_name: module_instance}
 
 
@@ -96,6 +98,7 @@ def _(args):
     """Stub function for translation"""
     deprecated('The stub function for translation is no longer used\n')
     return args  # pragma: no cover
+
 
 ## Constants ##
 
@@ -132,6 +135,7 @@ for h in (
         'SUPPLEMENTNAME', 'SUPPLEMENTVERSION', 'SUPPLEMENTFLAGS',
         'RECOMMENDNAME', 'RECOMMENDVERSION', 'RECOMMENDFLAGS'):
     SUPPORTED_OPT_DEP_HDRS[h] = hasattr(rpm, 'RPMTAG_%s' % h)
+
 
 # BEGIN kojikamid dup #
 
@@ -181,6 +185,7 @@ class Enum(dict):
     popitem = _notImplemented
     update = _notImplemented
     setdefault = _notImplemented
+
 
 # END kojikamid dup #
 
@@ -311,6 +316,8 @@ class GenericError(Exception):
                 return str(self.args[0])
             except Exception:
                 return str(self.__dict__)
+
+
 # END kojikamid dup #
 
 
@@ -333,12 +340,15 @@ class ActionNotAllowed(GenericError):
     """Raised when the session does not have permission to take some action"""
     faultCode = 1004
 
+
 # BEGIN kojikamid dup #
 
 
 class BuildError(GenericError):
     """Raised when a build fails"""
     faultCode = 1005
+
+
 # END kojikamid dup #
 
 
@@ -521,6 +531,7 @@ def decode_int(n):
     # else
     return int(n)
 
+
 # commonly used functions
 
 
@@ -530,6 +541,7 @@ def safe_xmlrpc_loads(s):
         return loads(s)
     except Fault as f:
         return f
+
 
 # BEGIN kojikamid dup #
 
@@ -565,6 +577,7 @@ def ensuredir(directory):
                 # something else must have gone wrong
                 raise
     return directory
+
 
 # END kojikamid dup #
 
@@ -1288,6 +1301,8 @@ def _open_text_file(path, mode='rt'):
         return open(path, mode)
     else:
         return open(path, mode, encoding='utf-8')
+
+
 # END kojikamid dup #
 
 
@@ -1453,11 +1468,13 @@ This is a meta-package that requires a defined group of packages
 
 def generate_comps(groups, expand_groups=False):
     """Generate comps content from groups data"""
+
     def boolean_text(x):
         if x:
             return "true"
         else:
             return "false"
+
     data = [
         """<?xml version="1.0"?>
 <!DOCTYPE comps PUBLIC "-//Red Hat, Inc.//DTD Comps info//EN" "comps.dtd">
@@ -1782,6 +1799,7 @@ def get_sequence_value(cursor, sequence):
     cursor.execute("""SELECT nextval(%(sequence)s)""", locals())
     return cursor.fetchone()[0]
 
+
 # From Python Cookbook 2nd Edition, Recipe 8.6
 
 
@@ -1926,7 +1944,7 @@ def config_directory_contents(dir_name, strict=False):
                 continue
             config_full_name = os.path.join(dir_name, name)
             if os.path.isfile(config_full_name) \
-               and os.access(config_full_name, os.F_OK):
+                    and os.access(config_full_name, os.F_OK):
                 configs.append(config_full_name)
             elif strict:
                 raise ConfigurationError("Config file %s can't be opened."
@@ -2184,7 +2202,7 @@ class PathInfo(object):
     def build(self, build):
         """Return the directory where a build belongs"""
         return self.volumedir(build.get('volume_name')) + \
-            ("/packages/%(name)s/%(version)s/%(release)s" % build)
+               ("/packages/%(name)s/%(version)s/%(release)s" % build)
 
     def mavenbuild(self, build):
         """Return the directory where the Maven build exists in the global store
@@ -2316,9 +2334,9 @@ def is_conn_error(e):
         return True
     str_e = str(e)
     if 'BadStatusLine' in str_e or \
-       'RemoteDisconnected' in str_e or \
-       'ConnectionReset' in str_e or \
-       'IncompleteRead' in str_e:
+            'RemoteDisconnected' in str_e or \
+            'ConnectionReset' in str_e or \
+            'IncompleteRead' in str_e:
         # we see errors like this in keep alive timeout races
         # ConnectionError(ProtocolError('Connection aborted.', BadStatusLine("''",)),)
         return True
@@ -2430,7 +2448,7 @@ class ClientSession(object):
         self._calls = []
         self.logger = logging.getLogger('koji')
         self.rsession = None
-        self.new_session()
+        self.new_session()  # 关键，创建会话
         self.opts.setdefault('timeout', DEFAULT_REQUEST_TIMEOUT)
 
     @property
@@ -2450,9 +2468,18 @@ class ClientSession(object):
 
     def new_session(self):
         self.logger.debug("Opening new requests session")
+        # [root@ctyun-rocky ~]# koji -d hello
+        # 2022-08-07 20:16:10,608 [DEBUG] koji: Opening new requests session
+        # 2022-08-07 20:16:10,608 [DEBUG] koji: Opening new requests session
+        # successfully connected to hub
+        # dobre dan, yifengyou!
+        #
+        # You are using the hub at https://koji.fedoraproject.org/kojihub
+        # Authenticated via GSSAPI
         if self.rsession:
             self.rsession.close()
-        self.rsession = requests.Session()
+        self.rsession = requests.Session()  # 关键，发送请求
+        # 自动处理cookies，做状态保持
 
     def setSession(self, sinfo):
         """Set the session info
@@ -2498,6 +2525,7 @@ class ClientSession(object):
         if uri[0] != 'https':
             self.baseurl = 'https://%s%s' % (uri[1], uri[2])
 
+        print("# baseurl: %s" % self.baseurl)
         # Force a new session
         self.new_session()
 
@@ -2505,6 +2533,7 @@ class ClientSession(object):
         old_env = {}
         old_opts = self.opts
         self.opts = old_opts.copy()
+        print(" # opts %s" % self.opts)
         e_str = None
         try:
             # temporary timeout value during login
@@ -2525,7 +2554,10 @@ class ClientSession(object):
                     )
                 else:
                     kwargs['principal'] = principal
+            # import requests_gssapi as reqgssapi
+            print("**kwargs: ", kwargs)
             self.opts['auth'] = reqgssapi.HTTPKerberosAuth(**kwargs)
+            print(" # auth %s" % self.opts['auth'])
             try:
                 # Depending on the server configuration, we might not be able to
                 # connect without client certificate, which means that the conn
@@ -2537,6 +2569,7 @@ class ClientSession(object):
                     kwargs['proxyauthtype'] = proxyauthtype
                 for tries in range(self.opts.get('max_retries', 30)):
                     try:
+                        # 关键点 C:\Users\YOU\PycharmProjects\koji-1.29.1\koji\__init__.py
                         sinfo = self._callMethod('sslLogin', [], kwargs, retry=False)
                         break
                     except Exception as ex:
@@ -2826,6 +2859,7 @@ class ClientSession(object):
                 tries += 1
                 self.retries += 1
                 try:
+                    print(" send call handler=%s headers=%s request=%s" % (handler, headers, request))
                     return self._sendCall(handler, headers, request)
                 # basically, we want to retry on most errors, with a few exceptions
                 #  - faults (this means the call completed and failed)
@@ -3205,7 +3239,6 @@ class VirtualCall(object):
 
 
 class MultiCallSession(object):
-
     """Manages a single multicall, acts like a session"""
 
     def __init__(self, session, strict=False, batch=None):
