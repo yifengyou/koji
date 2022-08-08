@@ -1,0 +1,87 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 2 (0x2)
+        Signature Algorithm: md5WithRSAEncryption
+        Issuer: C=CN, ST=Beijing, L=Beijing, O=Linux, CN=koji/emailAddress=koji@163.com
+        Validity
+            Not Before: Aug  8 03:27:02 2022 GMT
+            Not After : Aug  5 03:27:02 2032 GMT
+        Subject: C=CN, ST=Beijing, O=Linux, CN=kojiweb/emailAddress=koji@163.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: (2048 bit)
+                Modulus:
+                    00:e6:1f:67:b6:32:b7:90:dd:6f:83:9c:6b:d8:cf:
+                    b6:6c:52:bf:5e:9b:c9:34:e5:8a:32:ed:ad:f7:6c:
+                    04:4f:bc:21:a2:51:26:04:ef:19:dc:6b:b0:dc:90:
+                    9e:48:c8:f3:ef:e7:d5:50:e8:a2:fe:f2:32:ae:44:
+                    b1:69:ef:89:7e:be:2b:62:50:c3:49:bf:9f:69:17:
+                    74:22:35:5e:bf:0f:b3:1c:51:e4:7c:9a:51:02:f9:
+                    61:38:3b:40:77:8c:06:4c:32:e4:15:42:35:9a:5f:
+                    50:40:af:08:0b:2d:7f:b7:7f:72:bd:f7:e7:72:a4:
+                    18:49:2d:f8:e8:9e:1e:16:86:2f:14:fd:46:9b:fb:
+                    06:a0:40:10:84:57:ce:3e:47:99:93:6a:07:b3:7e:
+                    1e:e1:22:6c:5a:b4:7c:b3:31:61:be:a7:1e:f8:25:
+                    c3:f0:0b:35:8a:2f:d2:3a:e7:ce:92:46:f7:fd:96:
+                    7f:c3:dd:e6:fd:fa:8c:84:c6:9f:a9:01:1b:d0:e1:
+                    80:04:7c:ea:e9:6f:e8:84:bf:0b:14:63:72:fb:bc:
+                    3b:3b:f1:df:94:b3:0e:d5:41:47:31:57:f9:d1:db:
+                    17:6c:61:30:53:b6:09:d0:8d:1f:69:e7:ca:14:0c:
+                    40:43:82:47:b0:ed:2f:42:d1:9f:f8:45:5c:cc:7d:
+                    60:59
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Comment: 
+                OpenSSL Generated Certificate
+            X509v3 Subject Key Identifier: 
+                8B:32:99:09:8B:E0:62:83:CA:08:DB:D8:17:1A:61:4D:6C:FA:1D:EE
+            X509v3 Authority Key Identifier: 
+                keyid:BE:5B:5F:65:A1:79:00:E7:80:16:EE:A3:FD:F0:E8:60:BC:EE:64:F9
+                DirName:/C=CN/ST=Beijing/L=Beijing/O=Linux/CN=koji/emailAddress=koji@163.com
+                serial:3C:27:7B:70:E8:7F:63:04:D2:A7:D1:DC:52:77:3B:0C:D6:13:1E:93
+
+    Signature Algorithm: md5WithRSAEncryption
+         79:66:c4:e0:49:29:7c:81:10:c6:d4:51:48:3f:63:84:fa:73:
+         6e:28:c8:d4:58:c3:40:6f:f8:06:93:d2:31:2b:b6:96:88:19:
+         c7:2a:76:59:55:8f:4b:92:d5:2d:9b:1a:7b:c8:68:6c:e1:0b:
+         6a:c4:a0:cf:48:37:7c:38:4a:14:c3:5d:b0:d7:c6:71:fe:2e:
+         66:d3:23:40:40:da:a5:ad:c8:20:12:a7:34:a2:54:09:cc:7f:
+         59:e7:a3:bf:3a:83:07:ce:0f:60:43:97:7b:0e:02:00:f0:16:
+         6d:c4:a9:9b:7c:1d:d5:9f:c0:1f:b5:7f:42:52:90:4c:83:b9:
+         f5:ff:7e:f3:46:8f:8f:40:3c:3c:6b:50:31:b6:61:6e:28:87:
+         11:94:a5:e4:fa:eb:9a:81:bf:75:31:92:38:8a:c1:40:fa:0b:
+         09:fb:30:f2:7b:74:05:b3:f7:d0:7f:9a:75:01:e3:aa:c9:1f:
+         a6:80:6f:e4:19:e9:d5:29:3c:c9:a2:45:35:20:14:97:47:f4:
+         f1:9e:cc:cf:98:82:cf:79:4f:0e:d7:44:38:1f:1b:2f:44:2a:
+         1b:b3:01:85:ab:db:a4:43:52:5c:c4:70:87:56:a0:72:75:86:
+         33:e4:52:c2:6d:37:55:53:59:64:bd:31:24:d5:59:0b:eb:76:
+         c4:6e:83:1e
+-----BEGIN CERTIFICATE-----
+MIIEUTCCAzmgAwIBAgIBAjANBgkqhkiG9w0BAQQFADBtMQswCQYDVQQGEwJDTjEQ
+MA4GA1UECBMHQmVpamluZzEQMA4GA1UEBxMHQmVpamluZzEOMAwGA1UEChMFTGlu
+dXgxDTALBgNVBAMTBGtvamkxGzAZBgkqhkiG9w0BCQEWDGtvamlAMTYzLmNvbTAe
+Fw0yMjA4MDgwMzI3MDJaFw0zMjA4MDUwMzI3MDJaMF4xCzAJBgNVBAYTAkNOMRAw
+DgYDVQQIEwdCZWlqaW5nMQ4wDAYDVQQKEwVMaW51eDEQMA4GA1UEAxMHa29qaXdl
+YjEbMBkGCSqGSIb3DQEJARYMa29qaUAxNjMuY29tMIIBIjANBgkqhkiG9w0BAQEF
+AAOCAQ8AMIIBCgKCAQEA5h9ntjK3kN1vg5xr2M+2bFK/XpvJNOWKMu2t92wET7wh
+olEmBO8Z3Guw3JCeSMjz7+fVUOii/vIyrkSxae+Jfr4rYlDDSb+faRd0IjVevw+z
+HFHkfJpRAvlhODtAd4wGTDLkFUI1ml9QQK8ICy1/t39yvffncqQYSS346J4eFoYv
+FP1Gm/sGoEAQhFfOPkeZk2oHs34e4SJsWrR8szFhvqce+CXD8As1ii/SOufOkkb3
+/ZZ/w93m/fqMhMafqQEb0OGABHzq6W/ohL8LFGNy+7w7O/HflLMO1UFHMVf50dsX
+bGEwU7YJ0I0faefKFAxAQ4JHsO0vQtGf+EVczH1gWQIDAQABo4IBCTCCAQUwCQYD
+VR0TBAIwADAsBglghkgBhvhCAQ0EHxYdT3BlblNTTCBHZW5lcmF0ZWQgQ2VydGlm
+aWNhdGUwHQYDVR0OBBYEFIsymQmL4GKDygjb2BcaYU1s+h3uMIGqBgNVHSMEgaIw
+gZ+AFL5bX2WheQDngBbuo/3w6GC87mT5oXGkbzBtMQswCQYDVQQGEwJDTjEQMA4G
+A1UECBMHQmVpamluZzEQMA4GA1UEBxMHQmVpamluZzEOMAwGA1UEChMFTGludXgx
+DTALBgNVBAMTBGtvamkxGzAZBgkqhkiG9w0BCQEWDGtvamlAMTYzLmNvbYIUPCd7
+cOh/YwTSp9HcUnc7DNYTHpMwDQYJKoZIhvcNAQEEBQADggEBAHlmxOBJKXyBEMbU
+UUg/Y4T6c24oyNRYw0Bv+AaT0jErtpaIGccqdllVj0uS1S2bGnvIaGzhC2rEoM9I
+N3w4ShTDXbDXxnH+LmbTI0BA2qWtyCASpzSiVAnMf1nno786gwfOD2BDl3sOAgDw
+Fm3EqZt8HdWfwB+1f0JSkEyDufX/fvNGj49APDxrUDG2YW4ohxGUpeT665qBv3Ux
+kjiKwUD6Cwn7MPJ7dAWz99B/mnUB46rJH6aAb+QZ6dUpPMmiRTUgFJdH9PGezM+Y
+gs95Tw7XRDgfGy9EKhuzAYWr26RDUlzEcIdWoHJ1hjPkUsJtN1VTWWS9MSTVWQvr
+dsRugx4=
+-----END CERTIFICATE-----

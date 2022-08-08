@@ -1813,7 +1813,6 @@ def handle_prune_signed_copies(goptions, session, args):
             raise koji.GenericError("No such event: (%r, %r)" % (event_id, x))
         time_str = time.asctime(time.localtime(ts))
         return "%s: %s" % (time_str, fmt % x)
-
     for nvr, binfo in builds:
         # listBuilds returns slightly different data than normal
         if 'id' not in binfo:
@@ -3257,7 +3256,7 @@ def anon_handle_list_pkgs(goptions, session, args):
         print("Querying at event %(id)i (%(timestr)s)" % event)
 
     if not opts.get('tagID') and not opts.get('userID') and \
-            not opts.get('pkgID'):
+       not opts.get('pkgID'):
         if opts.get('event'):
             parser.error("--event and --ts makes sense only with --tag,"
                          " --owner or --package")
@@ -4696,7 +4695,6 @@ def _print_histline(entry, **kwargs):
             return '%s.name' % key[:-3]
         else:
             return '%s.name' % key
-
     if edit:
         keys = sorted(to_list(x.keys()))
         y = other[-1]
@@ -4854,7 +4852,6 @@ def anon_handle_list_history(goptions, session, args):
                 if key.startswith(name):
                     ret = ret and x[key]
             return ret
-
         for table in histdata:
             hist = histdata[table]
             for x in hist:
@@ -7809,16 +7806,13 @@ def handle_moshimoshi(options, session, args):
     (opts, args) = parser.parse_args(args)
     if len(args) != 0:
         parser.error("This command takes no arguments")
-    # 存在多个可能的调用点
     activate_session(session, options)
-    print("# activate_session(session, options)")
     u = session.getLoggedInUser()
     if not u:
         print("Not authenticated")
         u = {'name': 'anonymous user'}
-    # 这里随机选择，怪不得有时候是乱码
-    # print("%s, %s!" % (_printable_unicode(random.choice(greetings)), u["name"]))
-    print("%s, %s ! Welcome back~" % ('hello', u["name"]))
+    print("%s, %s!" % (_printable_unicode(random.choice(greetings)), u["name"]))
+    print("")
     print("You are using the hub at %s" % session.baseurl)
     authtype = u.get('authtype', getattr(session, 'authtype', None))
     if authtype == koji.AUTHTYPE_NORMAL:

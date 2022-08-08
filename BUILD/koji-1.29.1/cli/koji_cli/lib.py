@@ -731,9 +731,7 @@ def warn(msg):
 def activate_session(session, options):
     """Test and login the session is applicable"""
     if session.logged_in:
-        # 如果已经登录，则直接返回
         return
-    print("# no logged , try loggind...")
     if isinstance(options, dict):
         options = optparse.Values(options)
     noauth = options.authtype == "noauth" or getattr(options, 'noauth', False)
@@ -742,24 +740,19 @@ def activate_session(session, options):
         # skip authentication
         pass
     elif options.authtype == "ssl" or os.path.isfile(options.cert) and options.authtype is None:
-        print("# using ssl authtype")
         # authenticate using SSL client cert
         session.ssl_login(options.cert, None, options.serverca, proxyuser=runas)
     elif options.authtype == "password" \
             or getattr(options, 'user', None) \
             and options.authtype is None:
-        print("# using password authtype")
         # authenticate using user/password
         session.login()
     elif options.authtype == "kerberos" or options.authtype is None:
         try:
             if getattr(options, 'keytab', None) and getattr(options, 'principal', None):
-                print("# using kerberos authtype with principal")
                 session.gssapi_login(principal=options.principal, keytab=options.keytab,
                                      proxyuser=runas)
             else:
-                print("# using kerberos authtype without principal")
-                # C:\Users\YOU\PycharmProjects\koji-1.29.1\koji\__init__.py
                 session.gssapi_login(proxyuser=runas)
         except socket.error as e:
             warn("Could not connect to Kerberos authentication service: %s" % e.args[1])
@@ -769,7 +762,6 @@ def activate_session(session, options):
     # when it calls activate_session
     ensure_connection(session)
     if getattr(options, 'debug', None):
-        # 打印成功连接hub
         print("successfully connected to hub")
 
 
