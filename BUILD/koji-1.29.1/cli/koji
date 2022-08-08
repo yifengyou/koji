@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python2
 # coding=utf-8
 
 # command line interface for the Koji build system
@@ -107,18 +107,14 @@ def get_options():
                        'latest-build', 'search', 'list-targets']
     usage = "%%prog [global-options] command [command-options-and-arguments]\n\n" \
             "Common commands: %s" % ', '.join(sorted(common_commands))
-    # C:\Users\YOU\AppData\Local\Programs\Python\Python38\Lib\optparse.py
     parser = OptionParser(usage=usage)
-    # Set parsing to stop on the first non-option.
-    # Use this if you have a command processor which runs another command that has options
-    # of its own and you want to make sure these options don't get confused.
     parser.disable_interspersed_args()
     progname = os.path.basename(sys.argv[0]) or 'koji'
     parser.__dict__['origin_format_help'] = parser.format_help
     parser.__dict__['format_help'] = lambda formatter=None: (
-            "%(origin_format_help)s%(epilog)s" % ({
-        'origin_format_help': parser.origin_format_help(formatter),
-        'epilog': get_epilog_str()}))
+        "%(origin_format_help)s%(epilog)s" % ({
+            'origin_format_help': parser.origin_format_help(formatter),
+            'epilog': get_epilog_str()}))
     parser.add_option("-p", "--profile", default=progname,
                       help="specify a configuration profile. default: %s" % progname)
     parser.add_option("-c", "--config", dest="configFile",
@@ -135,7 +131,6 @@ def get_options():
                       help="authenticate even for read-only operations")
     parser.add_option("--authtype", help="force use of a type of authentication, options: "
                                          "noauth, ssl, password, or kerberos")
-    # 调试模式开关
     parser.add_option("-d", "--debug", action="store_true", help="show debug output")
     parser.add_option("--debug-xmlrpc", action="store_true", help="show xmlrpc debug output")
     parser.add_option("-q", "--quiet", action="store_true", default=False, help="run quietly")
@@ -208,22 +203,16 @@ def get_options():
         'untag': 'untag-build',
         'watch-tasks': 'watch-task',
     }
-    # 返回命令分类
     cmd = args[0]
     cmd = aliases.get(cmd, cmd)
-    # 这里问候也可以用 u'你好' 多国语言支持
-    # C:\Users\YOU\PycharmProjects\koji-1.29.1\cli\koji_cli\lib.py
     if cmd.lower() in greetings:
         cmd = "moshimoshi"
-    # cmd不可能出现-
     cmd = cmd.replace('-', '_')
     if ('anon_handle_' + cmd) in globals():
         if not options.force_auth and '--mine' not in args:
             options.noauth = True
         cmd = 'anon_handle_' + cmd
     elif ('handle_' + cmd) in globals():
-        # Return the dictionary containing the current scope's global variables.
-        # globals() 函数会以字典类型返回当前位置的全部全局变量。
         cmd = 'handle_' + cmd
     else:
         # hijack args to [return_code, message]
@@ -314,47 +303,8 @@ def list_commands(categories_chosen=None):
 if __name__ == "__main__":
     global options
     options, command, args = get_options()
-    #   {'profile': 'koji',
-    #   'configFile': None,
-    #   'keytab': None,
-    #   'principal': None,
-    #   'cert': '',
-    #   'runas': None,
-    #   'user': None,
-    #   'password': None,
-    #   'noauth': False,
-    #   'force_auth': False,
-    #   'authtype': 'kerberos',
-    #   'debug': False,
-    #   'debug_xmlrpc': False,
-    #   'quiet': False,
-    #   'skip_main': False,
-    #   'server': 'https://koji.fedoraproject.org/kojihub',
-    #   'topdir': '/mnt/koji',
-    #   'weburl': 'https://koji.fedoraproject.org/koji',
-    #   'topurl': 'https://kojipkgs.fedoraproject.org',
-    #   'pkgurl': None,
-    #   'plugin_paths': None,
-    #   'help_commands': False,
-    #   'max_retries': 30,
-    #   'retry_interval': 20,
-    #   'anon_retry': False,
-    #   'offline_retry': False,
-    #   'offline_retry_interval': 20,
-    #   'timeout': 43200,
-    #   'auth_timeout': 60,
-    #   'use_fast_upload': True,
-    #   'upload_blocksize': 1048576,
-    #   'poll_interval': 6,
-    #   'serverca': '',
-    #   'no_ssl_verify': False,
-    #   'pyver': None}
+
     logger = logging.getLogger("koji")
-    # DEBUG： 详细信息，通常仅在诊断问题时才受到关注。整数level=10
-    # INFO： 确认程序按预期工作。整数level=20
-    # WARNING：出现了异常，但是不影响正常工作.整数level=30
-    # ERROR：由于某些原因，程序 不能执行某些功能。整数level=40
-    # CRITICAL：严重的错误，导致程序不能运行。整数level=50
     handler = logging.StreamHandler(sys.stderr)
     handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(name)s: %(message)s'))
     handler.setLevel(logging.DEBUG)
@@ -365,33 +315,11 @@ if __name__ == "__main__":
         logger.setLevel(logging.ERROR)
     else:
         logger.setLevel(logging.WARN)
-    logger.debug("# enable debug mode!")
-    logger.debug("# get_options: %s %s %s" % (options, command, args))
-    # 运行环境健全检查
-    fix_pyver(options, logger)
-    # 提取session选项仓鼠
-    session_opts = koji.grab_session_options(options)
-    logger.debug("# session_opts %s" % session_opts)
-    #   {'debug_xmlrpc': False,
-    #   'debug': False,
-    #   'max_retries': 30,
-    #   'retry_interval': 20,
-    #   'offline_retry': False,
-    #   'offline_retry_interval': 20,
-    #   'anon_retry': False,
-    #   'timeout': 43200,
-    #   'auth_timeout': 60,
-    #   'use_fast_upload': True,
-    #   'upload_blocksize': 1048576,
-    #   'no_ssl_verify': False,
-    #   'serverca': ''}
-    session = koji.ClientSession(options.server, session_opts)
-    logger.debug("# finish koji.ClientSession(options.server, session_opts)")
-    # 'server': 'https://koji.fedoraproject.org/kojihub'
-    # 一定要清楚明白，koji就是cli terminal，所有交互99%是需要与server通信
 
-    # 这里判断命令，不应该是子串判断么？ 这里command是解析之后的，默认不识别的命令会解析返回 _list_commands ，相当于分类
-    # _list_commands [1, 'Unknown command: yyf']
+    fix_pyver(options, logger)
+
+    session_opts = koji.grab_session_options(options)
+    session = koji.ClientSession(options.server, session_opts)
     if command == '_list_commands':
         list_commands()
         if args[0] != 0:
@@ -400,11 +328,8 @@ if __name__ == "__main__":
     # run handler
     rv = 0
     try:
-        #  Return a dictionary containing the current scope's local variables.
-        #  locals() 函数会以字典类型返回当前位置的全部局部变量。
         rv = locals()[command].__call__(options, session, args)
         if not rv:
-            # rv = return value
             rv = 0
     except KeyboardInterrupt:
         rv = 1
