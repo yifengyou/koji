@@ -2826,6 +2826,7 @@ class ClientSession(object):
                 tries += 1
                 self.retries += 1
                 try:
+                    print(" send call handler=%s header=%s requests=%s" % (handler, headers, request))
                     return self._sendCall(handler, headers, request)
                 # basically, we want to retry on most errors, with a few exceptions
                 #  - faults (this means the call completed and failed)

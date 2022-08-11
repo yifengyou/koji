@@ -20,6 +20,7 @@
 
 import datetime
 import inspect
+import json
 import logging
 import os
 import pprint
@@ -43,13 +44,13 @@ from koji.xmlrpcplus import ExtendedMarshaller, Fault, dumps, getparser
 
 
 class Marshaller(ExtendedMarshaller):
-
     dispatch = ExtendedMarshaller.dispatch.copy()
 
     def dump_datetime(self, value, write):
         # For backwards compatibility, we return datetime objects as strings
         value = value.isoformat(' ')
         self.dump_unicode(value, write)
+
     dispatch[datetime.datetime] = dump_datetime
 
 
@@ -425,6 +426,7 @@ def load_config(environ):
         - all PythonOptions (except ConfigFile) are now deprecated and support for them
           will disappear in a future version of Koji
     """
+    print("load_config")
     # get our config file(s)
     cf = environ.get('koji.hub.ConfigFile', '/etc/koji-hub/hub.conf')
     cfdir = environ.get('koji.hub.ConfigDir', '/etc/koji-hub/hub.conf.d')
@@ -435,7 +437,7 @@ def load_config(environ):
         ['DBName', 'string', None],
         ['DBUser', 'string', None],
         ['DBHost', 'string', None],
-        ['DBhost', 'string', None],   # alias for backwards compatibility
+        ['DBhost', 'string', None],  # alias for backwards compatibility
         ['DBPort', 'integer', None],
         ['DBPass', 'string', None],
         ['DBConnectionString', 'string', None],
@@ -533,6 +535,7 @@ def load_config(environ):
         opts['RegexNameInternal.compiled'] = re.compile(opts['RegexNameInternal'])
     if opts['RegexUserName'] != '':
         opts['RegexUserName.compiled'] = re.compile(opts['RegexUserName'])
+    print("opts:", opts)
     return opts
 
 
@@ -722,6 +725,7 @@ def get_memory_usage():
 
 def server_setup(environ):
     global opts, plugins, registry, policy
+    print("server_setup")
     logger = logging.getLogger('koji')
     try:
         setup_logging1()
@@ -762,11 +766,13 @@ firstcall_lock = threading.Lock()
 
 
 def application(environ, start_response):
+    print("debug application")
     global firstcall
     if firstcall:
         with firstcall_lock:
             # check again, another thread may be ahead of us
             if firstcall:
+                print("firstcall true")
                 server_setup(environ)
                 firstcall = False
     # XMLRPC uses POST only. Reject anything else
@@ -774,7 +780,7 @@ def application(environ, start_response):
         extra_headers = [
             ('Allow', 'POST'),
         ]
-        response = "Method Not Allowed\n" \
+        response = "Hi！welcome to here~~~\nMethod Not Allowed\n" \
                    "This is an XML-RPC server. Only POST requests are accepted.\n"
         return error_reply(start_response, '405 Method Not Allowed', response, extra_headers)
     if opts.get('ServerOffline'):
@@ -793,6 +799,7 @@ def application(environ, start_response):
             context.environ = environ
             context.policy = policy
             try:
+                print("try db connect")
                 context.cnx = koji.db.connect()
             except Exception:
                 return offline_reply(start_response, msg="database outage")

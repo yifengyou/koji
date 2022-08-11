@@ -30,6 +30,8 @@ deploy cli/koji.conf /etc/koji.conf
 deploy hub/httpd.conf /etc/httpd/conf.d/kojihub.conf
 mkdir -p /etc/koji-hub/hub.conf.d || true
 deploy hub/kojixmlrpc.py /usr/share/koji-hub/kojixmlrpc.py
+deploy hub/kojihub.py /usr/share/koji-hub/kojihub.py
+deploy hub/__init__.py /usr/share/koji-hub/__init__.py
 
 mkdir -p /mnt/koji || true
 deploy hub/hub.conf /etc/koji-hub/hub.conf -a

@@ -190,8 +190,10 @@ def connect():
         opts = {}
     try:
         if 'dsn' in opts:
+            print("use dsn", opts['dsn'])
             conn = psycopg2.connect(dsn=opts['dsn'])
         else:
+            print("no dsn", opts)
             conn = psycopg2.connect(**opts)
         conn.set_client_encoding('UTF8')
     except Exception:
@@ -199,6 +201,7 @@ def connect():
         raise
     # XXX test
     # return conn
+    print("connect to db success", conn)
     _DBconn.conn = conn
 
     return DBWrapper(conn)
