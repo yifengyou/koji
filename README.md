@@ -31,6 +31,14 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
 * <https://docs.pagure.org/koji/>
 
 
+## koji入门到入土必备技能
+
+1. Python
+2. kerberos
+3. PostgreSQL
+4. rpmbuild/mock
+
+
 
 ## 目录
 
@@ -40,7 +48,46 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
     * [玩起来](docs/koji玩耍指南/玩起来.md)
     * [入口解析](docs/koji玩耍指南/入口解析.md)
     * [koji如何通过krb5鉴权](docs/koji玩耍指南/koji如何通过krb5鉴权.md)
+    * [PostgreSQL入门到入土](docs/koji玩耍指南/PostgreSQL入门到入土.md)
     * [kojihub如何连接PostgreSQL](docs/koji玩耍指南/kojihub如何连接PostgreSQL.md)
+
+## 图示
+
+
+![20220811_141522_56](image/20220811_141522_56.png)
+
+![20220811_141624_54](image/20220811_141624_54.png)
+
+![20220811_141636_16](image/20220811_141636_16.png)
+
+![20220811_141746_36](image/20220811_141746_36.png) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ---
