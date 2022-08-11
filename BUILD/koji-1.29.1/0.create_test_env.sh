@@ -36,6 +36,7 @@ deploy hub/__init__.py /usr/share/koji-hub/__init__.py
 mkdir -p /mnt/koji || true
 deploy hub/hub.conf /etc/koji-hub/hub.conf -a
 
-
+systemctl restart httpd
 
 echo "All  done!"
+

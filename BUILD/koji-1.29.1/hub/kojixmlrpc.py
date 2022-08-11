@@ -291,6 +291,7 @@ class ModXMLRPCRequestHandler(object):
 
     def handle_rpc(self, environ):
         params, method = self._read_request(environ['wsgi.input'])
+        print("handle_rpc params=%s method=%s" % (params, method))
         return self._dispatch(method, params)
 
     def check_session(self):
@@ -738,8 +739,12 @@ def server_setup(environ):
         load_scripts(environ)
         koji.util.setup_rlimits(opts)
         plugins = load_plugins(opts)
+        print("plugins: %s" % plugins)
+        # 路由，处理句柄
         registry = get_registry(opts, plugins)
+        print("registry: %s" % registry)
         policy = get_policy(opts, plugins)
+        print("policy: %s" % policy)
         if opts.get('DBConnectionString'):
             koji.db.provideDBopts(dsn=opts['DBConnectionString'])
         else:
@@ -765,8 +770,11 @@ firstcall = True
 firstcall_lock = threading.Lock()
 
 
+# wsgi 注入environ韩剧变量，包含各种参数，start_response为响应函数句柄
 def application(environ, start_response):
     print("debug application")
+    print("environ=%s" % environ)
+    print("start_response=%s" % start_response)
     global firstcall
     if firstcall:
         with firstcall_lock:
@@ -791,10 +799,12 @@ def application(environ, start_response):
         try:
             start = time.time()
             memory_usage_at_start = get_memory_usage()
-
+            # C:\Users\nicyou\PycharmProjects\koji-1.29.1\koji\context.py
             context._threadclear()
             context.commit_pending = False
             context.opts = opts
+            # registry = get_registry(opts, plugins)
+            # 在server_setup
             context.handlers = HandlerAccess(registry)
             context.environ = environ
             context.policy = policy
@@ -803,24 +813,33 @@ def application(environ, start_response):
                 context.cnx = koji.db.connect()
             except Exception:
                 return offline_reply(start_response, msg="database outage")
+            # 补充handler句柄字段
             h = ModXMLRPCRequestHandler(registry)
             try:
                 if environ.get('CONTENT_TYPE') == 'application/octet-stream':
+                    # 上传数据流
                     response = h._wrap_handler(h.handle_upload, environ)
                 else:
+                    # 发起rpc请求
+                    # def _wrap_handler(self, handler, environ)
+                    # 传递函数句柄，参数
                     response = h._wrap_handler(h.handle_rpc, environ)
             except BadRequest as e:
                 return error_reply(start_response, '400 Bad Request', str(e) + '\n')
             except RequestTimeout as e:
                 return error_reply(start_response, '408 Request Timeout', str(e) + '\n')
+            # Python encode() 方法以 encoding 指定的编码格式编码字符串。errors参数可以指定不同的错误处理方案
             response = response.encode()
+            print("response=%s" % response)
             headers = [
                 ('Content-Length', str(len(response))),
                 ('Content-Type', "text/xml"),
             ]
+            # 发送响应
             start_response('200 OK', headers)
             if h.traceback:
                 # rollback
+                # SQL回滚
                 context.cnx.rollback()
             elif context.commit_pending:
                 # Currently there is not much data we can provide to the
@@ -829,6 +848,7 @@ def application(environ, start_response):
                 koji.plugin.run_callbacks('preCommit')
                 context.cnx.commit()
                 koji.plugin.run_callbacks('postCommit')
+            # 获取内存使用情况统计
             memory_usage_at_end = get_memory_usage()
             if memory_usage_at_end - memory_usage_at_start > opts['MemoryWarnThreshold']:
                 paramstr = repr(getattr(context, 'params', 'UNKNOWN'))
