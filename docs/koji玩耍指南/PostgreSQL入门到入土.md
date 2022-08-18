@@ -135,13 +135,26 @@ host    all             jane            192.168.1.134            trust
 
 
 
+## 打开局域网访问权限
 
 
 
+编辑```/var/lib/pgsql/data/pg_hba.conf```
+
+![20220818_220259_16](image/20220818_220259_16.png)
+
+ADDRESS修改为全0，同时防火墙配置一下，我上去就直接关闭防火墙，你服不服
+
+```
+systemctl disable --now firewalld
+```
 
 
+## 添加
 
-
+```
+insert into users (name, password, status, usertype) values ('kojira', 'kojira', 0, 1);
+```
 
 
 
