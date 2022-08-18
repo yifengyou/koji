@@ -6,6 +6,7 @@
     * [帮助信息](docs/koji玩耍指南/帮助信息.md)
     * [玩起来](docs/koji玩耍指南/玩起来.md)
     * [入口解析](docs/koji玩耍指南/入口解析.md)
+    * [调试](docs/koji玩耍指南/调试.md)
     * [koji如何通过krb5鉴权](docs/koji玩耍指南/koji如何通过krb5鉴权.md)
     * [PostgreSQL入门到入土](docs/koji玩耍指南/PostgreSQL入门到入土.md)
     * [kojihub如何连接PostgreSQL](docs/koji玩耍指南/kojihub如何连接PostgreSQL.md)
