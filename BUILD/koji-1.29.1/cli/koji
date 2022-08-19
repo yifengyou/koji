@@ -130,6 +130,8 @@ def get_options():
     parser.add_option("--runas", help="run as the specified user (requires special privileges)")
     parser.add_option("--user", help="specify user")
     parser.add_option("--password", help="specify password")
+    # parser.add_option("--user", default="yifengyou", help="specify user")
+    # parser.add_option("--password", default="yifengyou", help="specify password")
     parser.add_option("--noauth", action="store_true", default=False, help="do not authenticate")
     parser.add_option("--force-auth", action="store_true",  # default (False) comes from the config
                       help="authenticate even for read-only operations")

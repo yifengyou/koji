@@ -8,6 +8,8 @@ After=network.target httpd.service
 [Service]
 ExecStart=/usr/sbin/kojira \
        --fg \
+       --debug \
+       --debug-xmlrpc \
        --force-lock \
        --verbose
 Restart=on-failure

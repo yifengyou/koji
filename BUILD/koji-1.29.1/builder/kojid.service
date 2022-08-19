@@ -8,6 +8,9 @@ After=network.target httpd.service
 [Service]
 ExecStart=/usr/sbin/kojid \
        --fg \
+       --debug \
+       --debug-mock \
+       --debug-task \
        --force-lock \
        --verbose
 ExecReload=/bin/kill -USR1 $MAINPID

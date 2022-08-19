@@ -283,7 +283,7 @@ class Session(object):
         c.execute(q, locals())
         r = c.fetchone()
         if not r:
-            raise koji.AuthError('invalid username or password')
+            raise koji.AuthError('invalid username or password user=[%s] password=[%s]' % (user, password))
         user_id = r[0]
 
         self.checkLoginAllowed(user_id)
@@ -783,6 +783,13 @@ def login(*args, **opts):
 
 
 def krbLogin(*args, **opts):
+    # print(dir(context))
+    # print(dir(context.session))
+    # print(context.session)
+    # print('\n'.join(['{0}: {1}'.format(item[0], item[1]) for item in context.session.__dict__.items()]))
+    print(context.__file__)
+    print(context.session.__file__)
+    print(context.session.krbLogin.__file__)
     return context.session.krbLogin(*args, **opts)
 
 

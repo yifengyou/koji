@@ -313,7 +313,9 @@ class ModXMLRPCRequestHandler(object):
             raise koji.ServerOffline("Server disabled for maintenance")
 
     def _dispatch(self, method, params):
+        # 根据函数名，获取函数句柄
         func = self._get_handler(method)
+        print("self._get_handler(method) %s func %s" % (method, func))
         context.method = method
         context.params = params
         self.check_session()
@@ -328,7 +330,7 @@ class ModXMLRPCRequestHandler(object):
                 self.logger.debug("Params: %s", pprint.pformat(params))
                 self.logger.debug("Opts: %s", pprint.pformat(opts))
             start = time.time()
-
+        print("koji.util.call_with_argcheck() func:%s params:%s opts:%s" % (func, params, opts))
         ret = koji.util.call_with_argcheck(func, params, opts)
 
         if self.logger.isEnabledFor(logging.INFO):
@@ -893,3 +895,4 @@ def get_registry(opts, plugins):
             continue
         registry.register_plugin(plugin)
     return registry
+

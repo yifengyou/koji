@@ -1299,7 +1299,6 @@ def quit(msg=None, code=1):
 
 
 if __name__ == "__main__":
-
     options = get_options()
     topdir = getattr(options, 'topdir', None)
     pathinfo = koji.PathInfo(topdir)
