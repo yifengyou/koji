@@ -16,6 +16,7 @@ yum install -y python3-pyOpenSSL \
 	postgresql-plpython3 \
 	python3-kerberos \
 	python3-cheetah \
+	python3-multilib \
 	httpd \
 	mod_ssl \
 	postgresql-server \
@@ -24,5 +25,4 @@ yum install -y python3-pyOpenSSL \
 	koji-web \
 	koji-utils \
 	createrepo \
-	postgresql-server \
 	python3-mod_wsgi

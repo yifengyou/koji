@@ -3,9 +3,7 @@
 set -xe
 
 WORKDIR=`pwd`
-
 cd /etc/pki/koji/
-
 export CANAME=koji
 
 for USER in kojiadmin kojira kojiweb kojihub kojibuilder{1..5}; do
@@ -24,7 +22,6 @@ for USER in kojiadmin kojira kojiweb kojihub kojibuilder{1..5}; do
 		-key certs/${USER}/${USER}.key \
 		-subj "/C=CN/ST=Chengdu/L=Chengdu/O=Linux/OU=OS/CN=${USER}/emailAddress=yifengyou666@gmail.com"
 
-
 	openssl ca -batch \
 		-config ssl.cnf \
 		-keyfile private/${CANAME}_ca_cert.key \
@@ -33,7 +30,6 @@ for USER in kojiadmin kojira kojiweb kojihub kojibuilder{1..5}; do
 		-outdir certs/${USER} \
 		-infiles certs/${USER}/${USER}.csr
 
-
 	cat certs/${USER}/${USER}.crt certs/${USER}/${USER}.key > certs/${USER}/${USER}.pem
 done
 
@@ -41,8 +37,8 @@ tree /etc/pki/koji/
 
 # 当前用户作为koji超级管理员
 [ -d ~/.koji ] || mkdir ~/.koji
-cp -a /etc/pki/koji/certs/kojiadmin/kojiadmin.pem ~/.koji/client.crt
-cp -a /etc/pki/koji/koji_ca_cert.crt ~/.koji/clientca.crt
-cp -a /etc/pki/koji/koji_ca_cert.crt ~/.koji/serverca.crt
+/usr/bin/cp -a /etc/pki/koji/certs/kojiadmin/kojiadmin.pem ~/.koji/client.crt
+/usr/bin/cp /etc/pki/koji/koji_ca_cert.crt ~/.koji/clientca.crt
+/usr/bin/cp /etc/pki/koji/koji_ca_cert.crt ~/.koji/serverca.crt
 
 echo "All done!"

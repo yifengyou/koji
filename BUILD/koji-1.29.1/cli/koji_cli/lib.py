@@ -144,7 +144,7 @@ def ensure_connection(session, options=None):
     try:
         ret = session.getAPIVersion()
     except requests.exceptions.ConnectionError as ex:
-        warn("Error: Unable to connect to server")
+        warn("Error: Unable to connect to server in lib.py err: {%s}" % str(ex))
         if options and getattr(options, 'debug', False):
             error(str(ex))
         else:

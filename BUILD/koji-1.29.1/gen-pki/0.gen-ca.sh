@@ -5,6 +5,7 @@ set -xe
 WORKDIR=`pwd`
 
 cat > /etc/selinux/config << EOF
+
 # This file controls the state of SELinux on the system.
 # SELINUX= can take one of these three values:
 #     enforcing - SELinux security policy is enforced.
@@ -50,5 +51,8 @@ openssl req \
 tree
 ls -alh private/${caname}_ca_cert.key
 ls -alh koji_ca_cert.crt
+
+[ -d /etc/httpd/conf.d ] || mkdir /etc/httpd/conf.d
+cp -a ${WORKDIR}/httpd-ssl.conf /etc/httpd/conf.d/ssl.conf
 
 echo "All done!"

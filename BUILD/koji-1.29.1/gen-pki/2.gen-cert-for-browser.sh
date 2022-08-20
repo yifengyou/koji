@@ -3,9 +3,7 @@
 set -xe
 
 WORKDIR=`pwd`
-
 cd /etc/pki/koji/
-
 export CANAME=koji
 
 for USER in kojiwebadmin kojiwebuser; do
@@ -18,14 +16,14 @@ for USER in kojiwebadmin kojiwebuser; do
 	mkdir -p certs/${USER}
 	openssl genrsa -out certs/${USER}/${USER}.key 2048
 
-    openssl req \
+	openssl req \
 		-config ssl.cnf \
 		-new -nodes \
 		-out certs/${USER}/${USER}.csr \
 		-key certs/${USER}/${USER}.key \
 		-subj "/C=CN/ST=Chengdu/L=Chengdu/O=Linux/OU=OS/CN=${USER}/emailAddress=yifengyou666@gmail.com"
 
-    openssl ca -batch \
+	openssl ca -batch \
 		-config ssl.cnf \
 		-keyfile private/${CANAME}_ca_cert.key \
 		-cert ${CANAME}_ca_cert.crt \
@@ -33,9 +31,9 @@ for USER in kojiwebadmin kojiwebuser; do
 		-outdir certs/${USER} \
 		-infiles certs/${USER}/${USER}.csr
 
-    cat certs/${USER}/${USER}.crt certs/${USER}/${USER}.key > certs/${USER}/${USER}.pem
+	cat certs/${USER}/${USER}.crt certs/${USER}/${USER}.key > certs/${USER}/${USER}.pem
 
-    openssl pkcs12 -passout pass: \
+	openssl pkcs12 -passout pass: \
 		-export \
 		-inkey certs/${USER}/${USER}.key \
 		-in certs/${USER}/${USER}.crt \
@@ -46,4 +44,3 @@ done
 tree /etc/pki/koji/
 
 echo "All done!"
-
