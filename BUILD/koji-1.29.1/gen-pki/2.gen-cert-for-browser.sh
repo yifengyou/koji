@@ -23,7 +23,7 @@ for USER in kojiwebadmin kojiwebuser; do
 		-new -nodes \
 		-out certs/${USER}/${USER}.csr \
 		-key certs/${USER}/${USER}.key \
-		-subj "/C=CN/ST=Chengdu/L=Chengdu/O=linux/OU=os/CN=${USER}/emailAddress=yifengyou666@gmail.com"
+		-subj "/C=CN/ST=Chengdu/L=Chengdu/O=Linux/OU=OS/CN=${USER}/emailAddress=yifengyou666@gmail.com"
 
     openssl ca -batch \
 		-config ssl.cnf \

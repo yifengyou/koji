@@ -8,7 +8,7 @@ cd /etc/pki/koji/
 
 export CANAME=koji
 
-for USER in kojira kojiweb kojihub kojibuilder{1..5}; do
+for USER in kojiadmin kojira kojiweb kojihub kojibuilder{1..5}; do
 	if [ -f certs/${USER}/${USER}.pem ]
 	then
 		echo "already exists /etc/pki/koji/${USER}/${USER}.pem, skip"
@@ -22,7 +22,7 @@ for USER in kojira kojiweb kojihub kojibuilder{1..5}; do
 		-new -nodes \
 		-out certs/${USER}/${USER}.csr \
 		-key certs/${USER}/${USER}.key \
-		-subj "/C=CN/ST=Chengdu/L=Chengdu/O=linux/OU=os/CN=${USER}/emailAddress=yifengyou666@gmail.com"
+		-subj "/C=CN/ST=Chengdu/L=Chengdu/O=Linux/OU=OS/CN=${USER}/emailAddress=yifengyou666@gmail.com"
 
 
 	openssl ca -batch \
@@ -38,5 +38,10 @@ for USER in kojira kojiweb kojihub kojibuilder{1..5}; do
 done
 
 tree /etc/pki/koji/
+
+mkdir ~/.koji
+cp -pv /etc/pki/koji/kojiadmin.pem ~/.koji/client.crt
+cp -pv /etc/pki/koji/koji_ca_cert.crt ~/.koji/clientca.crt
+cp -pv /etc/pki/koji/koji_ca_cert.crt ~/.koji/serverca.crt
 
 echo "All done!"
