@@ -39,9 +39,10 @@ done
 
 tree /etc/pki/koji/
 
-mkdir ~/.koji
-cp -pv /etc/pki/koji/kojiadmin.pem ~/.koji/client.crt
-cp -pv /etc/pki/koji/koji_ca_cert.crt ~/.koji/clientca.crt
-cp -pv /etc/pki/koji/koji_ca_cert.crt ~/.koji/serverca.crt
+# 当前用户作为koji超级管理员
+[ -d ~/.koji ] || mkdir ~/.koji
+cp -a /etc/pki/koji/certs/kojiadmin/kojiadmin.pem ~/.koji/client.crt
+cp -a /etc/pki/koji/koji_ca_cert.crt ~/.koji/clientca.crt
+cp -a /etc/pki/koji/koji_ca_cert.crt ~/.koji/serverca.crt
 
 echo "All done!"

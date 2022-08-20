@@ -45,7 +45,7 @@ openssl req \
 	-key private/${caname}_ca_cert.key \
 	-out ${caname}_ca_cert.crt \
 	-extensions v3_ca \
-	-subj "/C=CN/ST=Chengdu/L=Chengdu/O=linux/OU=os/CN=koji/emailAddress=yifengyou666@gmail.com"
+	-subj "/C=CN/ST=Chengdu/L=Chengdu/O=Linux/OU=os/CN=koji/emailAddress=yifengyou666@gmail.com"
 
 tree
 ls -alh private/${caname}_ca_cert.key
