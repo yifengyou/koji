@@ -1,0 +1,131 @@
+# koji编译openeuler
+
+```
+#!/bin/bash
+
+set -xe
+
+koji add-tag openEuler-20.03-LTS-SP1
+koji add-tag --parent openEuler-20.03-LTS-SP1 openEuler-20.03-LTS-SP1-candidate
+koji add-tag --parent openEuler-20.03-LTS-SP1 openEuler-20.03-LTS-SP1-testing
+koji add-tag --parent openEuler-20.03-LTS-SP1 openEuler-20.03-LTS-SP1-release
+koji add-tag --parent openEuler-20.03-LTS-SP1 --arches "x86_64" openEuler-20.03-LTS-SP1-build
+koji add-group openEuler-20.03-LTS-SP1-build build
+koji add-group openEuler-20.03-LTS-SP1-build srpm-build
+
+koji add-group-pkg openEuler-20.03-LTS-SP1-build build bash bzip2 coreutils cpio diffutils findutils gawk gcc gcc-c++ grep gzip info make patch openEuler-rpm-config openEuler-release rpm-build sed shadow-utils tar unzip util-linux which xz
+koji add-group-pkg openEuler-20.03-LTS-SP1-build build rpmdevtools epel-rpm-macros which ruby
+koji add-group-pkg openEuler-20.03-LTS-SP1-build srpm-build bash curl cvs gnupg2 make openEuler-rpm-config openEuler-release rpm-build shadow-utils
+koji add-group-pkg openEuler-20.03-LTS-SP1-build srpm-build rpmdevtools epel-rpm-macros rsh which git ruby
+
+koji add-target openEuler-20.03-LTS-SP1 openEuler-20.03-LTS-SP1-build openEuler-20.03-LTS-SP1-candidate
+
+koji add-external-repo -t openEuler-20.03-LTS-SP1-build everything-repo https://repo.huaweicloud.com/openeuler/openEuler-20.03-LTS-SP1/everything/x86_64/
+koji add-external-repo -t openEuler-20.03-LTS-SP1-build update-repo https://repo.huaweicloud.com/openeuler/openEuler-20.03-LTS-SP1/update/x86_64/
+
+
+
+
+
+for i in `koji list-tags \*-build`; do koji regen-repo --nowait $i; done
+
+
+koji regen-repo openEuler-20.03-LTS-SP1-build --nowait
+
+
+https://mirrors.aliyun.com/epel/8/Everything/x86_64/
+```
+
+koji edit-external-repo base-repo --url=http://mirrors.tencent.com/rocky/8.6/BaseOS/x86_64/os/
+koji edit-external-repo appstream-repo --url=http://mirrors.tencent.com/rocky/8.6/AppStream/x86_64/os/
+koji edit-external-repo epel-repo --url=http://mirrors.tencent.com/epel/8/Everything/x86_64/
+
+
+
+
+```
+/usr/bin/mergerepo_c --koji -b /mnt/koji/repos/openEuler-20.03-LTS-SP1-build/5/x86_64/blocklist -a x86_64 -o /tmp/koji/tasks/32/32/repo --arch-expand -g /mnt/koji/repos/openEuler-20.03-LTS-SP1-build/5/groups/comps.xml -r file:///tmp/koji/tasks/32/32/repo_5_premerge/ -r http://mirrors.nju.edu.cn/rocky/8.6/BaseOS/x86_64/os/ -r http://mirrors.tuna.tsinghua.edu.cn/epel/8/Everything/x86_64/ -r http://mirrors.nju.edu.cn/rocky/8.6/AppStream/x86_64/os/
+```
+
+
+
+rm -rf /tmp/koji/tasks/32/32/repo/.repodata/
+/usr/bin/mergerepo_c --koji -b /mnt/koji/repos/openEuler-20.03-LTS-SP1-build/5/x86_64/blocklist -a x86_64 -o /tmp/koji/tasks/32/32/repo --arch-expand -g /mnt/koji/repos/openEuler-20.03-LTS-SP1-build/5/groups/comps.xml -r file:///tmp/koji/tasks/32/32/repo_5_premerge/ -r https://mirrors.163.com/rocky/8.6/BaseOS/x86_64/os/
+
+
+
+wget http://vault.centos.org/6.7/os/Source/SPackages/ql23xx-firmware-3.03.27-3.1.el6.src.rpm
+koji add-pkg --owner kojiadmin.dev.saltbaek.dk dist-centos6 ql23xx-firmware
+koji build dist-centos6 ql23xx-firmware-3.03.27-3.1.el6.src.rpm
+
+
+
+koji build openEuler-20.03-LTS-SP1-build
+
+---
+
+
+koji edit-tag dnf-fedora-tag -x mock.package_manager=dnf
+
+koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[('enable', 'perl-DBI'),('enable',  'perl'),('enable', 'perl-IO-Socket-SSL'),('enable', 'perl-libwww-perl')]
+koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_enable="[perl,perl-DBI,perl-IO-Socket-SSL,perl-libwww-perl]"
+koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.package_manager=dnf
+
+koji edit-tag openEuler-20.03-LTS-SP1-build -r mock.module_setup_commands
+koji edit-tag openEuler-20.03-LTS-SP1-build -r mock.module_enable
+
+koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[]
+
+koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[['enable', 'perl-DBI']]
+
+koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[["enable","perl-DBI"]]
+
+
+koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[("enable","perl-DBI"),("enable","perl")]
+
+koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[\('enable','perl-DBI'\),\('enable','perl'\),\('enable','perl-IO-Socket-SSL'\),\('enable','perl-libwww-perl'\)]
+
+
+koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[('enable','perl-DBI'),('enable','perl'),('enable','perl-IO-Socket-SSL'),('enable','perl-libwww-perl')]
+
+
+
+koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[('enable', 'perl-DBI'),('enable',  'perl'),('enable', 'perl-IO-Socket-SSL'),('enable', 'perl-libwww-perl')]
+
+koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.yum.best=0
+
+
+
+[('enable', 'perl-DBI'),('enable',  'perl'),('enable', 'perl-IO-Socket-SSL'),('enable', 'perl-libwww-perl')]"
+
+
+
+
+
+[
+        ('disable', 'postgresql'),
+        ('enable',  'postgresql:12, ruby:2.6'),
+        ('install', 'nodejs:13/development'),
+        ('disable', 'nodejs'),
+        ]
+
+
+
+usermod -a -G mock root
+
+
+
+config_opts['module_enable'] = ['list', 'of', 'modules']
+
+
+
+
+
+
+
+
+
+
+
+
+---
