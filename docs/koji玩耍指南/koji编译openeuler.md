@@ -22,6 +22,7 @@ koji add-target openEuler-20.03-LTS-SP1 openEuler-20.03-LTS-SP1-build openEuler-
 
 koji add-external-repo -t openEuler-20.03-LTS-SP1-build everything-repo https://repo.huaweicloud.com/openeuler/openEuler-20.03-LTS-SP1/everything/x86_64/
 koji add-external-repo -t openEuler-20.03-LTS-SP1-build update-repo https://repo.huaweicloud.com/openeuler/openEuler-20.03-LTS-SP1/update/x86_64/
+koji add-external-repo -t openEuler-20.03-LTS-SP1-build epol-repo http://repo.openeuler.org/openEuler-20.03-LTS-SP3/EPOL/main/x86_64/
 
 
 
@@ -118,10 +119,12 @@ usermod -a -G mock root
 config_opts['module_enable'] = ['list', 'of', 'modules']
 
 
+## 获取mock配置
+
+koji mock-config --target openEuler-20.03-LTS-SP1 -a x86_64
 
 
-
-
+koji regen-repo openEuler-20.03-LTS-SP1-build --nowait
 
 
 
