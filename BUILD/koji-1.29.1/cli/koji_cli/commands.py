@@ -7814,7 +7814,8 @@ def handle_moshimoshi(options, session, args):
     if not u:
         print("Not authenticated")
         u = {'name': 'anonymous user'}
-    print("%s, %s!" % (_printable_unicode(random.choice(greetings)), u["name"]))
+    # print("%s, %s!" % (_printable_unicode(random.choice(greetings)), u["name"]))
+    print("hello, %s!" % (u["name"]))
     print("")
     print("You are using the hub at %s" % session.baseurl)
     authtype = u.get('authtype', getattr(session, 'authtype', None))
