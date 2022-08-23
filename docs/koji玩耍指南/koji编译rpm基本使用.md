@@ -104,7 +104,7 @@ koji add-group rocky8.6-build build
 koji add-group rocky8.6-build srpm-build
 
 koji add-group-pkg rocky8.6-build build bash bzip2 coreutils cpio diffutils findutarmv5telils gawk gcc gcc-c++ grep gzip info make patch redhat-rpm-config redhat-release rpm-build sed shadow-utils tar unzip util-linux which xz
-koji add-group-pkg rocky8.6-build build rpmdevtools epel-rpm-macros which ruby perl-HTTP-Daemon
+koji add-group-pkg rocky8.6-build build rpmdevtools epel-rpm-macros which ruby perl-HTTP-Daemon perl-IO-Socket-IP
 koji add-group-pkg rocky8.6-build srpm-build bash curl cvs gnupg2 make redhat-rpm-config redhat-release rpm-build shadow-utils
 koji add-group-pkg rocky8.6-build srpm-build rpmdevtools epel-rpm-macros rsh which git ruby
 
