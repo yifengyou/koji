@@ -39,7 +39,6 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
 4. rpmbuild/mock
 
 
-
 ## 目录
 
 * [koji玩耍指南](docs/koji玩耍指南.md)
@@ -54,6 +53,8 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
     * [kojihub如何连接PostgreSQL](docs/koji玩耍指南/kojihub如何连接PostgreSQL.md)
     * [koji身份认证](docs/koji玩耍指南/koji身份认证.md)
     * [koji编译rpm基本使用](docs/koji玩耍指南/koji编译rpm基本使用.md)
+    * [koji编译openeuler](docs/koji玩耍指南/koji编译openeuler.md)
+    * [koji channel是什么？](docs/koji玩耍指南/koji_channel是什么.md)
 
 
 ## 图示

@@ -1,4 +1,20 @@
+<!-- MDTOC maxdepth:6 firsth1:1 numbering:0 flatten:0 bullets:1 updateOnSave:1 -->
+
+- [koji编译openeuler](#koji编译openeuler)   
+   - [创建target、tag](#创建target、tag)   
+   - [koji编译openEuler包](#koji编译openeuler包)   
+   - [koji中mock用户身份](#koji中mock用户身份)   
+   - [修改mock配置文件](#修改mock配置文件)   
+   - [获取mock配置](#获取mock配置)   
+
+<!-- /MDTOC -->
+
+
+
 # koji编译openeuler
+
+
+## 创建target、tag
 
 ```
 #!/bin/bash
@@ -12,123 +28,90 @@ koji add-tag --parent openEuler-20.03-LTS-SP1 openEuler-20.03-LTS-SP1-release
 koji add-tag --parent openEuler-20.03-LTS-SP1 --arches "x86_64" openEuler-20.03-LTS-SP1-build
 koji add-group openEuler-20.03-LTS-SP1-build build
 koji add-group openEuler-20.03-LTS-SP1-build srpm-build
-
 koji add-group-pkg openEuler-20.03-LTS-SP1-build build bash bzip2 coreutils cpio diffutils findutils gawk gcc gcc-c++ grep gzip info make patch openEuler-rpm-config openEuler-release rpm-build sed shadow-utils tar unzip util-linux which xz
 koji add-group-pkg openEuler-20.03-LTS-SP1-build build rpmdevtools epel-rpm-macros which ruby
 koji add-group-pkg openEuler-20.03-LTS-SP1-build srpm-build bash curl cvs gnupg2 make openEuler-rpm-config openEuler-release rpm-build shadow-utils
 koji add-group-pkg openEuler-20.03-LTS-SP1-build srpm-build rpmdevtools epel-rpm-macros rsh which git ruby
-
 koji add-target openEuler-20.03-LTS-SP1 openEuler-20.03-LTS-SP1-build openEuler-20.03-LTS-SP1-candidate
-
 koji add-external-repo -t openEuler-20.03-LTS-SP1-build everything-repo https://repo.huaweicloud.com/openeuler/openEuler-20.03-LTS-SP1/everything/x86_64/
 koji add-external-repo -t openEuler-20.03-LTS-SP1-build update-repo https://repo.huaweicloud.com/openeuler/openEuler-20.03-LTS-SP1/update/x86_64/
 koji add-external-repo -t openEuler-20.03-LTS-SP1-build epol-repo http://repo.openeuler.org/openEuler-20.03-LTS-SP3/EPOL/main/x86_64/
 
-
-
-
-
-for i in `koji list-tags \*-build`; do koji regen-repo --nowait $i; done
+# koji edit-external-repo base-repo --url=http://mirrors.tencent.com/rocky/8.6/BaseOS/x86_64/os/
+# koji edit-external-repo appstream-repo --url=http://mirrors.tencent.com/rocky/8.6/AppStream/x86_64/os/
+# koji edit-external-repo epel-repo --url=http://mirrors.tencent.com/epel/8/Everything/x86_64/
 
 
 koji regen-repo openEuler-20.03-LTS-SP1-build --nowait
-
-
-https://mirrors.aliyun.com/epel/8/Everything/x86_64/
 ```
 
-koji edit-external-repo base-repo --url=http://mirrors.tencent.com/rocky/8.6/BaseOS/x86_64/os/
-koji edit-external-repo appstream-repo --url=http://mirrors.tencent.com/rocky/8.6/AppStream/x86_64/os/
-koji edit-external-repo epel-repo --url=http://mirrors.tencent.com/epel/8/Everything/x86_64/
+执行完上面，已经安排好了目标，可以选定目标编译src.rpm了
 
 
+## koji编译openEuler包
 
 
 ```
-/usr/bin/mergerepo_c --koji -b /mnt/koji/repos/openEuler-20.03-LTS-SP1-build/5/x86_64/blocklist -a x86_64 -o /tmp/koji/tasks/32/32/repo --arch-expand -g /mnt/koji/repos/openEuler-20.03-LTS-SP1-build/5/groups/comps.xml -r file:///tmp/koji/tasks/32/32/repo_5_premerge/ -r http://mirrors.nju.edu.cn/rocky/8.6/BaseOS/x86_64/os/ -r http://mirrors.tuna.tsinghua.edu.cn/epel/8/Everything/x86_64/ -r http://mirrors.nju.edu.cn/rocky/8.6/AppStream/x86_64/os/
+koji build --nowait --scratch openEuler-20.03-LTS-SP1  `pwd`/test/aalib-1.4.0-1.oe1.src.rpm
+```
+
+```
+koji watch-task XXX
 ```
 
 
 
-rm -rf /tmp/koji/tasks/32/32/repo/.repodata/
-/usr/bin/mergerepo_c --koji -b /mnt/koji/repos/openEuler-20.03-LTS-SP1-build/5/x86_64/blocklist -a x86_64 -o /tmp/koji/tasks/32/32/repo --arch-expand -g /mnt/koji/repos/openEuler-20.03-LTS-SP1-build/5/groups/comps.xml -r file:///tmp/koji/tasks/32/32/repo_5_premerge/ -r https://mirrors.163.com/rocky/8.6/BaseOS/x86_64/os/
+
+## koji中mock用户身份
+
+![20220823_204419_63](image/20220823_204419_63.png)
+
+在kojid配置中指定用户，需要先创建该用户，并加入mock组
+
+```
+useradd kojibuilder
+usermod -a -G mock kojibuilder
+```
 
 
+## 修改mock配置文件
 
-wget http://vault.centos.org/6.7/os/Source/SPackages/ql23xx-firmware-3.03.27-3.1.el6.src.rpm
-koji add-pkg --owner kojiadmin.dev.saltbaek.dk dist-centos6 ql23xx-firmware
-koji build dist-centos6 ql23xx-firmware-3.03.27-3.1.el6.src.rpm
+* koji对于mock配置文件的定制支持很不友好
 
-
-
-koji build openEuler-20.03-LTS-SP1-build
-
----
-
-
+```
 koji edit-tag dnf-fedora-tag -x mock.package_manager=dnf
-
 koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[('enable', 'perl-DBI'),('enable',  'perl'),('enable', 'perl-IO-Socket-SSL'),('enable', 'perl-libwww-perl')]
 koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_enable="[perl,perl-DBI,perl-IO-Socket-SSL,perl-libwww-perl]"
 koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.package_manager=dnf
-
 koji edit-tag openEuler-20.03-LTS-SP1-build -r mock.module_setup_commands
 koji edit-tag openEuler-20.03-LTS-SP1-build -r mock.module_enable
 
+
+# 这个参数简直有毒，总是配置不上
 koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[]
-
 koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[['enable', 'perl-DBI']]
-
 koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[["enable","perl-DBI"]]
-
-
 koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[("enable","perl-DBI"),("enable","perl")]
-
 koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[\('enable','perl-DBI'\),\('enable','perl'\),\('enable','perl-IO-Socket-SSL'\),\('enable','perl-libwww-perl'\)]
-
-
 koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[('enable','perl-DBI'),('enable','perl'),('enable','perl-IO-Socket-SSL'),('enable','perl-libwww-perl')]
-
-
-
 koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.module_setup_commands=[('enable', 'perl-DBI'),('enable',  'perl'),('enable', 'perl-IO-Socket-SSL'),('enable', 'perl-libwww-perl')]
 
+# 这个参数配置了压根没用，还不如直接改源代码
 koji edit-tag openEuler-20.03-LTS-SP1-build -x mock.yum.best=0
 
-
-
-[('enable', 'perl-DBI'),('enable',  'perl'),('enable', 'perl-IO-Socket-SSL'),('enable', 'perl-libwww-perl')]"
-
-
-
-
-
-[
-        ('disable', 'postgresql'),
-        ('enable',  'postgresql:12, ruby:2.6'),
-        ('install', 'nodejs:13/development'),
-        ('disable', 'nodejs'),
-        ]
-
-
-
-usermod -a -G mock root
-
-
-
-config_opts['module_enable'] = ['list', 'of', 'modules']
+```
 
 
 ## 获取mock配置
 
+可以通过koji子命令获取目标对应的配置
+
+我觉得如果koji能够直接支持指定配置文件，效果更佳
+
+```
 koji mock-config --target openEuler-20.03-LTS-SP1 -a x86_64
-
-
 koji regen-repo openEuler-20.03-LTS-SP1-build --nowait
-
-
-
-
+```
 
 
 ---
