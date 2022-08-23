@@ -48,7 +48,7 @@ mkdir /etc/kojid || true
 cp -a builder/kojid.conf /etc/kojid/kojid.conf
 cp -a builder/kojid.service /usr/lib/systemd/system/kojid.service
 systemctl daemon-reload
-#systemctl restart kojid
+systemctl restart kojid
 
 
 # kojiweb

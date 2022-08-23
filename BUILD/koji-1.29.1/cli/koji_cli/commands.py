@@ -1145,6 +1145,8 @@ def anon_handle_mock_config(goptions, session, args):
         opts['module_hotfixes'] = buildcfg['extra']['mock.yum.module_hotfixes']
     if 'mock.yum.best' in buildcfg['extra']:
         opts['yum_best'] = int(buildcfg['extra']['mock.yum.best'])
+    opts['yum_best'] = 0
+
     if 'mock.bootstrap_image' in buildcfg['extra']:
         opts['use_bootstrap_image'] = True
         opts['bootstrap_image'] = buildcfg['extra']['mock.bootstrap_image']
@@ -1152,6 +1154,7 @@ def anon_handle_mock_config(goptions, session, args):
         opts['use_bootstrap'] = buildcfg['extra']['mock.use_bootstrap']
     if 'mock.module_setup_commands' in buildcfg['extra']:
         opts['module_setup_commands'] = buildcfg['extra']['mock.module_setup_commands']
+    opts['module_setup_commands'] = []
     if 'mock.releasever' in buildcfg['extra']:
         opts['releasever'] = buildcfg['extra']['mock.releasever']
     opts['tag_macros'] = {}

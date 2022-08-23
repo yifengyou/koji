@@ -47,7 +47,7 @@
       #if $params_parsed
       $params_parsed
       #else
-      <div class="error">Parameters are not correct for this method.</div>
+      <div class="error">Parameters are not correct for this method. \$params_parsed = [$params_parsed] </div>
       $params
       #end if
       </td>
