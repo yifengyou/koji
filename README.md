@@ -58,6 +58,8 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
 
 ## 图示
 
+![20221005_110039_51](image/20221005_110039_51.png) 
+
 
 ![20220811_141522_56](image/20220811_141522_56.png)
 
