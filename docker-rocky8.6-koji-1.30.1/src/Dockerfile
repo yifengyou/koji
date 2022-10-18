@@ -2,10 +2,40 @@ FROM rockylinux:8.6
 LABEL maintainers="yifengyou <nicyou@tencent.com>"
 
 RUN dnf install -y epel-release && cat /etc/yum.repos.d/*.repo && dnf makecache && \
-    dnf -y --enablerepo powertools install systemd findutils gcc git \
-                   which passwd openssh-server \
+    dnf -y install systemd findutils git \
+                   which passwd openssh-server vim \
                    && \
     dnf install -y \
-    nginx \
-    sqlite vim && \
+        python3-pyOpenSSL \
+        python3-mod_wsgi \
+        postgresql-plpython3 \
+        python3-kerberos \
+        python3-cheetah \
+        python3-multilib \
+        httpd \
+        mod_ssl \
+        postgresql-server \
+        koji \
+        koji-hub \
+        koji-hub-plugins \
+        koji-builder \
+        koji-builder-plugins \
+        koji-web \
+        koji-utils \
+        python3-koji-cli-plugins \
+        python3-koji-hub-plugins \
+        createrepo \
+        python3-mod_wsgi \
+        sqlite python3-librepo \
+	net-tools && \
     dnf clean all
+
+COPY files/service.koji /etc/service.koji
+COPY files/koji-* /usr/bin/
+COPY files/koji.conf /etc/koji.conf
+COPY files/kojihub.conf /etc/httpd/conf.d/kojihub.conf
+COPY files/hub.conf /etc/koji-hub/hub.conf
+COPY files/kojira.conf /etc/kojira/kojira.conf
+COPY files/web.conf /etc/kojiweb/web.conf
+
+

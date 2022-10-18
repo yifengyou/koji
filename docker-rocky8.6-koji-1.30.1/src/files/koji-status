@@ -1,0 +1,18 @@
+#!/bin/bash
+
+function status () {
+    for name in $@; do \
+      echo ${name} $(systemctl is-active ${name}) $(systemctl is-enabled ${name}); \
+      done | column -t | grep --color=always '\(disabled\|inactive\|$\)'
+}
+
+netstat -anpt |grep 80
+
+for srv in `cat /etc/service.koji`
+do
+    status $srv
+done
+
+echo "All done! All ok! Enjoy~~"
+
+echo "All done!"

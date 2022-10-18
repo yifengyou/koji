@@ -4,6 +4,14 @@ set -e
 
 docker container prune -f
 
-docker run --privileged -d -v `pwd`/data:/data -p 8880:8880 -p 8822:22 --name rocky8.6-koji rockylinux8.6-koji /usr/sbin/init
+[ ! -d koji-data ] && mkdir koji-data
+
+docker run \
+	--privileged -d \
+	-v `pwd`/koji-data:/data \
+	-p 9980:80 \
+	--name rocky8.6-koji \
+	rockylinux8.6-koji \
+	/usr/sbin/init
 
 echo "All done!"
