@@ -1,0 +1,54 @@
+From d1d8f512c1f62412333acc983c382d44a18d7240 Mon Sep 17 00:00:00 2001
+From: Tomas Kopecek <tkopecek@redhat.com>
+Date: Sep 29 2022 13:40:38 +0000
+Subject: kiwi: handle include protocols
+
+
+Related: https://pagure.io/koji/issue/3495
+
+---
+
+diff --git a/docs/source/plugins.rst b/docs/source/plugins.rst
+index 1a6994a..6654504 100644
+--- a/docs/source/plugins.rst
++++ b/docs/source/plugins.rst
+@@ -282,6 +282,13 @@ option. Similarly to other image tasks, alternative architecture failures can be
+ ignored for successful build by ``--can-fail`` option. ``--arch`` can be used to
+ limit build tag architectures.
+ 
++There are some limitation to used kiwi configuration:
++
++ * ``include`` node can use only ``this://`` protocol. Other types like ``file://``
++   or ``https://`` could reach out of the repo preventing reproducible build.
++ * All repositories from description (and included files) are removed and replaced
++   by buildroot repo and other repositories specified by ``--repo`` option.
++
+ Driver Update Disks building
+ ============================
+ 
+diff --git a/plugins/builder/kiwi.py b/plugins/builder/kiwi.py
+index 41ef82e..ee1216c 100644
+--- a/plugins/builder/kiwi.py
++++ b/plugins/builder/kiwi.py
+@@ -4,6 +4,7 @@ import xml.dom.minidom
+ from fnmatch import fnmatch
+ 
+ import koji
++import koji.util
+ from koji.tasks import ServerExit
+ from __main__ import BaseBuildTask, BuildImageTask, BuildRoot, SCM
+ 
+@@ -199,6 +200,12 @@ class KiwiCreateImageTask(BaseBuildTask):
+         # doing it recursively)
+         for inc_node in image.getElementsByTagName('include'):
+             path = inc_node.getAttribute('from')
++            if path.startswith('this://'):
++                path = koji.util.joinpath(desc_path, path[7:])
++            else:
++                # we want to reject other protocols, e.g. file://, https://
++                # reachingoutside of repo
++                raise koji.GenericError(f"Unhandled include protocol in include path: {path}.")
+             inc = xml.dom.minidom.parse(path)  # nosec
+             # every included xml has image root element again
+             for node in inc.getElementsByTagName('image').childNodes:
+

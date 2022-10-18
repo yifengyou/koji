@@ -1,8 +1,0 @@
-V	320805032646Z		01	unknown	/C=CN/ST=Beijing/O=Linux/CN=kojira/emailAddress=koji@163.com
-V	320805032702Z		02	unknown	/C=CN/ST=Beijing/O=Linux/CN=kojiweb/emailAddress=koji@163.com
-V	320805032718Z		03	unknown	/C=CN/ST=Beijing/O=Linux/CN=kojihub/emailAddress=koji@163.com
-V	320805032731Z		04	unknown	/C=CN/ST=Beijing/O=Linux/CN=kojibuilder1/emailAddress=koji@163.com
-V	320805032745Z		05	unknown	/C=CN/ST=Beijing/O=Linux/CN=kojibuilder2/emailAddress=koji@163.com
-V	320805032757Z		06	unknown	/C=CN/ST=Beijing/O=Linux/CN=kojibuilder3/emailAddress=koji@163.com
-V	320805032824Z		07	unknown	/C=CN/ST=Beijing/O=Linux/CN=kojiadmin/emailAddress=koji@163.com
-V	320805032841Z		08	unknown	/C=CN/ST=Beijing/O=Linux/CN=kojiuser/emailAddress=koji@163.com

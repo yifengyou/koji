@@ -1,0 +1,17 @@
+[Unit]
+Description=Koji repo administration
+Documentation=https://docs.pagure.org/koji/server_howto/
+
+# If the koji-hub is on this host, httpd.service is needed first
+After=network.target httpd.service
+
+[Service]
+ExecStart=/usr/sbin/kojira \
+       --fg \
+       --force-lock \
+       --verbose
+Restart=on-failure
+RestartSec=60s
+
+[Install]
+WantedBy=multi-user.target

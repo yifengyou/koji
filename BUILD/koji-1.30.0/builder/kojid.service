@@ -1,0 +1,18 @@
+[Unit]
+Description=Koji build server
+Documentation=https://docs.pagure.org/koji/server_howto/
+
+# If the koji-hub is on this host, httpd.service is needed first
+After=network.target httpd.service
+
+[Service]
+ExecStart=/usr/sbin/kojid \
+       --fg \
+       --force-lock \
+       --verbose
+ExecReload=/bin/kill -USR1 $MAINPID
+Restart=on-failure
+RestartSec=60s
+
+[Install]
+WantedBy=multi-user.target

@@ -8,13 +8,19 @@
 %{?!python3_pkgversion:%global python3_pkgversion 3}
 
 Name: koji
-Version: 1.29.1
-Release: 1%{?dist}
+Version: 1.30.0
+Release: 3%{?dist}
 # the included arch lib from yum's rpmUtils is GPLv2+
 License: LGPLv2 and GPLv2+
 Summary: Build system tools
 URL: https://pagure.io/koji/
 Source0: https://releases.pagure.org/koji/koji-%{version}.tar.bz2
+
+# Proposed upstream
+## From: https://pagure.io/koji/pull-request/3496
+Patch1: 3496.patch
+## From: https://pagure.io/koji/pull-request/3498
+Patch2: 3498.patch
 
 # Not upstreamable
 Patch100: fedora-config.patch
@@ -200,14 +206,6 @@ koji-web is a web UI to the Koji system.
 sed -e '/util\/koji/g' -e '/koji_cli_plugins/g' -i setup.py
 
 %build
-# 宏展开
-# %%py3_build_wheel() %%{expand:\\\
-#   CFLAGS="${CFLAGS:-${RPM_OPT_FLAGS}}" LDFLAGS="${LDFLAGS:-${RPM_LD_FLAGS}}"\\\
-#   %%{__python3} %%{py_setup} %%{?py_setup_args} bdist_wheel %%{?*}
-#   sleep 1
-# }
-# bdist             create a built (binary) distribution
-# python3 setup.py bdist
 %py3_build_wheel
 
 %install
@@ -355,6 +353,24 @@ done
 %systemd_postun kojira.service
 
 %changelog
+* Mon Oct 03 2022 Neal Gompa <ngompa@fedoraproject.org> - 1.30.0-3
+- Refresh kiwi-build patches to latest versions
+
+* Thu Sep 22 2022 Neal Gompa <ngompa@fedoraproject.org> - 1.30.0-2
+- Backport fixes for kiwi-build command
+
+* Mon Aug 29 2022 Kevin Fenzi <kevin@scrye.com> - 1.30.0-1
+- Update to 1.30.0. Fixes rhbz#2122127
+
+* Wed Aug 10 2022 Adam Williamson <awilliam@redhat.com> - 1.29.1-4
+- Replace PR #3458 with PR #3459 (preferred by upstream)
+
+* Tue Aug 09 2022 Adam Williamson <awilliam@redhat.com> - 1.29.1-3
+- Backport PR #3458 to fix download-task arch filtering. fixes rhbz#2116674
+
+* Wed Jul 20 2022 Adam Williamson <awilliam@redhat.com> - 1.29.1-2
+- Backport PR #3445 to fix a koji crash in image builds
+
 * Tue Jul 12 2022 Kevin Fenzi <kevin@scrye.com> - 1.29.1-1
 - Update to 1.29.1. Fiex rhbz#2106294
 
