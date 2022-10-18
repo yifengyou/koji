@@ -23,8 +23,11 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
 
 ## 相关站点
 
-* <https://pagure.io/koji/>
-* <https://docs.pagure.org/koji/>
+* 官方源码：<https://pagure.io/koji>
+* 官方文档：<https://docs.pagure.org/koji/>
+* Fedora官方koji站点：<https://koji.fedoraproject.org/koji/>
+* CentOS官方koji站点：<https://cbs.centos.org/koji/>
+* RockyLinux官方koji站点：<https://koji.rockylinux.org/koji/>
 
 ## 目录
 
@@ -56,6 +59,6 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
 
 ![20220811_141746_36](image/20220811_141746_36.png)
 
-![20221018_135919_46](image/20221018_135919_46.png) 
+![20221018_135919_46](image/20221018_135919_46.png)
 
 ---
