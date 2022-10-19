@@ -1,6 +1,5 @@
 # Summary
 
-* [Introduction](README.md)
 * [koji介绍](docs/koji介绍.md)
 * [koji部署](docs/koji部署.md)
 * [koji容器化](docs/koji容器化.md)

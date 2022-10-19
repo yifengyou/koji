@@ -300,6 +300,12 @@ host    all         all         ::1/128               trust
 insert into users (name, password, status, usertype) values ('kojiadmin', '', 0, 0);
 select * from users;       # 找到kojiadmin的user id. 本例中user_id=1
 insert into user_perms (user_id, perm_id,creator_id) values (1, 1, 1);
+
+
+select * from users;
+insert into user_perms (user_id, perm_id,creator_id) values (1, 1, 1);
+select * from user_perms;
+
 exit
 ```
 
