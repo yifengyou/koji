@@ -28,8 +28,8 @@ RUN dnf install -y epel-release && cat /etc/yum.repos.d/*.repo && dnf makecache 
         python3-mod_wsgi \
         sqlite python3-librepo \
 	net-tools && \
-    dnf clean all
-
+    dnf clean all && mkdir -p /etc/koji-pki
+RUN useradd koji && passwd -d koji
 COPY files/service.koji /etc/service.koji
 COPY files/koji-* /usr/bin/
 COPY files/koji.conf /etc/koji.conf
@@ -37,5 +37,7 @@ COPY files/kojihub.conf /etc/httpd/conf.d/kojihub.conf
 COPY files/hub.conf /etc/koji-hub/hub.conf
 COPY files/kojira.conf /etc/kojira/kojira.conf
 COPY files/web.conf /etc/kojiweb/web.conf
-
-
+COPY files/koji-pki/* /etc/koji-pki/
+COPY files/pg_hba.conf /etc/kojiweb/
+COPY files/postgresql.conf /etc/kojiweb/
+COPY files/kojid.conf /etc/kojid/

@@ -3,7 +3,7 @@
 set -xe
 
 # setup hosts kojihub
-echo "localhost 192.168.33.61 kojihub" >> /etc/hosts
+echo "127.0.0.1 kojihub" >> /etc/hosts
 
 
 # koji cli
@@ -70,11 +70,88 @@ echo "localhost 192.168.33.61 kojihub" >> /etc/hosts
 # cp -a www/static /usr/share/koji-web/static
 
 
-
 systemctl daemon-reload
 
+# disable firewalld
+systemctl disable --now firewalld &> /dev/null || true
+setenforce 0 || true
+
+# pki
+cd /etc/koji-pki && chmod +x *.sh && ./9.onekey.sh
+
+
+# setup sql
+su - postgres -c "/usr/bin/postgresql-setup --initdb"
+sync
+systemctl enable --now postgresql.service
+su - postgres -c "createuser koji"
+su - postgres -c "createdb -O koji koji"
+su - koji -c "psql koji koji < /usr/share/doc/koji/docs/schema.sql"
+cat /etc/kojiweb/pg_hba.conf > /var/lib/pgsql/data/pg_hba.conf
+cat /etc/kojiweb/postgresql.conf > /var/lib/pgsql/data/postgresql.conf
+su - postgres -c '/usr/bin/pg_ctl reload -D /var/lib/pgsql/data'
+# su - postgres -c '/usr/bin/pg_ctl restart -D /var/lib/pgsql/data'
+cat > /etc/kojiweb/koji.sql << EOF
+insert into users (id, name, password, status, usertype) values (999, 'kojiadmin', '', 0, 0);
+insert into user_perms (user_id, perm_id,creator_id) values (999, 1, 999);
+\d
+select * from user_perms;
+select * from users;
+EOF
+su - koji -c "psql koji koji < /etc/kojiweb/koji.sql"
+
+# add host/user
 systemctl enable --now httpd.service
-systemctl enable --now kojid.service
+koji add-host kojibuilder1 i386 x86_64
+koji add-host kojibuilder2 i386 x86_64
+koji add-host kojibuilder3 i386 x86_64
+koji add-host kojibuilder4 i386 x86_64
+koji add-host kojibuilder5 i386 x86_64
+su - koji -c "psql koji koji -c 'select * from users;'"
+
+# dir
+mkdir -p /mnt/koji/{packages,repos,work,scratch}
+chown -R apache.apache /mnt/koji
+
 systemctl enable --now kojira.service
+systemctl enable --now kojid.service
+
+cat >> ~/.bashrc << EOF
+# github.com/yifengyou/bash
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias l.='ls -d .* -a --color=auto'
+alias ll='ls -l -h -a --color=auto'
+alias ls='ls -a --color=auto'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias xzegrep='xzegrep --color=auto'
+alias xzfgrep='xzfgrep --color=auto'
+alias xzgrep='xzgrep --color=auto'
+alias zegrep='zegrep --color=auto'
+alias zfgrep='zfgrep --color=auto'
+alias zgrep='zgrep --color=auto'
+alias push='git push'
+
+
+# History setting
+export PROMPT_COMMAND="history -a"
+export HISTTIMEFORMAT="%F %T "
+export HISTSIZE=10000
+
+# Proxy settings
+#export http_proxy='127.0.0.1:5050'
+#export https_proxy='127.0.0.1:5050'
+#export ftp_proxy='127.0.0.1:5050'
+
+#export http_proxy=
+#export https_proxy=
+#export ftp_proxy=
+
+PS1='\[\e[32;1m\][\[\e[31;1m\]\u\[\e[33;1m\]@\[\e[35;1m\]\h\[\e[36;1m\] \w\[\e[32;1m\]]\[\e[37;1m\]\$\[\e[0m\] '
+EOF
+cp ~/.bashrc /home/koji/.bashrc
 
 echo "All  done!"
