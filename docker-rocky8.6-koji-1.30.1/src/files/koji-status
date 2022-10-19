@@ -7,12 +7,17 @@ function status () {
 }
 
 netstat -anpt |grep 80
+netstat -anpt |grep 5432
 
 for srv in `cat /etc/service.koji`
 do
     status $srv
 done
 
-echo "All done! All ok! Enjoy~~"
+su - koji -c 'psql koji koji -c '\''select * from users;'\'''
+su - koji -c 'psql koji koji -c '\''select * from user_perms;'\'''
 
-echo "All done!"
+koji hello
+
+echo ""
+echo "All done! All ok! Enjoy ~~~"
