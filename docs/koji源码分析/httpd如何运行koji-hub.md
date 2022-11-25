@@ -8,6 +8,39 @@
 # httpd如何运行koji-hub
 
 
+
+## 总结
+
+1. 入口在httpd配置中， https://xxx/kojihub -> 指向kojixmlrpc.py
+
+```
+Alias /kojihub /usr/share/koji-hub/kojixmlrpc.py
+
+<Directory "/usr/share/koji-hub">
+...
+</Directory>
+```
+
+2. httpd调用python经过wsgi中间转换，根据协议规则，实际调用的是kojixmlrpc.py中的application函数
+
+```
+def application(environ, start_response)
+```
+
+![20221125_173502_15](image/20221125_173502_15.png)
+
+最简单的application:
+
+```
+def application(environ, start_response):
+    body = b'Hello world!\n'
+    status = '200 OK'
+    headers = [('Content-type', 'text/plain')]
+    start_response(status, headers)
+    return [body]
+```
+
+
 ## httpd配置
 
 ![20220809_105405_98](image/20220809_105405_98.png)
@@ -93,7 +126,7 @@ The second parameter passed to the application object is a callable of the form 
 
 ![20220811_155844_63](image/20220811_155844_63.png)
 
-* application()函数必须由WSGI服务器来调用。有很多符合WSGI规范的服务器，我们可以挑选一个来用。但是现在，我们只想尽快测试一下我们编写的application()函数真的可以把HTML输出到浏览器，所以，要赶紧找一个最简单的WSGI服务器，把我们的Web应用程序跑起来。
+* application()函数必须由WSGI服务器来调用。有很多符合WSGI规范的服务器，挑选一个来用
 * 整个application()函数本身没有涉及到任何解析HTTP的部分，也就是说，底层代码不需要我们自己编写，我们只负责在更高层次上考虑如何响应请求就可以了。
 * 从environ这个dict对象拿到HTTP请求信息，然后构造HTML，通过start_response()发送Header，最后返回Body
 
@@ -101,7 +134,9 @@ The second parameter passed to the application object is a callable of the form 
 
 
 
+## 参考
 
+* <https://www.toptal.com/python/pythons-wsgi-server-application-interface>
 
 
 

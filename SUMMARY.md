@@ -1,11 +1,13 @@
 # Summary
 
+* [Introduction](README.md)
 * [koji介绍](docs/koji介绍.md)
 * [koji部署](docs/koji部署.md)
 * [koji容器化](docs/koji容器化.md)
+* [koji相关rpm包](docs/koji相关rpm包.md)
 * [koji源码分析](docs/koji源码分析.md)
     * [帮助信息](docs/koji源码分析/帮助信息.md)
-    * [入口解析](docs/koji源码分析/入口解析.md)
+    * [httpd如何运行koji-hub](docs/koji源码分析/httpd如何运行koji-hub.md)
     * [调试](docs/koji源码分析/调试.md)
     * [koji如何通过krb5鉴权](docs/koji源码分析/koji如何通过krb5鉴权.md)
     * [ssl证书生成](docs/koji源码分析/ssl证书生成.md)
