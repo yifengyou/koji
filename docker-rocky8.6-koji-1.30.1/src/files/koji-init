@@ -108,6 +108,12 @@ koji add-host kojibuilder3 i386 x86_64
 koji add-host kojibuilder4 i386 x86_64
 koji add-host kojibuilder5 i386 x86_64
 su - koji -c "psql koji koji -c 'select * from users;'"
+su - koji -c "psql koji koji -c 'select * from host;'"
+
+# koji配置
+
+# koji add-host-to-channel kojibuilder1 createrepo 
+
 
 # dir
 mkdir -p /mnt/koji/{packages,repos,work,scratch}
@@ -150,7 +156,7 @@ export HISTSIZE=10000
 #export https_proxy=
 #export ftp_proxy=
 
-PS1='\[\e[32;1m\][\[\e[31;1m\]\u\[\e[33;1m\]@\[\e[35;1m\]\h\[\e[36;1m\] \w\[\e[32;1m\]]\[\e[37;1m\]\$\[\e[0m\] '
+PS1='\[\e[32;1m\][\[\e[31;1m\]\u\[\e[33;1m\]@\[\e[35;1m\]\h\[\e[36;1m\] \w\[\e[32;1m\]]\[\e[37;1m\]\\\$\[\e[0m\] '
 EOF
 cp ~/.bashrc /home/koji/.bashrc
 

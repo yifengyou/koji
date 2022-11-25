@@ -11,3 +11,4 @@ BUILD/koji-1.29.1/debugsources.list
 BUILD/koji-1.29.1/dist/
 BUILD/koji-1.29.1/elfbins.list
 BUILD/koji-1.29.1/vm/kojikamid
+*.drawio.bkp
