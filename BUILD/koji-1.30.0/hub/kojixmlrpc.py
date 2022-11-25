@@ -43,13 +43,13 @@ from koji.xmlrpcplus import ExtendedMarshaller, Fault, dumps, getparser
 
 
 class Marshaller(ExtendedMarshaller):
-
     dispatch = ExtendedMarshaller.dispatch.copy()
 
     def dump_datetime(self, value, write):
         # For backwards compatibility, we return datetime objects as strings
         value = value.isoformat(' ')
         self.dump_unicode(value, write)
+
     dispatch[datetime.datetime] = dump_datetime
 
 
@@ -210,9 +210,12 @@ class ModXMLRPCRequestHandler(object):
             return self.handlers.get(name)
 
     def _read_request(self, stream):
+        # import six.moves.xmlrpc_client as xmlrpc_client
+        # getparser = xmlrpc_client.getparser
         parser, unmarshaller = getparser()
         rlen = 0
         maxlen = opts.get('MaxRequestLength', None)
+        # 处理请求过大问题
         while True:
             try:
                 chunk = stream.read(8192)
@@ -289,7 +292,9 @@ class ModXMLRPCRequestHandler(object):
         return kojihub.handle_upload(environ)
 
     def handle_rpc(self, environ):
+        #  environ['wsgi.input'] points to a stream that represents the body of the HTTP reques
         params, method = self._read_request(environ['wsgi.input'])
+        # 路由分发
         return self._dispatch(method, params)
 
     def check_session(self):
@@ -311,6 +316,7 @@ class ModXMLRPCRequestHandler(object):
             raise koji.ServerOffline("Server disabled for maintenance")
 
     def _dispatch(self, method, params):
+        # method -> str, params -> ()
         func = self._get_handler(method)
         context.method = method
         context.params = params
@@ -330,6 +336,7 @@ class ModXMLRPCRequestHandler(object):
         ret = koji.util.call_with_argcheck(func, params, opts)
 
         if self.logger.isEnabledFor(logging.INFO):
+            # 返回资源利用情况句柄
             rusage = resource.getrusage(resource.RUSAGE_SELF)
             self.logger.info(
                 "Completed method %s for session %s (#%s): %f seconds, rss %s, stime %f",
@@ -431,11 +438,11 @@ def load_config(environ):
     config = koji.read_config_files([cfdir, (cf, True)], raw=True)
 
     cfgmap = [
-        # option, type, default
+        # option, type, default 设置默认值
         ['DBName', 'string', None],
         ['DBUser', 'string', None],
         ['DBHost', 'string', None],
-        ['DBhost', 'string', None],   # alias for backwards compatibility
+        ['DBhost', 'string', None],  # alias for backwards compatibility
         ['DBPort', 'integer', None],
         ['DBPass', 'string', None],
         ['DBConnectionString', 'string', None],
@@ -713,14 +720,26 @@ def load_scripts(environ):
 
 
 def get_memory_usage():
+    # 返回一个系统页面的字节数，一般是4K
     pagesize = resource.getpagesize()
+    # 计算自身进程占用内存大小
     statm = [pagesize * int(y) // 1024
              for y in "".join(open("/proc/self/statm").readlines()).strip().split()]
+    # 7591 358 312 304 0 151 0
+    # Size (pages) 任务虚拟地址空间的大小 VmSize/4
+    # Resident(pages) 应用程序正在使用的物理内存的大小 VmRSS/4
+    # Shared(pages) 共享页数 0
+    # Trs(pages) 程序所拥有的可执行虚拟内存的大小 VmExe/4
+    # Lrs(pages) 被映像到任务的虚拟内存空间的库的大小 VmLib/4
+    # Drs(pages) 程序数据段和用户态的栈的大小 （VmData+ VmStk ）4
+    # dt(pages) 0
     size, res, shr, text, lib, data, dirty = statm
+    # 返回物理内存占用情况
     return res - shr
 
 
 def server_setup(environ):
+    # 定义全局变量，外部虽然没出现，使用时必须初始化否则会错误
     global opts, plugins, registry, policy
     logger = logging.getLogger('koji')
     try:
@@ -734,6 +753,7 @@ def server_setup(environ):
         load_scripts(environ)
         koji.util.setup_rlimits(opts)
         plugins = load_plugins(opts)
+        # 注册路由
         registry = get_registry(opts, plugins)
         policy = get_policy(opts, plugins)
         if opts.get('DBConnectionString'):
@@ -762,11 +782,22 @@ firstcall_lock = threading.Lock()
 
 
 def application(environ, start_response):
+    """
+    wsgi 入口
+    :param environ:
+    :param start_response:
+    :return:
+    """
     global firstcall
     if firstcall:
         with firstcall_lock:
             # check again, another thread may be ahead of us
+            # 并发情况下，每个thread互斥执行一次初始化
+            # ssl_error_log:7: ... [pid 6245:tid 140439287510784] [client 127.0.0.1:33058] firstcall
+            # ssl_error_log:8: ... [pid 6482:tid 140439055234816] [client 127.0.0.1:33062] firstcall
+            # ssl_error_log:9: ... [pid 5667:tid 139790515173120] [client 127.0.0.1:60362] firstcall
             if firstcall:
+                # 关键初始化操作
                 server_setup(environ)
                 firstcall = False
     # XMLRPC uses POST only. Reject anything else
@@ -776,8 +807,31 @@ def application(environ, start_response):
         ]
         response = "Method Not Allowed\n" \
                    "This is an XML-RPC server. Only POST requests are accepted.\n"
+        # def error_reply(start_response, status, response, extra_headers=None)
+        # start_response 封装
+        # # curl -vvv http://kojihub/kojihub
+        # *   Trying 127.0.0.1...
+        # * TCP_NODELAY set
+        # * Connected to kojihub (127.0.0.1) port 80 (#0)
+        # > GET /kojihub HTTP/1.1
+        # > Host: kojihub
+        # > User-Agent: curl/7.61.1
+        # > Accept: */*
+        # >
+        # < HTTP/1.1 405 Method Not Allowed
+        # < Date: Fri, 25 Nov 2022 12:19:11 GMT
+        # < Server: Apache/2.4.37 (rocky) OpenSSL/1.1.1k mod_auth_gssapi/1.6.1 mod_wsgi/4.6.4 Python/3.6
+        # < Content-Length: 79
+        # < Allow: POST
+        # < Content-Type: text/plain; charset=UTF-8
+        # <
+        # Method Not Allowed
+        # This is an XML-RPC server. Only POST requests are accepted.
+        # * Connection #0 to host kojihub left intact
         return error_reply(start_response, '405 Method Not Allowed', response, extra_headers)
+
     if opts.get('ServerOffline'):
+        # def offline_reply(start_response, msg=None)
         return offline_reply(start_response, msg=opts.get("OfflineMessage", None))
     # XXX check request length
     # XXX most of this should be moved elsewhere
@@ -789,18 +843,26 @@ def application(environ, start_response):
             context._threadclear()
             context.commit_pending = False
             context.opts = opts
+            # registry 在 server_setup(environ) 执行流中已经初始化为全局变量
             context.handlers = HandlerAccess(registry)
             context.environ = environ
             context.policy = policy
             try:
+                # 天呐，每个请求都会尝试连接数据库
                 context.cnx = koji.db.connect()
             except Exception:
+                # 连接sql失败
                 return offline_reply(start_response, msg="database outage")
+            # 路由句柄
+            # registry 在 server_setup(environ) 执行流中已经初始化为全局变量
+            # 实例化 class ModXMLRPCRequestHandler 对象
             h = ModXMLRPCRequestHandler(registry)
             try:
                 if environ.get('CONTENT_TYPE') == 'application/octet-stream':
+                    # 如果是上传文件
                     response = h._wrap_handler(h.handle_upload, environ)
                 else:
+                    # 否则执行rpc请求，路由
                     response = h._wrap_handler(h.handle_rpc, environ)
             except BadRequest as e:
                 return error_reply(start_response, '400 Bad Request', str(e) + '\n')
@@ -823,6 +885,10 @@ def application(environ, start_response):
                 context.cnx.commit()
                 koji.plugin.run_callbacks('postCommit')
             memory_usage_at_end = get_memory_usage()
+            # 统计物理内存开销是否超过阈值
+            # If memory consumption raises during handling request for more
+            # than MemoryWarnThreshold kilobytes, warning is emitted to log
+            # MemoryWarnThreshold = 5000
             if memory_usage_at_end - memory_usage_at_start > opts['MemoryWarnThreshold']:
                 paramstr = repr(getattr(context, 'params', 'UNKNOWN'))
                 if len(paramstr) > 120:
@@ -832,6 +898,7 @@ def application(environ, start_response):
                     "request %s with args %s" %
                     (os.getpid(), memory_usage_at_start, memory_usage_at_end,
                      memory_usage_at_end - memory_usage_at_start, context.method, paramstr))
+            # 配置/etc/koji-hub/hub.conf键值 KojiDebug = On
             h.logger.debug("Returning %d bytes after %f seconds", len(response),
                            time.time() - start)
         finally:
