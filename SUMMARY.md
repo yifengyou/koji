@@ -7,6 +7,12 @@
 * [koji相关rpm包](docs/koji相关rpm包.md)
 * [koji源码分析](docs/koji源码分析.md)
     * [帮助信息](docs/koji源码分析/帮助信息.md)
+    * [koji-hub](docs/koji源码分析/koji-hub.md)
+    * [koji-cli](docs/koji源码分析/koji-cli.md)
+    * [koji-kojira](docs/koji源码分析/koji-kojira.md)
+    * [koji-gc](docs/koji源码分析/koji-gc.md)
+    * [koji-web](docs/koji源码分析/koji-web.md)
+    * [koji-builder](docs/koji源码分析/koji-builder.md)
     * [httpd如何运行koji-hub](docs/koji源码分析/httpd如何运行koji-hub.md)
     * [调试](docs/koji源码分析/调试.md)
     * [koji如何通过krb5鉴权](docs/koji源码分析/koji如何通过krb5鉴权.md)
@@ -16,3 +22,4 @@
     * [koji身份认证](docs/koji源码分析/koji身份认证.md)
     * [koji编译rpm基本使用](docs/koji源码分析/koji编译rpm基本使用.md)
     * [koji编译openeuler](docs/koji源码分析/koji编译openeuler.md)
+
