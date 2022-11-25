@@ -1,11 +1,4 @@
-<!-- MDTOC maxdepth:6 firsth1:1 numbering:0 flatten:0 bullets:1 updateOnSave:1 -->
 
-- [httpd如何运行koji-hub](#httpd如何运行koji-hub)   
-   - [httpd配置](#httpd配置)   
-   - [application入口](#application入口)   
-
-<!-- /MDTOC -->
-# httpd如何运行koji-hub
 
 
 
@@ -36,6 +29,28 @@ def application(environ, start_response):
     body = b'Hello world!\n'
     status = '200 OK'
     headers = [('Content-type', 'text/plain')]
+    start_response(status, headers)
+    return [body]
+```
+
+
+* <https://mleue.com/posts/python-wsgi-framework/>
+
+```
+def application(environ, start_response):
+	if environ["PATH_INFO"] == "/":
+		status = "200 OK"
+		headers = [("Content-type", "text/plain")]
+		body = b"Hello from /"
+	elif environ["PATH_INFO"] == "/create" and environ["REQUEST_METHOD"] == "POST":
+		status = "200 OK"
+		headers = [("Content-type", "text/plain")]
+		data = environ["wsgi.input"].read()
+		body = b"Hello from /create called with data " + data
+	else:
+		status = "404 NOT FOUND"
+		headers = [("Content-type", "text/plain")]
+		body = b""
     start_response(status, headers)
     return [body]
 ```
@@ -129,9 +144,6 @@ The second parameter passed to the application object is a callable of the form 
 * application()函数必须由WSGI服务器来调用。有很多符合WSGI规范的服务器，挑选一个来用
 * 整个application()函数本身没有涉及到任何解析HTTP的部分，也就是说，底层代码不需要我们自己编写，我们只负责在更高层次上考虑如何响应请求就可以了。
 * 从environ这个dict对象拿到HTTP请求信息，然后构造HTML，通过start_response()发送Header，最后返回Body
-
-
-
 
 
 ## 参考
