@@ -96,11 +96,12 @@ systemctl enable postgresql --now
 
 su postgres
 cd
-export PGDATA=`pwd`postgresql_data
-initdb
+export PGDATA=`pwd`
+postgresql_data initdb
+```
 完成postgre初始化，再然后创建koji账户
 
-
+```
 [root@os1 ~]# useradd koji
 [root@os1 ~]# passwd -d koji
 [root@os1 ~]# su - postgres
