@@ -158,6 +158,34 @@ insert into users (name, password, status, usertype) values ('kojira', 'kojira',
 
 
 
+## SQL连接数
+
+
+```
+psql: FATAL:  remaining connection slots are reserved for non-replication superuser connections
+```
+
+
+![20221126_104705_93](image/20221126_104705_93.png)
+
+
+![20221126_104829_11](image/20221126_104829_11.png)
+
+![20221126_105137_98](image/20221126_105137_98.png)
+
+
+## 配置外部访问5432
+
+监听地址改为*
+
+![20221126_110932_31](image/20221126_110932_31.png)
+
+![20221126_110902_58](image/20221126_110902_58.png)
+
+![20221126_111010_88](image/20221126_111010_88.png)
+
+![20221126_111020_59](image/20221126_111020_59.png)
+
 
 
 

@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>c4563b98-6ffc-41db-b396-3b0ec1223856.DATABASE:koji</OriginalElement>
+  <nodes>
+    <node x="1216.3510246792766" y="237.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.content_generator</node>
+    <node x="5113.38673896499" y="639.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.user_perms</node>
+    <node x="370.0" y="877.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.win_archives</node>
+    <node x="1812.8510246792762" y="662.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.image_builds</node>
+    <node x="3691.6166666666663" y="662.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.groups</node>
+    <node x="4432.38673896499" y="650.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_target_config</node>
+    <node x="3564.830952380952" y="237.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events</node>
+    <node x="2236.7" y="662.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_notifications</node>
+    <node x="5310.205952380953" y="117.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.sessions</node>
+    <node x="2649.6010246792766" y="418.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.external_repo</node>
+    <node x="0.0" y="1013.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.proton_queue</node>
+    <node x="799.2260246792762" y="418.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.btype</node>
+    <node x="413.15315557729355" y="662.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archiveinfo</node>
+    <node x="2895.6166666666663" y="662.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_notifications_block</node>
+    <node x="1915.8510246792762" y="117.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.channels</node>
+    <node x="3936.2233800826193" y="854.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_config</node>
+    <node x="2032.8510246792762" y="117.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host</node>
+    <node x="3339.6166666666663" y="662.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_updates</node>
+    <node x="5098.205952380953" y="395.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.user_groups</node>
+    <node x="4802.515046749286" y="843.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_req_listing</node>
+    <node x="4665.705952380953" y="639.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_inheritance</node>
+    <node x="1168.239022070009" y="650.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_types</node>
+    <node x="0.0" y="877.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.image_archives</node>
+    <node x="1860.7916666666665" y="877.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.maven_archives</node>
+    <node x="3130.6166666666663" y="650.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.external_repo_config</node>
+    <node x="2391.9343580126097" y="406.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host_config</node>
+    <node x="916.8900467492854" y="650.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot_tools_info</node>
+    <node x="713.0" y="890.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archive_rpm_components</node>
+    <node x="1250.3510246792766" y="418.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot</node>
+    <node x="2948.7833333333333" y="237.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.package</node>
+    <node x="2701.6166666666663" y="639.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_external_repos</node>
+    <node x="2434.2781555772935" y="639.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_listing</node>
+    <node x="1324.5390220700092" y="877.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.standard_buildroot</node>
+    <node x="955.0" y="890.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot_listing</node>
+    <node x="4199.573795933898" y="639.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_extra</node>
+    <node x="282.75" y="418.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archivetypes</node>
+    <node x="2198.2416666666663" y="877.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.maven_builds</node>
+    <node x="4945.205952380953" y="418.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.permissions</node>
+    <node x="1698.6166666666663" y="237.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.task</node>
+    <node x="1081.3510246792762" y="395.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.cg_users</node>
+    <node x="3511.830952380952" y="0.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users</node>
+    <node x="4846.705952380953" y="650.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_config</node>
+    <node x="1356.4031555772935" y="662.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.rpminfo</node>
+    <node x="3895.767691345943" y="431.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.event_labels</node>
+    <node x="2040.1999999999998" y="395.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host_channels</node>
+    <node x="1669.8510246792762" y="662.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.win_builds</node>
+    <node x="2117.19482224396" y="662.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.repo</node>
+    <node x="165.0" y="890.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archive_components</node>
+    <node x="4584.573795933897" y="418.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_target</node>
+    <node x="524.0" y="866.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot_archives</node>
+    <node x="3997.5593580126097" y="639.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_packages</node>
+    <node x="1570.6166666666663" y="237.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.volume</node>
+    <node x="4369.573795933897" y="106.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.user_krb_principals</node>
+    <node x="1212.5390220700092" y="890.5">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.rpmsigs</node>
+    <node x="1482.8510246792762" y="662.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_reservations</node>
+    <node x="1625.8249999999998" y="418.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build</node>
+    <node x="3461.517691345943" y="843.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_package_listing</node>
+    <node x="3745.6166666666663" y="418.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag</node>
+    <node x="3484.6166666666663" y="639.0">c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_package_owners</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_package_owners" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="0.0" y="-51.0" />
+      <point x="3577.6166666666663" y="558.0" />
+      <point x="3554.330952380952" y="558.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.task" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="-28.333333333333258" y="-28.0" />
+      <point x="1712.783333333333" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.rpminfo" relationship="REFERENCES">
+      <point x="38.5" y="-15.0" />
+      <point x="1070.5" y="822.0" />
+      <point x="1127.5150467492854" y="822.0" />
+      <point x="1127.5150467492854" y="762.0" />
+      <point x="1402.4031555772935" y="762.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="-12.416666666666515" y="-51.0" />
+      <point x="2496.3614889106266" y="548.0" />
+      <point x="2562.4343580126097" y="548.0" />
+      <point x="2562.4343580126097" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.standard_buildroot" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.repo" relationship="REFERENCES">
+      <point x="34.799999999999955" y="-28.0" />
+      <point x="1446.3390220700092" y="792.0" />
+      <point x="2159.69482224396" y="792.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_package_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.groups" relationship="REFERENCES">
+      <point x="82.5" y="-62.5" />
+      <point x="3643.017691345943" y="822.0" />
+      <point x="3734.6166666666663" y="822.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="-21.25" y="-28.0" />
+      <point x="1647.0749999999998" y="334.0" />
+      <point x="1560.1166666666663" y="334.0" />
+      <point x="1560.1166666666663" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.maven_builds" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" relationship="REFERENCES">
+      <point x="-33.25" y="-28.0" />
+      <point x="2231.4916666666663" y="772.0" />
+      <point x="1802.3510246792762" y="772.0" />
+      <point x="1802.3510246792762" y="598.0" />
+      <point x="1668.3249999999998" y="598.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_packages" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="37.25" y="-51.0" />
+      <point x="4109.30935801261" y="558.0" />
+      <point x="4178.073795933898" y="558.0" />
+      <point x="4178.073795933898" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_notifications_block" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="71.66666666666652" y="-28.0" />
+      <point x="3074.783333333333" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="0.0" y="-39.5" />
+      <point x="2466.4343580126097" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot" relationship="REFERENCES">
+      <point x="-38.5" y="-15.0" />
+      <point x="993.5" y="802.0" />
+      <point x="1109.3900467492854" y="802.0" />
+      <point x="1109.3900467492854" y="608.0" />
+      <point x="1301.8510246792766" y="608.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot_archives" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archiveinfo" relationship="REFERENCES">
+      <point x="-42.25" y="-39.5" />
+      <point x="566.25" y="812.0" />
+      <point x="470.15315557729355" y="812.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.external_repo_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="37.59999999999991" y="-39.5" />
+      <point x="3262.2166666666662" y="568.0" />
+      <point x="3248.9166666666665" y="568.0" />
+      <point x="3248.9166666666665" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.groups" relationship="REFERENCES">
+      <point x="-62.08333333333303" y="-51.0" />
+      <point x="3948.6400467492863" y="822.0" />
+      <point x="3734.6166666666663" y="822.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archive_rpm_components" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.rpminfo" relationship="REFERENCES">
+      <point x="55.5" y="-15.0" />
+      <point x="879.5" y="822.0" />
+      <point x="1127.5150467492854" y="822.0" />
+      <point x="1127.5150467492854" y="762.0" />
+      <point x="1402.4031555772935" y="762.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.standard_buildroot" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.task" relationship="REFERENCES">
+      <point x="-34.799999999999955" y="-28.0" />
+      <point x="1376.7390220700092" y="772.0" />
+      <point x="1472.3510246792762" y="772.0" />
+      <point x="1472.3510246792762" y="364.0" />
+      <point x="1762.3666666666663" y="364.0" />
+      <point x="21.25" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_inheritance" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="-12.41666666666697" y="-51.0" />
+      <point x="4727.789285714285" y="558.0" />
+      <point x="4748.539285714285" y="558.0" />
+      <point x="4748.539285714285" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_updates" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="-41.333333333333485" y="-28.0" />
+      <point x="3360.283333333333" y="568.0" />
+      <point x="3375.45" y="568.0" />
+      <point x="3375.45" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_req_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="23.142857142856883" y="-62.5" />
+      <point x="4906.657903892143" y="762.0" />
+      <point x="4836.205952380953" y="762.0" />
+      <point x="4836.205952380953" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.win_builds" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="1730.8510246792762" y="598.0" />
+      <point x="1668.3249999999998" y="598.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host_channels" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host" relationship="REFERENCES">
+      <point x="-37.25" y="-51.0" />
+      <point x="2077.45" y="334.0" />
+      <point x="2075.351024679276" y="334.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_req_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="-23.142857142856883" y="-62.5" />
+      <point x="4860.372189606429" y="782.0" />
+      <point x="3913.4071292672306" y="782.0" />
+      <point x="3913.4071292672306" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_extra" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="0.0" y="-51.0" />
+      <point x="4274.073795933898" y="568.0" />
+      <point x="4281.861904761905" y="568.0" />
+      <point x="4281.861904761905" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="2075.351024679276" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.user_groups" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="-62.08333333333303" y="-51.0" />
+      <point x="5110.622619047619" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_extra" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="-59.600000000000364" y="-51.0" />
+      <point x="4214.473795933897" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archive_rpm_components" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archiveinfo" relationship="REFERENCES">
+      <point x="-55.5" y="-15.0" />
+      <point x="768.5" y="812.0" />
+      <point x="470.15315557729355" y="812.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host_channels" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.channels" relationship="REFERENCES">
+      <point x="-62.083333333333485" y="-51.0" />
+      <point x="2052.6166666666663" y="334.0" />
+      <point x="1964.3510246792762" y="334.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.standard_buildroot" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="1411.5390220700092" y="782.0" />
+      <point x="1953.3510246792762" y="782.0" />
+      <point x="1953.3510246792762" y="216.0" />
+      <point x="2075.351024679276" y="216.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archive_components" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archiveinfo" relationship="REFERENCES">
+      <point x="-46.25" y="-15.0" />
+      <point x="211.25" y="812.0" />
+      <point x="470.15315557729355" y="812.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.standard_buildroot" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot" relationship="REFERENCES">
+      <point x="-69.59999999999991" y="-28.0" />
+      <point x="1341.9390220700093" y="802.0" />
+      <point x="1157.739022070009" y="802.0" />
+      <point x="1157.739022070009" y="608.0" />
+      <point x="1301.8510246792766" y="608.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.cg_users" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="37.25" y="-51.0" />
+      <point x="1193.1010246792762" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_inheritance" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="-62.08333333333303" y="-51.0" />
+      <point x="4678.122619047619" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_notifications_block" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.package" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="3003.1166666666663" y="568.0" />
+      <point x="2996.2833333333333" y="568.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot_archives" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot" relationship="REFERENCES">
+      <point x="42.25" y="-39.5" />
+      <point x="650.75" y="802.0" />
+      <point x="822.8510246792762" y="802.0" />
+      <point x="822.8510246792762" y="608.0" />
+      <point x="1301.8510246792766" y="608.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.sessions" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.sessions" relationship="REFERENCES">
+      <point x="0.0" y="28.0" />
+      <point x="5357.205952380953" y="193.5" />
+      <point x="5290.205952380953" y="193.5" />
+      <point x="5290.205952380953" y="145.5" />
+      <point x="-47.0" y="-0.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.cg_users" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.content_generator" relationship="REFERENCES">
+      <point x="12.416666666666742" y="-51.0" />
+      <point x="1168.2676913459427" y="374.0" />
+      <point x="1301.8510246792766" y="374.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_packages" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="-12.41666666666697" y="-51.0" />
+      <point x="4059.6426913459427" y="538.0" />
+      <point x="4143.003571428571" y="538.0" />
+      <point x="4143.003571428571" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_external_repos" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.external_repo" relationship="REFERENCES">
+      <point x="-72.08333333333348" y="-51.0" />
+      <point x="2716.033333333333" y="588.0" />
+      <point x="2717.1010246792766" y="588.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_target_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="50.285714285714675" y="-39.5" />
+      <point x="4570.672453250705" y="568.0" />
+      <point x="4574.073795933897" y="568.0" />
+      <point x="4574.073795933897" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="62.083333333333485" y="-51.0" />
+      <point x="2570.8614889106266" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="-62.08333333333303" y="-39.5" />
+      <point x="4859.122619047619" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_external_repos" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="72.08333333333348" y="-51.0" />
+      <point x="2860.2" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.repo" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="2159.69482224396" y="568.0" />
+      <point x="2199.7" y="568.0" />
+      <point x="2199.7" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.content_generator" relationship="REFERENCES">
+      <point x="-35.41666666666674" y="-28.0" />
+      <point x="1632.908333333333" y="374.0" />
+      <point x="1301.8510246792766" y="374.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_package_owners" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="26.57142857142844" y="-51.0" />
+      <point x="3604.188095238095" y="568.0" />
+      <point x="3594.4329174820555" y="568.0" />
+      <point x="3594.4329174820555" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.external_repo_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.external_repo" relationship="REFERENCES">
+      <point x="-75.19999999999982" y="-39.5" />
+      <point x="3149.4166666666665" y="588.0" />
+      <point x="2717.1010246792766" y="588.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.standard_buildroot" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="69.59999999999991" y="-28.0" />
+      <point x="1481.139022070009" y="802.0" />
+      <point x="2226.2" y="802.0" />
+      <point x="2226.2" y="538.0" />
+      <point x="2551.4343580126097" y="538.0" />
+      <point x="2551.4343580126097" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.win_archives" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archiveinfo" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="437.0" y="812.0" />
+      <point x="470.15315557729355" y="812.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.user_groups" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="62.08333333333303" y="-51.0" />
+      <point x="5234.789285714285" y="374.0" />
+      <point x="5225.032129267231" y="374.0" />
+      <point x="5225.032129267231" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.user_krb_principals" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="0.0" y="-39.5" />
+      <point x="4461.073795933897" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.rpminfo" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.external_repo" relationship="REFERENCES">
+      <point x="30.666666666666742" y="-28.0" />
+      <point x="1433.0698222439603" y="588.0" />
+      <point x="2717.1010246792766" y="588.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_extra" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="59.600000000000364" y="-51.0" />
+      <point x="4333.673795933898" y="568.0" />
+      <point x="4318.173795933897" y="568.0" />
+      <point x="4318.173795933897" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_req_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.groups" relationship="REFERENCES">
+      <point x="-69.42857142857156" y="-62.5" />
+      <point x="4814.086475320714" y="822.0" />
+      <point x="3734.6166666666663" y="822.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host_channels" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="37.25" y="-51.0" />
+      <point x="2151.95" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.image_archives" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archiveinfo" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="72.5" y="812.0" />
+      <point x="470.15315557729355" y="812.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.image_builds" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" relationship="REFERENCES">
+      <point x="-2.2737367544323206E-13" y="-28.0" />
+      <point x="1877.851024679276" y="598.0" />
+      <point x="1668.3249999999998" y="598.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.task" relationship="REFERENCES">
+      <point x="7.0833333333332575" y="-28.0" />
+      <point x="1675.408333333333" y="364.0" />
+      <point x="1762.3666666666663" y="364.0" />
+      <point x="21.25" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archiveinfo" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot" relationship="REFERENCES">
+      <point x="14.25" y="-28.0" />
+      <point x="484.40315557729355" y="608.0" />
+      <point x="1301.8510246792766" y="608.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.volume" relationship="REFERENCES">
+      <point x="-7.0833333333332575" y="-28.0" />
+      <point x="1661.2416666666666" y="324.0" />
+      <point x="1614.6166666666663" y="324.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.cg_users" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="-62.083333333333485" y="-51.0" />
+      <point x="1093.7676913459427" y="364.0" />
+      <point x="1121.4343580126092" y="364.0" />
+      <point x="1121.4343580126092" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="12.41666666666697" y="-51.0" />
+      <point x="4023.1400467492863" y="792.0" />
+      <point x="3984.0869047619044" y="792.0" />
+      <point x="3984.0869047619044" y="528.0" />
+      <point x="4130.782129267231" y="528.0" />
+      <point x="4130.782129267231" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host_channels" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="12.416666666666515" y="-51.0" />
+      <point x="2127.1166666666663" y="334.0" />
+      <point x="2139.351024679276" y="334.0" />
+      <point x="2139.351024679276" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_package_owners" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.package" relationship="REFERENCES">
+      <point x="-79.71428571428578" y="-51.0" />
+      <point x="3497.9023809523806" y="558.0" />
+      <point x="3521.330952380952" y="558.0" />
+      <point x="3521.330952380952" y="354.0" />
+      <point x="2996.2833333333333" y="354.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="-37.25" y="-51.0" />
+      <point x="3973.4733800826193" y="812.0" />
+      <point x="3788.1166666666663" y="812.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.package" relationship="REFERENCES">
+      <point x="21.25" y="-28.0" />
+      <point x="1689.5749999999998" y="354.0" />
+      <point x="2996.2833333333333" y="354.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_packages" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.package" relationship="REFERENCES">
+      <point x="-37.25" y="-51.0" />
+      <point x="4034.8093580126097" y="518.0" />
+      <point x="3874.267691345943" y="518.0" />
+      <point x="3874.267691345943" y="354.0" />
+      <point x="2996.2833333333333" y="354.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.maven_builds" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.groups" relationship="REFERENCES">
+      <point x="33.25" y="-28.0" />
+      <point x="2297.9916666666663" y="822.0" />
+      <point x="3734.6166666666663" y="822.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot_tools_info" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot" relationship="REFERENCES">
+      <point x="0.0" y="-39.5" />
+      <point x="1007.8900467492854" y="608.0" />
+      <point x="1301.8510246792766" y="608.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_target_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="-75.42857142857156" y="-39.5" />
+      <point x="4444.958167536419" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_package_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="-16.5" y="-62.5" />
+      <point x="3544.017691345943" y="792.0" />
+      <point x="3329.1166666666663" y="792.0" />
+      <point x="3329.1166666666663" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_updates" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="3401.6166666666663" y="568.0" />
+      <point x="3386.45" y="568.0" />
+      <point x="3386.45" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_inheritance" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="37.25" y="-51.0" />
+      <point x="4777.455952380953" y="568.0" />
+      <point x="4770.539285714285" y="568.0" />
+      <point x="4770.539285714285" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.task" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.task" relationship="REFERENCES">
+      <point x="-21.25" y="28.0" />
+      <point x="1719.8666666666663" y="313.0" />
+      <point x="1678.6166666666663" y="313.0" />
+      <point x="1678.6166666666663" y="265.0" />
+      <point x="-42.5" y="-0.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_target_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_target" relationship="REFERENCES">
+      <point x="75.42857142857156" y="-39.5" />
+      <point x="4595.815310393562" y="568.0" />
+      <point x="4646.073795933897" y="568.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.rpminfo" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="1402.4031555772935" y="598.0" />
+      <point x="1668.3249999999998" y="598.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="29.800000000000182" y="-39.5" />
+      <point x="2496.23435801261" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_req_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="46.285714285714675" y="-62.5" />
+      <point x="4929.8007610350005" y="812.0" />
+      <point x="5414.705952380953" y="812.0" />
+      <point x="5414.705952380953" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.rpmsigs" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.rpminfo" relationship="REFERENCES">
+      <point x="0.0" y="-15.0" />
+      <point x="1258.5390220700092" y="822.0" />
+      <point x="1127.5150467492854" y="822.0" />
+      <point x="1127.5150467492854" y="762.0" />
+      <point x="1402.4031555772935" y="762.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_external_repos" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="-14.416666666666515" y="-51.0" />
+      <point x="2773.7" y="558.0" />
+      <point x="2806.1010246792766" y="558.0" />
+      <point x="2806.1010246792766" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="37.25" y="-51.0" />
+      <point x="2546.0281555772935" y="568.0" />
+      <point x="2609.7260246792766" y="568.0" />
+      <point x="2609.7260246792766" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.user_perms" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="-12.41666666666697" y="-51.0" />
+      <point x="5175.470072298323" y="598.0" />
+      <point x="5087.705952380953" y="598.0" />
+      <point x="5087.705952380953" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_types" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" relationship="REFERENCES">
+      <point x="31.25" y="-39.5" />
+      <point x="1261.989022070009" y="598.0" />
+      <point x="1668.3249999999998" y="598.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="37.25" y="-39.5" />
+      <point x="4958.455952380953" y="598.0" />
+      <point x="4914.622619047619" y="598.0" />
+      <point x="4914.622619047619" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_notifications_block" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="-71.66666666666652" y="-28.0" />
+      <point x="2931.45" y="568.0" />
+      <point x="2938.2833333333333" y="568.0" />
+      <point x="2938.2833333333333" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archiveinfo" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" relationship="REFERENCES">
+      <point x="42.75" y="-28.0" />
+      <point x="512.9031555772935" y="598.0" />
+      <point x="1668.3249999999998" y="598.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.task" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.channels" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="1741.1166666666663" y="206.0" />
+      <point x="1964.3510246792762" y="206.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" relationship="REFERENCES">
+      <point x="-62.083333333333485" y="-51.0" />
+      <point x="2446.6948222439596" y="598.0" />
+      <point x="1668.3249999999998" y="598.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.task" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host" relationship="REFERENCES">
+      <point x="28.333333333333258" y="-28.0" />
+      <point x="1769.4499999999996" y="216.0" />
+      <point x="2075.351024679276" y="216.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_updates" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="41.333333333333485" y="-28.0" />
+      <point x="3442.95" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.permissions" relationship="REFERENCES">
+      <point x="62.08333333333303" y="-39.5" />
+      <point x="4983.289285714285" y="618.0" />
+      <point x="5005.705952380953" y="618.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archiveinfo" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archivetypes" relationship="REFERENCES">
+      <point x="-42.75" y="-28.0" />
+      <point x="427.40315557729355" y="618.0" />
+      <point x="345.75" y="618.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_types" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.btype" relationship="REFERENCES">
+      <point x="-31.25" y="-39.5" />
+      <point x="1199.489022070009" y="618.0" />
+      <point x="841.7260246792762" y="618.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_package_owners" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="79.71428571428578" y="-51.0" />
+      <point x="3657.330952380952" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="-12.41666666666697" y="-39.5" />
+      <point x="4908.789285714285" y="618.0" />
+      <point x="4892.622619047619" y="618.0" />
+      <point x="4892.622619047619" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.external_repo_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="0.0" y="-39.5" />
+      <point x="3224.6166666666663" y="568.0" />
+      <point x="3228.6368911719924" y="568.0" />
+      <point x="3228.6368911719924" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archiveinfo" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.btype" relationship="REFERENCES">
+      <point x="-14.25" y="-28.0" />
+      <point x="455.90315557729355" y="618.0" />
+      <point x="841.7260246792762" y="618.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="35.41666666666674" y="-28.0" />
+      <point x="1703.7416666666666" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="37.25" y="-51.0" />
+      <point x="4047.9733800826193" y="802.0" />
+      <point x="4189.073795933898" y="802.0" />
+      <point x="4189.073795933898" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.user_perms" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.permissions" relationship="REFERENCES">
+      <point x="-62.08333333333303" y="-51.0" />
+      <point x="5125.803405631657" y="618.0" />
+      <point x="5005.705952380953" y="618.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.content_generator" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_reservations" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="1566.3510246792762" y="598.0" />
+      <point x="1668.3249999999998" y="598.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.host" relationship="REFERENCES">
+      <point x="-59.59999999999991" y="-39.5" />
+      <point x="2406.8343580126098" y="324.0" />
+      <point x="2444.4343580126097" y="324.0" />
+      <point x="2444.4343580126097" y="216.0" />
+      <point x="2075.351024679276" y="216.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.user_perms" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="62.08333333333303" y="-51.0" />
+      <point x="5249.970072298323" y="618.0" />
+      <point x="5279.705952380953" y="618.0" />
+      <point x="5279.705952380953" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_package_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="-49.5" y="-62.5" />
+      <point x="3511.017691345943" y="802.0" />
+      <point x="2885.1166666666663" y="802.0" />
+      <point x="2885.1166666666663" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_notifications" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="56.0" y="-28.0" />
+      <point x="2376.7" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.repo" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.task" relationship="REFERENCES">
+      <point x="-28.333333333333485" y="-28.0" />
+      <point x="2131.3614889106266" y="578.0" />
+      <point x="2029.6999999999998" y="578.0" />
+      <point x="2029.6999999999998" y="364.0" />
+      <point x="1762.3666666666663" y="364.0" />
+      <point x="21.25" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.sessions" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="5357.205952380953" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_notifications" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.users" relationship="REFERENCES">
+      <point x="-56.0" y="-28.0" />
+      <point x="2264.7" y="528.0" />
+      <point x="2287.2" y="528.0" />
+      <point x="2287.2" y="81.0" />
+      <point x="3554.330952380952" y="81.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_external_repos" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="14.416666666666515" y="-51.0" />
+      <point x="2802.533333333333" y="568.0" />
+      <point x="2817.1010246792766" y="568.0" />
+      <point x="2817.1010246792766" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_notifications" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.package" relationship="REFERENCES">
+      <point x="0.0" y="-28.0" />
+      <point x="2320.7" y="528.0" />
+      <point x="2381.4343580126097" y="528.0" />
+      <point x="2381.4343580126097" y="354.0" />
+      <point x="2996.2833333333333" y="354.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.maven_archives" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.groups" relationship="REFERENCES">
+      <point x="37.0" y="-28.0" />
+      <point x="1971.7916666666665" y="822.0" />
+      <point x="3734.6166666666663" y="822.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.maven_archives" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.archiveinfo" relationship="REFERENCES">
+      <point x="-37.0" y="-28.0" />
+      <point x="1897.7916666666665" y="812.0" />
+      <point x="470.15315557729355" y="812.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag_packages" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="-62.08333333333303" y="-51.0" />
+      <point x="4009.9760246792766" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.rpminfo" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.buildroot" relationship="REFERENCES">
+      <point x="-30.666666666666742" y="-28.0" />
+      <point x="1371.7364889106268" y="608.0" />
+      <point x="1301.8510246792766" y="608.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.group_package_listing" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="49.5" y="-62.5" />
+      <point x="3610.017691345943" y="812.0" />
+      <point x="3681.1166666666663" y="812.0" />
+      <point x="3681.1166666666663" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.build_target_config" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="-25.142857142856883" y="-39.5" />
+      <point x="4495.2438818221335" y="568.0" />
+      <point x="4500.101024679276" y="568.0" />
+      <point x="4500.101024679276" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.repo" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.tag" relationship="REFERENCES">
+      <point x="28.333333333333485" y="-28.0" />
+      <point x="2188.0281555772935" y="578.0" />
+      <point x="3788.1166666666663" y="578.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+    <edge source="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.event_labels" target="c4563b98-6ffc-41db-b396-3b0ec1223856.TABLE:koji.public.events" relationship="REFERENCES">
+      <point x="0.0" y="-15.0" />
+      <point x="3957.767691345943" y="344.0" />
+      <point x="3607.330952380952" y="344.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.5499999999999999" showDependencies="false" x="395.615471485037" y="-59.58741258741236" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+

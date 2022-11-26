@@ -37,21 +37,19 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
 * [相关技术](docs/相关技术.md)
     * [PostgreSQL](docs/相关技术/PostgreSQL.md)
     * [kerberos](docs/相关技术/kerberos.md)
+    * [psycopg2](docs/相关技术/psycopg2.md)
 * [koji源码分析](docs/koji源码分析.md)
     * [koji-hub httpd如何运行koji-hub](docs/koji源码分析/httpd如何运行koji-hub.md)
     * [koji-hub 入口程序application](docs/koji源码分析/入口程序application.md)
     * [koji-hub curl发送调试请求](docs/koji源码分析/curl发送调试请求.md)
     * [koji-hub 获取路由列表](docs/koji源码分析/获取路由列表.md)
     * [koji-hub 连接PostgreSQL](docs/koji源码分析/连接PostgreSQL.md)
+    * [koji-hub SQL表拆解](docs/koji源码分析/SQL表拆解.md)
     * [koji-cli koji如何通过krb5鉴权](docs/koji源码分析/koji如何通过krb5鉴权.md)
     * [koji-cli 身份认证](docs/koji源码分析/身份认证.md)
 * [koji使用](docs/koji使用.md)
     * [koji编译openeuler](docs/koji使用/koji编译openeuler.md)
     * [koji编译rpm基本使用](docs/koji使用/koji编译rpm基本使用.md)
-
-
-
-
 
 
 
