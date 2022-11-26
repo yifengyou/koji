@@ -14,6 +14,7 @@
     * [koji-hub curl发送调试请求](docs/koji源码分析/curl发送调试请求.md)
     * [koji-hub 获取路由列表](docs/koji源码分析/获取路由列表.md)
     * [koji-hub 连接PostgreSQL](docs/koji源码分析/连接PostgreSQL.md)
+    * [koji-hub SQL表拆解](docs/koji源码分析/SQL表拆解.md)
     * [koji-cli koji如何通过krb5鉴权](docs/koji源码分析/koji如何通过krb5鉴权.md)
     * [koji-cli 身份认证](docs/koji源码分析/身份认证.md)
 * [koji使用](docs/koji使用.md)

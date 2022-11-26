@@ -1,3 +1,12 @@
+<!-- MDTOC maxdepth:6 firsth1:1 numbering:0 flatten:0 bullets:1 updateOnSave:1 -->
+
+- [kojihub如何连接PostgreSQL](#kojihub如何连接postgresql)   
+   - [问题分析](#问题分析)   
+   - [代码跟踪](#代码跟踪)   
+   - [总结](#总结)   
+
+<!-- /MDTOC -->
+
 # kojihub如何连接PostgreSQL
 
 
