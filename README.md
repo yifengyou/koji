@@ -40,7 +40,7 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
 * [koji源码分析](docs/koji源码分析.md)
     * [koji-hub httpd如何运行koji-hub](docs/koji源码分析/httpd如何运行koji-hub.md)
     * [koji-hub 入口程序application](docs/koji源码分析/入口程序application.md)
-    * [koji-hub 调试方法](docs/koji源码分析/调试方法.md)
+    * [koji-hub curl发送调试请求](docs/koji源码分析/curl发送调试请求.md)
     * [koji-hub 连接PostgreSQL](docs/koji源码分析/连接PostgreSQL.md)
     * [koji-cli koji如何通过krb5鉴权](docs/koji源码分析/koji如何通过krb5鉴权.md)
     * [koji-cli 身份认证](docs/koji源码分析/身份认证.md)
