@@ -45,11 +45,16 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
     * [koji-hub 获取路由列表](docs/koji源码分析/获取路由列表.md)
     * [koji-hub 连接PostgreSQL](docs/koji源码分析/连接PostgreSQL.md)
     * [koji-hub SQL表拆解](docs/koji源码分析/SQL表拆解.md)
+    * [kojid builder入口解析](docs/koji源码分析/builder入口解析.md)
+    * [kojid builder如何与koji-hub交互](docs/koji源码分析/builder如何与koji-hub交互.md)
     * [koji-cli koji如何通过krb5鉴权](docs/koji源码分析/koji如何通过krb5鉴权.md)
     * [koji-cli 身份认证](docs/koji源码分析/身份认证.md)
 * [koji使用](docs/koji使用.md)
     * [koji编译openeuler](docs/koji使用/koji编译openeuler.md)
     * [koji编译rpm基本使用](docs/koji使用/koji编译rpm基本使用.md)
+* [公开课](docs/公开课.md)
+    * [How Fedora's Koji Works](docs/公开课/How_Fedoras_Koji_Works.md)
+    * [Building RPMs with Gitlab and Koji](docs/公开课/Building_RPMs_with_Gitlab_and_Koji.md)
 
 
 
