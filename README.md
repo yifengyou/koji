@@ -37,6 +37,7 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
 * [相关技术](docs/相关技术.md)
     * [PostgreSQL](docs/相关技术/PostgreSQL.md)
     * [kerberos](docs/相关技术/kerberos.md)
+    * [psycopg2](docs/相关技术/psycopg2.md)
 * [koji源码分析](docs/koji源码分析.md)
     * [koji-hub httpd如何运行koji-hub](docs/koji源码分析/httpd如何运行koji-hub.md)
     * [koji-hub 入口程序application](docs/koji源码分析/入口程序application.md)

@@ -1,6 +1,8 @@
 # kojihub如何连接PostgreSQL
 
 
+## 问题分析
+
 构造一个空的POST请求：
 
 ```
@@ -147,20 +149,212 @@ koji hello
 
 
 
+## 代码跟踪
+
+每个请求都会获取SQL句柄
+
+![20221126_101445_31](image/20221126_101445_31.png)
+
+psycopg2库是python用来操作postgreSQL 数据库的第三方库。
+
+* <https://blog.csdn.net/weixin_42475060/article/details/122945521>
+
+![20221126_101721_11](image/20221126_101721_11.png)
+
+SQL参数和连接都是全局，尤其是连接必须是线程独立的
+
+SQL参数从哪里来，该函数初始化了_DBopts
+
+![20221126_101823_17](image/20221126_101823_17.png)
+
+
+![20221126_101902_93](image/20221126_101902_93.png)
+
+![20221126_101936_48](image/20221126_101936_48.png)
+
+```
+opts = load_config(environ)
+```
+
+毫无疑问，调用到hub核心服务初始化过程中加载配置
+
+这里时时刻刻都关联到environ中，之前讲过 environ是一个包含所有HTTP请求信息的dict对象
+
+代码里写死了配置地址在 /etc/koji-hub/hub.conf、/etc/koji-hub/hub.conf.d
 
 
 
 
+```
+
+def load_config(environ):
+    """Load configuration options
+
+    Options are read from a config file. The config file location is
+    controlled by the koji.hub.ConfigFile environment variable
+    in the httpd config. To override this (for example):
+
+      SetEnv koji.hub.ConfigFile /home/developer/koji/hub/hub.conf
+
+    Backwards compatibility:
+        - if ConfigFile is not set, opts are loaded from http config
+        - if ConfigFile is set, then the http config must not provide Koji options
+        - In a future version we will load the default hub config regardless
+        - all PythonOptions (except ConfigFile) are now deprecated and support for them
+          will disappear in a future version of Koji
+    """
+    # get our config file(s)
+    cf = environ.get('koji.hub.ConfigFile', '/etc/koji-hub/hub.conf') # dict.get(key[, value])  value -- 可选，如果指定键的值不存在时，返回该默认值
+    cfdir = environ.get('koji.hub.ConfigDir', '/etc/koji-hub/hub.conf.d')
+    # 加载配置  /etc/koji-hub/hub.conf、/etc/koji-hub/hub.conf.d
+    config = koji.read_config_files([cfdir, (cf, True)], raw=True)
+
+    cfgmap = [
+        # option, type, default 设置默认值
+        ['DBName', 'string', None],
+        ['DBUser', 'string', None],
+        ['DBHost', 'string', None],
+        ['DBhost', 'string', None],  # alias for backwards compatibility
+        ['DBPort', 'integer', None],
+        ['DBPass', 'string', None],
+        ['DBConnectionString', 'string', None],
+        ['KojiDir', 'string', None],
+
+        ['AuthPrincipal', 'string', None],
+        ['AuthKeytab', 'string', None],
+        ['ProxyPrincipals', 'string', ''],
+        ['HostPrincipalFormat', 'string', None],
+        ['AllowedKrbRealms', 'string', '*'],
+        # TODO: this option should be removed in future release
+        ['DisableGSSAPIProxyDNFallback', 'boolean', False],
+
+        ['DNUsernameComponent', 'string', 'CN'],
+        ['ProxyDNs', 'string', ''],
+
+        ['CheckClientIP', 'boolean', True],
+
+        ['LoginCreatesUser', 'boolean', True],
+        ['AllowProxyAuthType', 'boolean', False],
+        ['KojiWebURL', 'string', 'http://localhost.localdomain/koji'],
+        ['EmailDomain', 'string', None],
+        ['NotifyOnSuccess', 'boolean', True],
+        ['DisableNotifications', 'boolean', False],
+
+        ['Plugins', 'string', ''],
+        ['PluginPath', 'string', '/usr/lib/koji-hub-plugins'],
+
+        ['KojiDebug', 'boolean', False],
+        ['KojiTraceback', 'string', None],
+        ['VerbosePolicy', 'boolean', False],
+
+        ['LogLevel', 'string', 'WARNING'],
+        ['LogFormat', 'string',
+         '%(asctime)s [%(levelname)s] m=%(method)s u=%(user_name)s p=%(process)s r=%(remoteaddr)s '
+         '%(name)s: %(message)s'],
+
+        ['MissingPolicyOk', 'boolean', True],
+        ['EnableMaven', 'boolean', False],
+        ['EnableWin', 'boolean', False],
+
+        ['RLIMIT_AS', 'string', None],
+        ['RLIMIT_CORE', 'string', None],
+        ['RLIMIT_CPU', 'string', None],
+        ['RLIMIT_DATA', 'string', None],
+        ['RLIMIT_FSIZE', 'string', None],
+        ['RLIMIT_MEMLOCK', 'string', None],
+        ['RLIMIT_NOFILE', 'string', None],
+        ['RLIMIT_NPROC', 'string', None],
+        ['RLIMIT_OFILE', 'string', None],  # alias for RLIMIT_NOFILE
+        ['RLIMIT_RSS', 'string', None],
+        ['RLIMIT_STACK', 'string', None],
+
+        ['MemoryWarnThreshold', 'integer', 5000],
+        ['MaxRequestLength', 'integer', 4194304],
+
+        ['LockOut', 'boolean', False],
+        ['ServerOffline', 'boolean', False],
+        ['OfflineMessage', 'string', None],
+
+        ['MaxNameLengthInternal', 'integer', 256],
+        ['RegexNameInternal', 'string', r'^[A-Za-z0-9/_.+-]+$'],
+        ['RegexUserName', 'string', r'^[A-Za-z0-9/_.@-]+$']
+    ]
+    opts = {}
+    for name, dtype, default in cfgmap:
+        key = ('hub', name)
+        if config and config.has_option(*key):
+            if dtype == 'integer':
+                opts[name] = config.getint(*key)
+            elif dtype == 'boolean':
+                opts[name] = config.getboolean(*key)
+            else:
+                opts[name] = config.get(*key)
+            continue
+        opts[name] = default
+    if opts['DBHost'] is None:
+        opts['DBHost'] = opts['DBhost']
+    if opts['RLIMIT_NOFILE'] is None:
+        opts['RLIMIT_NOFILE'] = opts['RLIMIT_OFILE']
+    # load policies
+    # (only from config file)
+    if config and config.has_section('policy'):
+        # for the moment, we simply transfer the policy conf to opts
+        opts['policy'] = dict(config.items('policy'))
+    else:
+        opts['policy'] = {}
+    for pname, text in _default_policies.items():
+        opts['policy'].setdefault(pname, text)
+    # use configured KojiDir
+    if opts.get('KojiDir') is not None:
+        koji.BASEDIR = opts['KojiDir']
+        koji.pathinfo.topdir = opts['KojiDir']
+    if opts['RegexNameInternal'] != '':
+        opts['RegexNameInternal.compiled'] = re.compile(opts['RegexNameInternal'])
+    if opts['RegexUserName'] != '':
+        opts['RegexUserName.compiled'] = re.compile(opts['RegexUserName'])
+    return opts
+```
 
 
 
 
+在读取```config = koji.read_config_files([cfdir, (cf, True)], raw=True)```中有逻辑
+
+![20221126_102708_63](image/20221126_102708_63.png)
+
+![20221126_102724_25](image/20221126_102724_25.png)
+
+![20221126_102808_12](image/20221126_102808_12.png)
+
+可选用户配置，
+
+最终读配置在这里
+
+```
+def read_config_files(config_files, raw=False):
+```
+
+![20221126_103044_86](image/20221126_103044_86.png)
+
+是基于configparser来读取配置的
+
+![20221126_103008_12](image/20221126_103008_12.png)
+
+绕回来，所有配置都在opts中
+
+![20221126_103156_26](image/20221126_103156_26.png)
+
+在看下配置，没错，就是这个
+
+![20221126_103225_99](image/20221126_103225_99.png)
+
+![20221126_103257_83](image/20221126_103257_83.png)
 
 
+## 总结
 
-
-
-
+1. configparser解析参数，读取/etc/koji-hub/hub.conf，获取SQL相关参数
+2. 使用psycopg2连接postgresql，返回句柄
 
 
 
