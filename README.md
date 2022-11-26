@@ -55,6 +55,9 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
 * [公开课](docs/公开课.md)
     * [How Fedora's Koji Works](docs/公开课/How_Fedoras_Koji_Works.md)
     * [Building RPMs with Gitlab and Koji](docs/公开课/Building_RPMs_with_Gitlab_and_Koji.md)
+    * [Intro to Koji Build System](docs/公开课/Intro_to_Koji_Build_System.md)
+    * [CentOS Buildsystems and infrastructure](docs/公开课/CentOS_Buildsystems_and_infrastructure.md)
+
 
 
 
