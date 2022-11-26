@@ -186,13 +186,16 @@ psql: FATAL:  remaining connection slots are reserved for non-replication superu
 
 ![20221126_111020_59](image/20221126_111020_59.png)
 
+## navicat访问postgresql
 
 
+![20221126_112147_55](image/20221126_112147_55.png)
 
+![20221126_112211_65](image/20221126_112211_65.png)
 
+![20221126_112440_89](image/20221126_112440_89.png)
 
-
-
+![20221126_112525_96](image/20221126_112525_96.png) 
 
 
 
