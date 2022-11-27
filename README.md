@@ -47,9 +47,15 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
     * [koji-hub SQL表拆解](docs/koji源码分析/SQL表拆解.md)
     * [kojid builder入口解析](docs/koji源码分析/builder入口解析.md)
     * [kojid builder如何与koji-hub交互](docs/koji源码分析/builder如何与koji-hub交互.md)
+    * [kojid smtp发送邮件](docs/koji源码分析/builder_smtp发送邮件.md)
+    * [kojid 编译git仓库](docs/koji源码分析/builder_编译git仓库.md)
     * [koji-cli koji如何通过krb5鉴权](docs/koji源码分析/koji如何通过krb5鉴权.md)
     * [koji-cli 身份认证](docs/koji源码分析/身份认证.md)
+    * [koji-cli list-notifications使用及解析](docs/koji源码分析/list-notifications使用及解析.md)
+    * [koji-cli watch-task使用及解析](docs/koji源码分析/watch-task使用及解析.md)
 * [koji使用](docs/koji使用.md)
+    * [koji编译centos7](docs/koji使用/koji编译centos7.md)
+    * [koji编译rockylinux8.6](docs/koji使用/koji编译rockylinux8_6.md)
     * [koji编译openeuler](docs/koji使用/koji编译openeuler.md)
     * [koji编译rpm基本使用](docs/koji使用/koji编译rpm基本使用.md)
 * [公开课](docs/公开课.md)
@@ -57,6 +63,9 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
     * [Building RPMs with Gitlab and Koji](docs/公开课/Building_RPMs_with_Gitlab_and_Koji.md)
     * [Intro to Koji Build System](docs/公开课/Intro_to_Koji_Build_System.md)
     * [CentOS Buildsystems and infrastructure](docs/公开课/CentOS_Buildsystems_and_infrastructure.md)
+
+
+
 
 
 
@@ -74,5 +83,20 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
 ![20220811_141746_36](image/20220811_141746_36.png)
 
 ![20221018_135919_46](image/20221018_135919_46.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---

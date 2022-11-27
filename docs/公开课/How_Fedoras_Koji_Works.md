@@ -94,8 +94,8 @@ setup流程：
 
 ```
 koji add-tag fedora-14-base
-koji add-tag fedora-16-base-addon
-koji add-tag fedora-16-base-addon-testing --parent=fedora-14-base-addon
+koji add-tag fedora-14-base-addon
+koji add-tag fedora-14-base-addon-testing --parent=fedora-14-base-addon
 koji add-tag fedora-14-addons-build --parent=fedora-14-addons --arches="i686 x86_64"
 koji add-tag-inheritance --priority=1 fedora-14-addons-build fedora-14-base
 
@@ -166,7 +166,7 @@ koji build fedora-14-addons bash-4.1.7-3.fc14.src.rpm
 
 ![20221126_134432_32](image/20221126_134432_32.png)
 
-![20221126_134450_76](image/20221126_134450_76.png) 
+![20221126_134450_76](image/20221126_134450_76.png)
 
 
 
