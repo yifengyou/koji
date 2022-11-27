@@ -78,13 +78,16 @@ koji add-group-pkg rockylinux8.6-addons-build build bash bzip2 coreutils cpio di
 koji add-group-pkg rockylinux8.6-addons-build build bash tar gcc-c++ redhat-rpm-config redhat-release which xz sed make bzip2 gzip gcc coreutils unzip shadow-utils diffutils cpio bash gawk rpm-build info patch util-linux findutils grep  rocky-release rpm-build
 
 
+## rocky linux源码仓库结构
+
+![20221127_213409_72](image/20221127_213409_72.png)
+
+* <https://wiki.rockylinux.org/special_interest_groups/sig_guide/content/#importing-to-the-rocky-linux-gitlab>
 
 
+* <https://docs.rockylinux.org/guides/package_management/developer_start2/#4-use-rocky-devtools-rockybuild-to-build-a-new-package-for-the-rocky-os>
 
-
-
-
-
+rockylinux 工具集
 
 
 
