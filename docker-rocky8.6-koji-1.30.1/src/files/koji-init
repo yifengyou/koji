@@ -2,6 +2,8 @@
 
 set -xe
 
+timedatectl set-timezone "Asia/Shanghai"
+
 # setup hosts kojihub
 echo "127.0.0.1 kojihub" >> /etc/hosts
 
@@ -82,13 +84,13 @@ cd /etc/koji-pki && chmod +x *.sh && ./9.onekey.sh
 
 # setup sql
 su - postgres -c "/usr/bin/postgresql-setup --initdb"
+cat /etc/kojiweb/postgresql.conf > /var/lib/pgsql/data/postgresql.conf
+cat /etc/kojiweb/pg_hba.conf > /var/lib/pgsql/data/pg_hba.conf
 sync
 systemctl enable --now postgresql.service
 su - postgres -c "createuser koji"
 su - postgres -c "createdb -O koji koji"
 su - koji -c "psql koji koji < /usr/share/doc/koji/docs/schema.sql"
-cat /etc/kojiweb/pg_hba.conf > /var/lib/pgsql/data/pg_hba.conf
-cat /etc/kojiweb/postgresql.conf > /var/lib/pgsql/data/postgresql.conf
 su - postgres -c '/usr/bin/pg_ctl reload -D /var/lib/pgsql/data'
 # su - postgres -c '/usr/bin/pg_ctl restart -D /var/lib/pgsql/data'
 cat > /etc/kojiweb/koji.sql << EOF
@@ -111,8 +113,9 @@ su - koji -c "psql koji koji -c 'select * from users;'"
 su - koji -c "psql koji koji -c 'select * from host;'"
 
 # koji配置
-
-# koji add-host-to-channel kojibuilder1 createrepo 
+koji add-user kojira
+koji grant-permission repo kojira
+koji add-host-to-channel kojibuilder1 createrepo 
 
 
 # dir

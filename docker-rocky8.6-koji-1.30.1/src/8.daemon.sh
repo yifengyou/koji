@@ -10,6 +10,7 @@ docker run \
 	--privileged -d \
 	-v `pwd`/koji-data:/data \
 	-p 9980:80 \
+	-p 5432:5432 \
 	--name rocky8.6-koji \
 	rockylinux8.6-koji \
 	/usr/sbin/init

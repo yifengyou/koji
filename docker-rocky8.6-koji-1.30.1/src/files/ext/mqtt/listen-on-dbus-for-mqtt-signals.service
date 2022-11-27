@@ -1,0 +1,16 @@
+[Unit]
+Description=Listen to org.centos.git.mqtt for actions
+After=network.target
+
+[Service]
+Type=simple
+PrivateTmp=yes
+Restart=on-failure
+RestartSec=2s
+
+#User=<TRUSTEDUSERNAME>
+Group=nobody
+ExecStart=/usr/local/bin/listen-on-dbus-for-mqtt-signals.py --dbus-use-system-bus --run-command=/usr/local/bin/my_safe_command.py
+
+[Install]
+WantedBy=multi-user.target

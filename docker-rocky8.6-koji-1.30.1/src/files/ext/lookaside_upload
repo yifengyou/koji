@@ -1,0 +1,123 @@
+#!/bin/bash
+
+# This script will let you upload sources/blobs to new CentOS lookaside cache
+# requirements:
+#  - curl
+#  - valid TLS certs from https://accounts.centos.org (or dev instance for testing)
+#  - valid group membership to let you upload to specific "branch"
+
+# Some variables, switch for new url
+lookaside_baseurl="https://git.centos.org"
+
+function usage {
+
+cat <<  EOF
+
+You need to call the script like this : $0 -arguments
+
+        -f : filename/source to upload (required, default:none)
+        -n : package name for that source (requred, default:none, example "httpd")
+        -b : "branch" where to upload to (required, default:none, example "c7-sig-core")
+        -h : display this help
+
+EOF
+
+}
+
+function varcheck {
+if [ -z "$1" ] ; then
+        usage
+        exit 1
+fi
+
+}
+
+function f_log {
+  echo "[+] CentOS Lookaside upload tool -> $*"
+}
+
+
+
+while getopts “hf:n:b:” OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         f)
+             file=$OPTARG
+             ;;
+         n)
+             pkgname=$OPTARG
+             ;;
+         b)
+             branch=$OPTARG
+             ;;
+         ?)
+             usage
+             exit
+             ;;
+     esac
+done
+
+varcheck $file
+varcheck $pkgname
+varcheck $branch
+
+if [ ! -f ~/.centos.cert ] ;then
+  f_log "No mandatory TLS cert found (~/.centos.cert) .."
+  f_log "please use centos-cert to retrieve your ACO TLS cert"
+  exit 1
+fi
+
+if [ ! -f "${file}" ] ;then
+  f_log "Source to upload ${file} not found"
+  exit 2
+fi
+
+checksum=$(sha1sum ${file}|awk '{print $1}')
+
+f_log "Checking if file already uploaded"
+local_size=$(stat -c %s ${file})
+http_code=$(curl -s -o /dev/null -w "%{http_code}" ${lookaside_baseurl}/sources/${pkgname}/${branch}/${checksum})
+remote_size=$(curl --silent -i --head ${lookaside_baseurl}/sources/${pkgname}/${branch}/${checksum}|grep "Content-Length"|cut -f 2 -d ':'|tr -d [:blank:]|tr -d '\r')
+if [ "$http_code" -eq 200 ] && [ "$local_size" -eq "$remote_size" ] ; then
+  f_log "File already uploaded"
+  exit 3
+fi
+
+f_log "Initialing new upload to lookaside"
+f_log "URL : $lookaside_baseurl"
+f_log "Source to upload : ${file} "
+f_log "Package name: $pkgname"
+f_log "sha1sum: ${checksum}"
+f_log "Remote branch: ${branch}" 
+f_log " ====== Trying to upload ======="
+echo ""
+curl ${lookaside_baseurl}/sources/upload.cgi \
+	--fail \
+	--cert ~/.centos.cert \
+	--form "name=${pkgname}" \
+	--form "branch=${branch}" \
+	--form "sha1sum=${checksum}" \
+	--form "file=@${file}" \
+	--progress-bar | tee /dev/null
+
+upload_result="${PIPESTATUS[0]}"
+
+if [ "$upload_result" -ne "0" ] ;then
+  f_log "[ERROR] Something didn't work to push to ${lookaside_baseurl}/sources/${pkgname}/${branch}/${checksum}"
+  f_log "[ERROR] Verify at the server side"
+  exit 1
+fi
+
+f_log "Validating that source was correctly uploaded ...."
+remote_size=$(curl --silent -i --head ${lookaside_baseurl}/sources/${pkgname}/${branch}/${checksum}|grep "Content-Length"|cut -f 2 -d ':'|tr -d [:blank:]|tr -d '\r')
+if [ "$local_size" -eq "$remote_size" ] ; then
+  f_log "[SUCCESS] Source should be available at ${lookaside_baseurl}/sources/${pkgname}/${branch}/${checksum}"
+else
+  f_log "[ERROR] it seems there is a mismatch with source size and remote file size"
+fi
+
+
