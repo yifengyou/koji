@@ -653,7 +653,7 @@ class SCM(object):
                      chdir=update_checkout_dir, fatal=True)
             _run(update_checkout_cmd, chdir=update_checkout_dir, fatal=True)
 
-        _run(['/ext/get_sources.sh'], chdir=update_checkout_dir, fatal=True)
+        _run(['/ext/get_sources.py'], chdir=update_checkout_dir, fatal=True)
 
         if self.use_common and not globals().get('KOJIKAMID'):
             _run(common_checkout_cmd, chdir=scmdir, fatal=True)

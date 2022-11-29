@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ ! -f /ext/srpmproc ]
+then
+	echo "/ext/srpmproc not found!"
+	exit 1
+fi
+
+set -x
+
+/ext/srpmproc fetch --cdn-url=https://rocky-linux-sources-staging.a1.rockylinux.org
+
+echo "All done!"
