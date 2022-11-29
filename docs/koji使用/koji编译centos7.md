@@ -1,6 +1,12 @@
 # koji编译centos7
 
 
+## centos源码仓库
+
+![20221128_142024_96](image/20221128_142024_96.png)
+
+patch、spec存放在```git.centos.org```，源代码tar包存放在```https://git.centos.org/sources/包名/分支/```
+
 ## 源码获取脚本get_sources.sh
 
 ![20221127_144329_82](image/20221127_144329_82.png)

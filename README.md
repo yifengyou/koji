@@ -57,6 +57,7 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
     * [koji编译centos7](docs/koji使用/koji编译centos7.md)
     * [koji编译rockylinux8.6](docs/koji使用/koji编译rockylinux8_6.md)
     * [koji编译openeuler](docs/koji使用/koji编译openeuler.md)
+    * [koji编译anolis](docs/koji使用/koji编译anolis.md)
     * [koji编译rpm基本使用](docs/koji使用/koji编译rpm基本使用.md)
 * [公开课](docs/公开课.md)
     * [How Fedora's Koji Works](docs/公开课/How_Fedoras_Koji_Works.md)
