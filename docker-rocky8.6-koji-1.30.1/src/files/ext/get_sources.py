@@ -63,8 +63,6 @@ def do_rocky():
     if not download_success:
         CDN_URL = "https://sources.build.resf.org"
         run(["/ext/srpmproc", "fetch", "--cdn-url=%s" % CDN_URL])
-    print("All done!")
-
 
 if __name__ == "__main__":
     if not os.path.exists('.git/config'):
