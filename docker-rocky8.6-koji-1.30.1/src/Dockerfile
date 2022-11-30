@@ -42,4 +42,5 @@ COPY files/kojid.conf /etc/kojid/
 COPY files/pg_hba.conf /etc/kojiweb/
 COPY files/postgresql.conf /etc/kojiweb/
 COPY files/daemon.py /usr/lib/python3.6/site-packages/koji/daemon.py
+COPY files/__init__.py /usr/lib/python3.6/site-packages/koji/__init__.py
 COPY files/ext/* /ext/
