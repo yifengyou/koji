@@ -175,9 +175,29 @@ Pool finished
 
 ==> 2:DEFAULT:mergerepos.log <==
 $ /usr/bin/mergerepo_c --koji -b /mnt/koji/repos/rockylinux8.6-addons-build/1/x86_64/blocklist -a x86_64 -o /tmp/koji/tasks/2/2/repo --arch-expand -g /mnt/koji/repos/rockylinux8.6-addons-build/1/groups/comps.xml -r file:///tmp/koji/tasks/2/2/repo_1_premerge/ -r http://mirror.nju.edu.cn/rocky/8.7/AppStream/x86_64/os/ -r http://mirror.nju.edu.cn/rocky/8.7/BaseOS/x86_64/os/ -r http://mirror.nju.edu.cn/rocky/8.7/extras/x86_64/os/
+```
+
+![20221129_205841_50](image/20221129_205841_50.png)
+
+经诊断，是因为这里mergerepo模式用了--koji，精简了很多，所以会出现包找不到问题，调整为bare就行
+
+
+![20221129_210633_83](image/20221129_210633_83.png)
+
+* <https://docs.pagure.org/koji/external_repo_server_bootstrap/>
 
 
 ```
+koji add-external-repo -t rockylinux8.6-base -m bare rockylinux8.6-AppSteam   http://mirror.nju.edu.cn/rocky/8.6/AppStream/\$arch/os/
+koji add-external-repo -t rockylinux8.6-base -m bare rockylinux8.6-BaseOs     http://mirror.nju.edu.cn/rocky/8.6/BaseOS/\$arch/os/
+koji add-external-repo -t rockylinux8.6-base -m bare rockylinux8.6-extras     http://mirror.nju.edu.cn/rocky/8.6/extras/\$arch/os/
+koji add-external-repo -t rockylinux8.6-base -m bare rockylinux8.6-PowerTools http://mirror.nju.edu.cn/rocky/8.6/PowerTools/\$arch/os/
+koji add-external-repo -t rockylinux8.6-base -m bare rockylinux8.6-Devel      http://mirror.nju.edu.cn/rocky/8.6/Devel/\$arch/os/
+```
+
+![20221129_214706_93](image/20221129_214706_93.png)
+
+完美解决，成功编译
 
 
 

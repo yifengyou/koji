@@ -2,8 +2,10 @@
 
 * [Introduction](README.md)
 * [koji介绍](docs/koji介绍.md)
+* [koji站点汇总](docs/koji站点汇总.md)
 * [koji部署](docs/koji部署.md)
 * [koji容器化](docs/koji容器化.md)
+* [koji核心概念](docs/koji核心概念.md)
 * [相关技术](docs/相关技术.md)
     * [PostgreSQL](docs/相关技术/PostgreSQL.md)
     * [kerberos](docs/相关技术/kerberos.md)
@@ -28,9 +30,10 @@
     * [koji编译rockylinux8.6](docs/koji使用/koji编译rockylinux8_6.md)
     * [koji编译openeuler](docs/koji使用/koji编译openeuler.md)
     * [koji编译anolis](docs/koji使用/koji编译anolis.md)
-    * [koji编译rpm基本使用](docs/koji使用/koji编译rpm基本使用.md)
+    * [mock中使用systemd-nspawn](docs/koji使用/mock中使用systemd-nspawn.md)
 * [公开课](docs/公开课.md)
     * [How Fedora's Koji Works](docs/公开课/How_Fedoras_Koji_Works.md)
     * [Building RPMs with Gitlab and Koji](docs/公开课/Building_RPMs_with_Gitlab_and_Koji.md)
     * [Intro to Koji Build System](docs/公开课/Intro_to_Koji_Build_System.md)
     * [CentOS Buildsystems and infrastructure](docs/公开课/CentOS_Buildsystems_and_infrastructure.md)
+
