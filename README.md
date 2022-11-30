@@ -21,6 +21,7 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
 * Buildroot contents are tracked in the database
 * Versioned data
 
+
 ## 相关站点
 
 * 官方源码：<https://pagure.io/koji>
@@ -56,6 +57,7 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
     * [koji-cli 身份认证](docs/koji源码分析/身份认证.md)
     * [koji-cli watch-task使用及解析](docs/koji源码分析/watch-task使用及解析.md)
     * [mock中使用systemd-nspawn](docs/koji源码分析/mock中使用systemd-nspawn.md)
+    * [跳过rpm_check阶段](docs/koji源码分析/跳过rpm_check阶段.md)
     * [koji task执行后notifications使用及解析](docs/koji源码分析/task执行后notifications使用及解析.md)
 * [koji使用](docs/koji使用.md)
     * [koji编译centos7](docs/koji使用/koji编译centos7.md)
@@ -68,6 +70,10 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
     * [Intro to Koji Build System](docs/公开课/Intro_to_Koji_Build_System.md)
     * [CentOS Buildsystems and infrastructure](docs/公开课/CentOS_Buildsystems_and_infrastructure.md)
 
+## 技术交流 && 意见反馈
+
+* 打开本菜鸡Github首页，<https://github.com/yifengyou>，
+* 微信/钉钉 加好友，互怼唠嗑扯犊子...whatever~~
 
 
 ## 图示
