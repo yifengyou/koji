@@ -8,6 +8,7 @@ docker container prune -f
 
 docker run \
 	--privileged -d \
+	-v `pwd`/test:/test \
 	-v `pwd`/koji-data:/data \
 	-p 9980:80 \
 	-p 5432:5432 \
