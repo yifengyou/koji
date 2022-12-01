@@ -1785,6 +1785,8 @@ name=build
         value = files[key]
         parts.append("config_opts['files'][%r] = %r\n" % (key, value))
 
+    parts.append("config_opts['rpmbuild_opts'] = '--nocheck'")
+    
     return ''.join(parts)
 
 

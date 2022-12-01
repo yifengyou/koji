@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import shutil
 import subprocess
 
 
@@ -64,6 +65,41 @@ def do_rocky():
         CDN_URL = "https://sources.build.resf.org"
         run(["/ext/srpmproc", "fetch", "--cdn-url=%s" % CDN_URL])
 
+
+def do_anolis():
+    with open('download', 'r') as df:
+        to_download = df.readlines()
+
+    os.makedirs('SOURCES', exist_ok=True)
+    os.makedirs('SPECS', exist_ok=True)
+
+    for fd in os.listdir('.'):
+        if '.git' == fd or 'SOURCES' == fd or 'SPECS' == fd:
+            continue
+        elif fd.endswith('.spec'):
+            shutil.move(fd, 'SPECS')
+        else:
+            shutil.move(fd, 'SOURCES')
+
+    for line in to_download:
+        hashcode = line.split()[0]
+        filename = line.split()[1]
+        print("try download %s : %s" % (filename, hashcode))
+        outpufile = "SOURCES/%s" % filename
+        url = "http://build.openanolis.cn/kojifiles/upstream-source/%s.%s" % (filename, hashcode)
+        run(["curl", "--retry", "5", "-o", outpufile, url])
+    run(["find", "."])
+
+
+"""
+wget -O a.tar.xz http://build.openanolis.cn/kojifiles/upstream-source/a.tar.xz.6acca8f7109cc7ef465a5e3ee3254573    
+"""
+
+
+def do_openeuler():
+    pass
+
+
 if __name__ == "__main__":
     if not os.path.exists('.git/config'):
         print(" # Fatal error! current dir is not normal git repo")
@@ -73,13 +109,13 @@ if __name__ == "__main__":
     with open('.git/config', 'r') as gitconfig:
         data = gitconfig.read()
 
-    if 'gitee.com' in data and os.path.exists('download'):
-        print(" # repo upstream is gitee.com openanolis community")
-
     if 'gitee.com' in data:
-        print(" # repo upstream is gitee.com")
-        print(" # no need to do, keep running...")
-
+        if 'anolis' in data and os.path.exists('download'):
+            print(" # repo upstream is gitee.com openanolis community")
+            do_anolis()
+        if 'openeuler' in data:
+            if os.path.exists('sources') or os.path.exists('SOURCES') or os.path.exists('source'):
+                do_openeuler()
     elif 'git.centos.org' in data:
         print(" # repo upstream is git.centos.org")
         run(["/ext/centos_getsrc.sh"])
