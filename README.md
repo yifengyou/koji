@@ -60,6 +60,7 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
     * [koji task执行后notifications使用及解析](docs/koji源码分析/task执行后notifications使用及解析.md)
     * [如何给koji web换个皮肤](docs/koji源码分析/如何给koji_web换个皮肤.md)
     * [koji-cli addpkg奔溃](docs/koji源码分析/addpkg奔溃.md)
+    * [koji-web 修改默认显示全部task](docs/koji源码分析/修改默认显示全部task.md)
 * [koji使用](docs/koji使用.md)
     * [koji编译OpenCloudOS](docs/koji使用/koji编译OpenCloudOS.md)
     * [koji编译centos7](docs/koji使用/koji编译centos7.md)
