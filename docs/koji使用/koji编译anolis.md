@@ -39,10 +39,10 @@ http://build.openanolis.cn/kojifiles/upstream-source/
 
 
 
+wget -O linux-4.19.91-27_rc3.an8.tar.xz http://build.openanolis.cn/kojifiles/upstream-source/linux-4.19.91-27_rc3.an8.tar.xz.6acca8f7109cc7ef465a5e3ee3254573
 
 
-
-
+curl  -o linux-4.19.91-27_rc3.an8.tar.xz http://build.openanolis.cn/kojifiles/upstream-source/linux-4.19.91-27_rc3.an8.tar.xz.6acca8f7109cc7ef465a5e3ee3254573
 
 
 
