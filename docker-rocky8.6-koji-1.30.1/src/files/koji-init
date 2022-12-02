@@ -102,6 +102,12 @@ select * from users;
 EOF
 su - koji -c "psql koji koji < /etc/kojiweb/koji.sql"
 
+# modify koji-theme
+if [ -f /usr/share/koji-web/static/themes/rocky/include/header.chtml ]
+then
+    cp -a /usr/share/koji-web/static/themes/rocky/include/header.chtml /usr/share/koji-web/scripts/includes/header.chtml
+fi
+
 # add host/user
 systemctl enable --now httpd.service
 koji add-host kojibuilder1 i386 x86_64

@@ -1,0 +1,90 @@
+#encoding UTF-8
+#import koji
+#from kojiweb import util
+#from koji_cli.lib import greetings
+#import random
+<!DOCTYPE html>
+
+#def greeting()
+#echo $random.choice($greetings)##slurp
+#end def
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>$title | $siteName</title>
+    <link rel="shortcut icon" href="$util.themePath('images/koji.ico')"/>
+    <link rel="stylesheet" type="text/css" media="screen" title="Koji Style" href="$util.themePath('koji.css')"/>
+    <link rel="alternate stylesheet" type="text/css" media="screen" title="Debug" href="$util.themePath('debug.css')"/>
+    <link rel="alternate" type="application/rss+xml" title="Koji: recent builds" href="/koji/recentbuilds"/>
+  </head>
+  <body id="$pageID">
+
+    <div id="wrap">
+      <div id="innerwrap">
+
+        <!-- HEADER -->
+        <div id="header">
+          <img src="$util.themePath('images/koji.png')" alt="Koji Logo" id="kojiLogo"/>
+#set $localnavpath=$util.themePath("extra-nav.html", local=True)
+#if os.path.exists($localnavpath)
+#set $localnav="".join(open($localnavpath).readlines())
+$localnav
+#end if
+          <form action="search" id="headerSearch">
+            <input type="hidden" name="match" value="glob"/>
+            <select name="type">
+              <option $util.toggleSelected($self, $type, "package") value="package">Packages</option>
+              <option $util.toggleSelected($self, $type, "build") value="build">Builds</option>
+              <option $util.toggleSelected($self, $type, "tag") value="tag">Tags</option>
+              <option $util.toggleSelected($self, $type, "target") value="target">Build Targets</option>
+              <option $util.toggleSelected($self, $type, "user") value="user">Users</option>
+              <option $util.toggleSelected($self, $type, "host") value="host">Hosts</option>
+              <option $util.toggleSelected($self, $type, "rpm") value="rpm">RPMs</option>
+              #if $mavenEnabled
+              <option $util.toggleSelected($self, $type, "maven") value="maven">Maven Artifacts</option>
+              #end if
+              #if $winEnabled
+              <option $util.toggleSelected($self, $type, "win") value="win">Windows Artifacts</option>
+              #end if
+            </select>
+            #try
+                #set $old_terms = util.escapeHTML($terms)
+            #except
+                #set $old_terms = ""
+            #end try
+            <input type="text" name="terms" title="You can use glob expressions here (e.g. 'bash-*')" value="$old_terms"/>
+            <input class="btn btn-primary" type="submit" value="Search"/>
+          </form>
+          <span id="loginInfo">
+            $koji.formatTimeLong($currentDate)
+            #if not $LoginDisabled
+             |
+            #if $currentUser
+            $greeting(), <a href="userinfo?userID=$currentUser.id">$currentUser.name</a> | <a href="logout">logout</a>
+            #else
+            <a href="login">login</a>
+            #end if
+            #end if
+          </span>
+        </div><!-- end header -->
+
+        <!-- MAIN NAVIGATION -->
+        <div id="mainNav">
+          <h4 class="hide">Main Site Links:</h4>
+          <ul class="nav">
+            <li class="btn btn-primary" id="summaryTab"><a class="btn btn-primary" href="index">Summary</a></li>
+            <li class="btn btn-primary" id="packagesTab"><a class="btn btn-primary" href="packages">Packages</a></li>
+            <li class="btn btn-primary" id="buildsTab"><a class="btn btn-primary" href="builds">Builds</a></li>
+            <li class="btn btn-primary" id="tasksTab"><a class="btn btn-primary" href="tasks">Tasks</a></li>
+            <li class="btn btn-primary" id="tagsTab"><a class="btn btn-primary" href="tags">Tags</a></li>
+            <li class="btn btn-primary" id="buildtargetsTab"><a class="btn btn-primary" href="buildtargets">Build Targets</a></li>
+            <li class="btn btn-primary" id="usersTab"><a class="btn btn-primary" href="users">Users</a></li>
+            <li class="btn btn-primary" id="hostsTab"><a class="btn btn-primary" href="hosts">Hosts</a></li>
+            <li class="btn btn-primary" id="reportsTab"><a class="btn btn-primary" href="reports">Reports</a></li>
+            <li class="btn btn-primary" id="searchTab"><a class="btn btn-primary" href="search">Search</a></li>
+            <li class="btn btn-primary" id="apiTab"><a class="btn btn-primary" href="api">API</a></li>
+          </ul>
+        </div><!-- end mainNav -->
+
+        <div id="content">
