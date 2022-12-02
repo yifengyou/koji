@@ -100,6 +100,10 @@ def do_openeuler():
     pass
 
 
+def do_opencloudos():
+    run(["/ext/opencloudos_getsrc.sh"])
+
+
 if __name__ == "__main__":
     if not os.path.exists('.git/config'):
         print(" # Fatal error! current dir is not normal git repo")
@@ -116,6 +120,8 @@ if __name__ == "__main__":
         if 'openeuler' in data:
             if os.path.exists('sources') or os.path.exists('SOURCES') or os.path.exists('source'):
                 do_openeuler()
+        if 'opencloudos' in data:
+            do_opencloudos()
     elif 'git.centos.org' in data:
         print(" # repo upstream is git.centos.org")
         run(["/ext/centos_getsrc.sh"])

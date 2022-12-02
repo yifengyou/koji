@@ -39,8 +39,8 @@ koji add-external-repo -t rockylinux9-base -m bare rockylinux9-extras           
 koji add-group rockylinux9-addons-build build
 koji add-group rockylinux9-addons-build srpm-build
 
-koji add-group-pkg rockylinux9-addons-build   build    bash bzip2 coreutils cpio diffutils findutils gawk gcc gcc-c++ grep gzip info make patch redhat-rpm-config rocky-release rpm-build sed shadow-utils tar unzip util-linux which xz rpmdevtools  which xz ruby fedpkg
-koji add-group-pkg rockylinux9-addons-build   srpm-build    bash bzip2 coreutils cpio diffutils findutils gawk gcc gcc-c++ grep gzip info make patch redhat-rpm-config rocky-release rpm-build sed shadow-utils tar unzip util-linux which xz rpmdevtools  which xz ruby fedpkg
+koji add-group-pkg rockylinux9-addons-build   build    bash bzip2 coreutils cpio diffutils findutils gawk gcc gcc-c++ grep gzip info make patch redhat-rpm-config rocky-release rpm-build sed shadow-utils tar unzip util-linux which xz rpmdevtools  which xz
+koji add-group-pkg rockylinux9-addons-build   srpm-build    bash bzip2 coreutils cpio diffutils findutils gawk gcc gcc-c++ grep gzip info make patch redhat-rpm-config rocky-release rpm-build sed shadow-utils tar unzip util-linux which xz rpmdevtools  which xz
 
 koji add-target rockylinux9-addons rockylinux9-addons-build rockylinux9-base-addon-testing
 
