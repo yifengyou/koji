@@ -144,7 +144,7 @@ koji regen-repo rockylinux8.6-addons-build
 ![20221202_165724_69](image/20221202_165724_69.png)
 
 
-![20221202_173634_53](image/20221202_173634_53.png) 
+![20221202_173634_53](image/20221202_173634_53.png)
 
 
 ### group
@@ -177,7 +177,7 @@ koji regen-repo rockylinux8.6-addons-build
 
 capacity是builder的处理能力，根据builder负载情况，一般可以设定为nproc
 
-```capacity是指builder可以接受的最大数量的task``` 并不严谨
+- **capacity是指builder可以接受的最大数量的task**
 
 ```
 koji hostinfo kojibuilder1
