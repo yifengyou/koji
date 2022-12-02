@@ -2,7 +2,7 @@
 
 ## 题
 
-又不少发行版用koji搭建都会换个皮肤，是怎么玩的？怎么也给PS一套玩玩？
+有不少发行版用koji 都会换个皮肤，是怎么玩的？怎么也给PS一套玩玩？
 
 ![20221202_144504_34](image/20221202_144504_34.png)
 
@@ -67,7 +67,7 @@ cp include/header.chtml /usr/share/koji-web/scripts/includes/header.chtml
 
 
 
-
+未完待续。。。
 
 
 

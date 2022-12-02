@@ -110,18 +110,22 @@ fi
 
 # add host/user
 systemctl enable --now httpd.service
-koji add-host kojibuilder1 i386 x86_64
-koji add-host kojibuilder2 i386 x86_64
-koji add-host kojibuilder3 i386 x86_64
-koji add-host kojibuilder4 i386 x86_64
-koji add-host kojibuilder5 i386 x86_64
+koji add-host kojibuilder1 x86_64
+koji add-host kojibuilder2 x86_64
+koji add-host kojibuilder3 x86_64
+koji add-host kojibuilder4 x86_64
+koji add-host kojibuilder5 x86_64
 su - koji -c "psql koji koji -c 'select * from users;'"
 su - koji -c "psql koji koji -c 'select * from host;'"
 
 # koji配置
 koji add-user kojira
 koji grant-permission repo kojira
+
+# 必须有个builder具备createrepo能力
 koji add-host-to-channel kojibuilder1 createrepo 
+# 调整builder能力
+koji edit-host --capacity=`nproc` kojibuilder1
 
 
 # dir
