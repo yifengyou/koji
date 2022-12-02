@@ -2,6 +2,8 @@
 
 set -x
 
+koji mock-config --target rockylinux9-addons -a x86_64
+
 koji build rockylinux9-addons --skip-tag  --nowait   'git+https://git.rockylinux.org/staging/src/rocky-release#origin/r9'
 
 exit 0
