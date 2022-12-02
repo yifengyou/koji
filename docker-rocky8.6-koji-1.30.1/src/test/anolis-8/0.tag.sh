@@ -33,4 +33,3 @@ echo "All done!"
 
 exit 0
 
-koji remove-external-repo anolis8-base

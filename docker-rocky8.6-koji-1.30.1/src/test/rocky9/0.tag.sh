@@ -8,11 +8,33 @@ koji add-tag rockylinux9-base-addon-testing --parent=rockylinux9-base-addon
 koji add-tag rockylinux9-addons-build --parent=rockylinux9-base-addon --arches="x86_64"
 koji add-tag-inheritance --priority=1 rockylinux9-addons-build rockylinux9-base
 
-koji add-external-repo -t rockylinux9-base -m bare rockylinux9-AppSteam   http://mirror.nju.edu.cn/rocky/9/AppStream/\$arch/os/
-koji add-external-repo -t rockylinux9-base -m bare rockylinux9-BaseOs     http://mirror.nju.edu.cn/rocky/9/BaseOS/\$arch/os/
-koji add-external-repo -t rockylinux9-base -m bare rockylinux9-extras     http://mirror.nju.edu.cn/rocky/9/extras/\$arch/os/
-koji add-external-repo -t rockylinux9-base -m bare rockylinux9-PowerTools http://mirror.nju.edu.cn/rocky/9/PowerTools/\$arch/os/
-koji add-external-repo -t rockylinux9-base -m bare rockylinux9-Devel      http://mirror.nju.edu.cn/rocky/9/Devel/\$arch/os/
+#http://mirrors.aliyun.com/rockylinux/9/AppStream/
+#http://mirrors.aliyun.com/rockylinux/9/BaseOS/
+#http://mirrors.aliyun.com/rockylinux/9/CRB/
+#http://mirrors.aliyun.com/rockylinux/9/HighAvailability/
+#http://mirrors.aliyun.com/rockylinux/9/NFV/
+#http://mirrors.aliyun.com/rockylinux/9/RT/
+#http://mirrors.aliyun.com/rockylinux/9/ResilientStorage/
+#http://mirrors.aliyun.com/rockylinux/9/SAP/
+#http://mirrors.aliyun.com/rockylinux/9/SAPHANA/
+#http://mirrors.aliyun.com/rockylinux/9/devel/
+#http://mirrors.aliyun.com/rockylinux/9/extras/
+#
+#
+#http://mirrors.aliyun.com/rockylinux/9/AppStream/x86_64/os/
+#http://mirrors.aliyun.com/rockylinux/9/BaseOS/x86_64/os/
+#http://mirrors.aliyun.com/rockylinux/9/HighAvailability/x86_64/os/
+#http://mirrors.aliyun.com/rockylinux/9/ResilientStorage/x86_64/os/
+#http://mirrors.aliyun.com/rockylinux/9/devel/x86_64/os/
+#http://mirrors.aliyun.com/rockylinux/9/extras/x86_64/os/
+
+
+koji add-external-repo -t rockylinux9-base -m bare rockylinux9-AppSteam             http://mirrors.aliyun.com/rockylinux/9/AppStream/x86_64/os/
+koji add-external-repo -t rockylinux9-base -m bare rockylinux9-BaseOs               http://mirrors.aliyun.com/rockylinux/9/BaseOS/x86_64/os/
+koji add-external-repo -t rockylinux9-base -m bare rockylinux9-HighAvailability     http://mirrors.aliyun.com/rockylinux/9/HighAvailability/x86_64/os/
+koji add-external-repo -t rockylinux9-base -m bare rockylinux9-ResilientStorage     http://mirrors.aliyun.com/rockylinux/9/ResilientStorage/x86_64/os/
+koji add-external-repo -t rockylinux9-base -m bare rockylinux9-devel                http://mirrors.aliyun.com/rockylinux/9/devel/x86_64/os/
+koji add-external-repo -t rockylinux9-base -m bare rockylinux9-extras               http://mirrors.aliyun.com/rockylinux/9/extras/x86_64/os/
 
 koji add-group rockylinux9-addons-build build
 koji add-group rockylinux9-addons-build srpm-build
