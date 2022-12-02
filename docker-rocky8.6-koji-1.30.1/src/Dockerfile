@@ -45,6 +45,8 @@ COPY files/daemon.py /usr/lib/python3.6/site-packages/koji/daemon.py
 COPY files/__init__.py /usr/lib/python3.6/site-packages/koji/__init__.py
 COPY files/ext/* /ext/
 COPY files/koji-theme/ /usr/share/koji-web/static/themes/
+COPY files/commands.py /usr/lib/python3.6/site-packages/koji_cli/commands.py
+COPY files/index.py /usr/share/koji-web/scripts/index.py
 
 
 

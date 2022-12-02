@@ -523,7 +523,7 @@ _PARENT_TASKS = ['build', 'chainbuild', 'maven', 'chainmaven', 'winbuild', 'newR
                  'wrapperRPM', 'livecd', 'appliance', 'image', 'livemedia']
 
 
-def tasks(environ, owner=None, state='all', view='tree', method='all', hostID=None,
+def tasks(environ, owner=None, state='active', view='tree', method='all', hostID=None,
           channelID=None, start=None, order='-id'):
     values = _initValues(environ, 'Tasks', 'tasks')
     server = _getServer(environ)
