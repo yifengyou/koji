@@ -55,17 +55,18 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
     * [koji-cli koji如何通过krb5鉴权](docs/koji源码分析/koji如何通过krb5鉴权.md)
     * [koji-cli 身份认证](docs/koji源码分析/身份认证.md)
     * [koji-cli watch-task使用及解析](docs/koji源码分析/watch-task使用及解析.md)
-    * [mock中使用systemd-nspawn](docs/koji源码分析/mock中使用systemd-nspawn.md)
-    * [跳过rpm check阶段](docs/koji源码分析/跳过rpm_check阶段.md)
-    * [koji task执行后notifications使用及解析](docs/koji源码分析/task执行后notifications使用及解析.md)
-    * [如何给koji web换个皮肤](docs/koji源码分析/如何给koji_web换个皮肤.md)
+    * [kojid mock中使用systemd-nspawn](docs/koji源码分析/mock中使用systemd-nspawn.md)
+    * [kojid 跳过rpm check阶段](docs/koji源码分析/跳过rpm_check阶段.md)
+    * [koji-hub task执行后notifications使用及解析](docs/koji源码分析/task执行后notifications使用及解析.md)
+    * [koji-web 如何给koji web换个皮肤](docs/koji源码分析/如何给koji_web换个皮肤.md)
     * [koji-cli addpkg奔溃](docs/koji源码分析/addpkg奔溃.md)
     * [koji-web 修改默认显示全部task](docs/koji源码分析/修改默认显示全部task.md)
+    * [koji-cli 获取target的mock配置](docs/koji源码分析/获取target的mock配置.md)
 * [koji使用](docs/koji使用.md)
     * [koji编译OpenCloudOS](docs/koji使用/koji编译OpenCloudOS.md)
     * [koji编译centos7](docs/koji使用/koji编译centos7.md)
     * [koji编译rockylinux8.6](docs/koji使用/koji编译rockylinux8_6.md)
-    * [koji编译openeuler](docs/koji使用/koji编译openeuler.md)
+    * [koji编译openeuler20.03-LTS-SP1](docs/koji使用/koji编译openeuler2003ltssp1.md)
     * [koji编译anolis](docs/koji使用/koji编译anolis.md)
 * [公开课](docs/公开课.md)
     * [How Fedora's Koji Works](docs/公开课/How_Fedoras_Koji_Works.md)
@@ -75,10 +76,11 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
 
 
 
+
 ## 技术交流 && 意见反馈
 
 * 打开本菜鸡Github首页，<https://github.com/yifengyou>，
-* 微信/钉钉 加好友，互怼唠嗑扯犊子...whatever~~
+* 微信/钉钉 加好友，互怼唠嗑扯犊子...有什么问题，需求， whatever~~
 
 
 ## 图示
