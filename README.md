@@ -59,6 +59,8 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
     * [跳过rpm check阶段](docs/koji源码分析/跳过rpm_check阶段.md)
     * [koji task执行后notifications使用及解析](docs/koji源码分析/task执行后notifications使用及解析.md)
     * [如何给koji web换个皮肤](docs/koji源码分析/如何给koji_web换个皮肤.md)
+    * [koji-cli addpkg奔溃](docs/koji源码分析/addpkg奔溃.md)
+    * [koji-web 修改默认显示全部task](docs/koji源码分析/修改默认显示全部task.md)
 * [koji使用](docs/koji使用.md)
     * [koji编译OpenCloudOS](docs/koji使用/koji编译OpenCloudOS.md)
     * [koji编译centos7](docs/koji使用/koji编译centos7.md)
@@ -70,6 +72,7 @@ Koji's goal is to provide a flexible, secure, and reproducible way to build soft
     * [Building RPMs with Gitlab and Koji](docs/公开课/Building_RPMs_with_Gitlab_and_Koji.md)
     * [Intro to Koji Build System](docs/公开课/Intro_to_Koji_Build_System.md)
     * [CentOS Buildsystems and infrastructure](docs/公开课/CentOS_Buildsystems_and_infrastructure.md)
+
 
 
 ## 技术交流 && 意见反馈
