@@ -13,6 +13,10 @@ RUN dnf install -y epel-release && cat /etc/yum.repos.d/*.repo && dnf makecache 
         python3-cheetah \
         python3-multilib \
         httpd \
+        tmux \
+        openssl \
+        telnet \
+        ca-certificates \
         mod_ssl \
         postgresql-server \
         koji \
