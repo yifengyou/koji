@@ -1,0 +1,349 @@
+#!/usr/bin/python2
+# coding=utf-8
+
+# command line interface for the Koji build system
+# Copyright (c) 2005-2014 Red Hat, Inc.
+#
+#    Koji is free software; you can redistribute it and/or
+#    modify it under the terms of the GNU Lesser General Public
+#    License as published by the Free Software Foundation;
+#    version 2.1 of the License.
+#
+#    This software is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#    Lesser General Public License for more details.
+#
+#    You should have received a copy of the GNU Lesser General Public
+#    License along with this software; if not, write to the Free Software
+#    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+#
+# Authors:
+#       Dennis Gregorovic <dgregor@redhat.com>
+#       Mike McLean <mikem@redhat.com>
+#       Mike Bonnet <mikeb@redhat.com>
+#       Cristian Balint <cbalint@redhat.com>
+
+from __future__ import absolute_import, division
+
+import logging
+import os
+import re
+import sys
+from optparse import SUPPRESS_HELP, OptionParser
+
+import six
+import six.moves.configparser
+import six.moves.xmlrpc_client
+
+import koji
+import koji.plugin
+import koji.util
+from koji_cli.commands import *  # noqa: F401, F403
+from koji_cli.lib import categories, get_epilog_str, greetings, warn
+
+
+def register_plugin(plugin):
+    """Scan a given plugin for handlers
+
+    Handlers are functions marked with one of the decorators defined in koji.plugin
+    """
+    for v in six.itervalues(vars(plugin)):
+        if isinstance(v, six.class_types):
+            # skip classes
+            continue
+        if callable(v):
+            if getattr(v, 'exported_cli', False):
+                if hasattr(v, 'export_alias'):
+                    name = getattr(v, 'export_alias')
+                else:
+                    name = v.__name__
+                # copy object to local namespace
+                globals()[name] = v
+
+
+def load_plugins(plugin_paths):
+    """Load plugins specified by input paths, ~/.koji/plugins, system plugins.
+    Loading order is descending, so they can be overridden by user-specified
+    ones.
+    Notice that:
+    - plugin file should end with .py extension
+    - non-directory is not acceptable by plugin_paths
+    - all plugin files and the exported handlers inside will be loaded, and
+      handler with the same name will override the one has already been loaded
+      before"""
+
+    logger = logging.getLogger('koji.plugins')
+    # first, always load plugins from koji_cli_plugins module
+    paths = [
+        '%s/lib/python%s.%s/site-packages/koji_cli_plugins' %
+        (sys.prefix, sys.version_info[0], sys.version_info[1]),
+        '%s/lib64/python%s.%s/site-packages/koji_cli_plugins' %
+        (sys.prefix, sys.version_info[0], sys.version_info[1])
+    ]
+    # second, always load plugins from ~/.koji/plugins
+    paths.append(os.path.expanduser('~/.koji/plugins'))
+    # finally, update plugin_paths to the list
+    if plugin_paths:
+        if not isinstance(plugin_paths, (list, tuple)):
+            plugin_paths = plugin_paths.split(':')
+        paths.extend([os.path.expanduser(p) for p in reversed(plugin_paths)])
+    tracker = koji.plugin.PluginTracker()
+    for path in paths:
+        if os.path.exists(path) and os.path.isdir(path):
+            for name in sorted(os.listdir(path)):
+                fullname = os.path.join(path, name)
+                if not (os.path.isfile(fullname) and name.endswith('.py')):
+                    continue
+                name = name[:-3]
+                logger.info('Loading plugin: %s', fullname)
+                register_plugin(tracker.load(name, path=path, reload=True))
+
+
+def get_options():
+    """process options from command line and config file"""
+
+    common_commands = ['build', 'help', 'download-build',
+                       'latest-build', 'search', 'list-targets']
+    usage = "%%prog [global-options] command [command-options-and-arguments]\n\n" \
+            "Common commands: %s" % ', '.join(sorted(common_commands))
+    parser = OptionParser(usage=usage)
+    parser.disable_interspersed_args()
+    progname = os.path.basename(sys.argv[0]) or 'koji'
+    parser.__dict__['origin_format_help'] = parser.format_help
+    parser.__dict__['format_help'] = lambda formatter=None: (
+        "%(origin_format_help)s%(epilog)s" % ({
+            'origin_format_help': parser.origin_format_help(formatter),
+            'epilog': get_epilog_str()}))
+    parser.add_option("-p", "--profile", default=progname,
+                      help="specify a configuration profile. default: %s" % progname)
+    parser.add_option("-c", "--config", dest="configFile",
+                      help="load profile's settings from another file. Use with --profile.",
+                      metavar="FILE")
+    parser.add_option("--keytab", help="specify a Kerberos keytab to use", metavar="FILE")
+    parser.add_option("--principal", help="specify a Kerberos principal to use")
+    parser.add_option("--cert", help="specify a SSL cert to use", metavar="FILE")
+    parser.add_option("--runas", help="run as the specified user (requires special privileges)")
+    parser.add_option("--user", help="specify user")
+    parser.add_option("--password", help="specify password")
+    parser.add_option("--noauth", action="store_true", default=False, help="do not authenticate")
+    parser.add_option("--force-auth", action="store_true",  # default (False) comes from the config
+                      help="authenticate even for read-only operations")
+    parser.add_option("--authtype", help="force use of a type of authentication, options: "
+                                         "noauth, ssl, password, or kerberos")
+    parser.add_option("-d", "--debug", action="store_true", help="show debug output")
+    parser.add_option("--debug-xmlrpc", action="store_true", help="show xmlrpc debug output")
+    parser.add_option("-q", "--quiet", action="store_true", default=False, help="run quietly")
+    parser.add_option("--skip-main", action="store_true", default=False,
+                      help="don't actually run main")
+    parser.add_option("-s", "--server", help="url of XMLRPC server")
+    parser.add_option("--topdir", help="specify topdir")
+    parser.add_option("--weburl", help="url of the Koji web interface")
+    parser.add_option("--topurl", help="url for Koji file access")
+    parser.add_option("--pkgurl", help=SUPPRESS_HELP)
+    parser.add_option("--plugin-paths", metavar='PATHS',
+                      help="specify additional plugin paths (colon separated)")
+    parser.add_option("--help-commands", action="store_true", default=False, help="list commands")
+    (options, args) = parser.parse_args()
+
+    # load local config
+    try:
+        result = koji.read_config(options.profile, user_config=options.configFile)
+    except koji.ConfigurationError as e:
+        parser.error(e.args[0])
+        assert False  # pragma: no cover
+
+    # update options according to local config
+    for name, value in six.iteritems(result):
+        if getattr(options, name, None) is None:
+            setattr(options, name, value)
+
+    dir_opts = ('topdir', 'cert', 'serverca')
+    for name in dir_opts:
+        # expand paths here, so we don't have to worry about it later
+        value = os.path.expanduser(getattr(options, name))
+        setattr(options, name, value)
+
+    # honor topdir
+    if options.topdir:
+        koji.BASEDIR = options.topdir
+        koji.pathinfo.topdir = options.topdir
+
+    # pkgurl is obsolete
+    if options.pkgurl:
+        if options.topurl:
+            warn("Warning: the pkgurl option is obsolete")
+        else:
+            suggest = re.sub(r'/packages/?$', '', options.pkgurl)
+            if suggest != options.pkgurl:
+                warn("Warning: the pkgurl option is obsolete, using topurl=%r"
+                     % suggest)
+                options.topurl = suggest
+            else:
+                warn("Warning: The pkgurl option is obsolete, please use topurl instead")
+
+    load_plugins(options.plugin_paths)
+
+    if not args:
+        options.help_commands = True
+    if options.help_commands:
+        # hijack args to [return_code, message]
+        return options, '_list_commands', [0, '']
+
+    aliases = {
+        'cancel-task': 'cancel',
+        'cxl': 'cancel',
+        'list-commands': 'help',
+        'move-pkg': 'move-build',
+        'move': 'move-build',
+        'latest-pkg': 'latest-build',
+        'tag-pkg': 'tag-build',
+        'tag': 'tag-build',
+        'untag-pkg': 'untag-build',
+        'untag': 'untag-build',
+        'watch-tasks': 'watch-task',
+    }
+    cmd = args[0]
+    cmd = aliases.get(cmd, cmd)
+    if cmd.lower() in greetings:
+        cmd = "moshimoshi"
+    cmd = cmd.replace('-', '_')
+    if ('anon_handle_' + cmd) in globals():
+        if not options.force_auth and '--mine' not in args:
+            options.noauth = True
+        cmd = 'anon_handle_' + cmd
+    elif ('handle_' + cmd) in globals():
+        cmd = 'handle_' + cmd
+    else:
+        # hijack args to [return_code, message]
+        return options, '_list_commands', [1, 'Unknown command: %s' % args[0]]
+
+    return options, cmd, args[1:]
+
+
+def handle_help(options, session, args):
+    "[info] List available commands"
+    usage = "usage: %prog help <category> ..."
+    usage += "\n(Specify the --help global option for a list of other help options)"
+    parser = OptionParser(usage=usage)
+    # the --admin opt is for backwards compatibility. It is equivalent to: koji help admin
+    parser.add_option("--admin", action="store_true", help=SUPPRESS_HELP)
+
+    (options, args) = parser.parse_args(args)
+
+    chosen = set(args)
+    if options.admin:
+        chosen.add('admin')
+    avail = set(list(categories.keys()) + ['all'])
+    unavail = chosen - avail
+    for arg in unavail:
+        print("No such help category: %s" % arg)
+
+    if not chosen:
+        list_commands()
+    else:
+        list_commands(chosen)
+
+
+def fix_pyver(options, logger):
+    '''Attempt to run under the correct python version, if requested'''
+    pyver = getattr(options, 'pyver', None)
+    if not pyver:
+        return
+    if pyver not in [2, 3]:
+        logger.warning('Invalid python version requested: %s', pyver)
+    if sys.version_info[0] == pyver:
+        return
+    py_exec = '/usr/bin/python%i' % pyver
+    if not os.path.exists(py_exec):
+        logger.error('No such file: %s', py_exec)
+        return
+    args = list(sys.argv)
+    args.insert(0, py_exec)
+    logger.debug('Executing via %s', py_exec)
+    logger.debug('args = %r', args)
+    try:
+        os.execvp(py_exec, args)
+    except Exception:
+        logger.exception('Unable to execute with requested python version')
+
+
+def list_commands(categories_chosen=None):
+    if categories_chosen is None or "all" in categories_chosen:
+        categories_chosen = list(categories.keys())
+    else:
+        # copy list since we're about to modify it
+        categories_chosen = list(categories_chosen)
+    categories_chosen.sort()
+    handlers = []
+    for name, value in globals().items():
+        if name.startswith('handle_'):
+            alias = name.replace('handle_', '')
+            alias = alias.replace('_', '-')
+            handlers.append((alias, value))
+        elif name.startswith('anon_handle_'):
+            alias = name.replace('anon_handle_', '')
+            alias = alias.replace('_', '-')
+            handlers.append((alias, value))
+    handlers.sort()
+    print("Available commands:")
+    for category in categories_chosen:
+        print("\n%s:" % categories[category])
+        for alias, handler in handlers:
+            desc = handler.__doc__ or ''
+            if desc.startswith('[%s] ' % category):
+                desc = desc[len('[%s] ' % category):]
+            elif category != 'misc' or desc.startswith('['):
+                continue
+            print("        %-25s %s" % (alias, desc))
+
+    print("%s" % get_epilog_str().rstrip("\n"))
+
+
+if __name__ == "__main__":
+    global options
+    options, command, args = get_options()
+
+    logger = logging.getLogger("koji")
+    handler = logging.StreamHandler(sys.stderr)
+    handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(name)s: %(message)s'))
+    handler.setLevel(logging.DEBUG)
+    logger.addHandler(handler)
+    if options.debug:
+        logger.setLevel(logging.DEBUG)
+    elif options.quiet:
+        logger.setLevel(logging.ERROR)
+    else:
+        logger.setLevel(logging.WARN)
+
+    fix_pyver(options, logger)
+
+    session_opts = koji.grab_session_options(options)
+    session = koji.ClientSession(options.server, session_opts)
+    if command == '_list_commands':
+        list_commands()
+        if args[0] != 0:
+            logger.error(args[1])
+        sys.exit(args[0])
+    # run handler
+    rv = 0
+    try:
+        rv = locals()[command].__call__(options, session, args)
+        if not rv:
+            rv = 0
+    except KeyboardInterrupt:
+        rv = 1
+    except SystemExit:
+        raise
+    except Exception:
+        if options.debug:
+            raise
+        else:
+            exctype, value = sys.exc_info()[:2]
+            rv = 1
+            logger.error("%s: %s" % (exctype.__name__, value))
+    try:
+        session.logout()
+    except Exception:
+        pass
+    sys.exit(rv)

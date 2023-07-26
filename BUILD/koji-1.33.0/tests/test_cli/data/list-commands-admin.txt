@@ -1,0 +1,76 @@
+Available commands:
+
+admin commands:
+        add-channel               Add a channel
+        add-external-repo         Create an external repo and/or add one to a tag
+        add-group                 Add a group to a tag
+        add-group-pkg             Add a package to a group's package listing
+        add-group-req             Add a group to a group's required list
+        add-host                  Add a host
+        add-host-to-channel       Add a host to a channel
+        add-pkg                   Add a package to the listing for tag
+        add-tag                   Add a new tag to the database
+        add-tag-inheritance       Add to a tag's inheritance
+        add-target                Create a new build target
+        add-user                  Add a user
+        add-volume                Add a new storage volume
+        assign-task               Assign a task to a host
+        block-group               Block group in tag
+        block-group-pkg           Block a package from a group's package listing
+        block-group-req           Block a group's requirement listing
+        block-pkg                 Block a package in the listing for tag
+        clone-tag                 Duplicate the contents of one tag onto another tag
+        disable-channel           Mark one or more channels as disabled
+        disable-host              Mark one or more hosts as disabled
+        disable-user              Disable logins by a user
+        edit-channel              Edit a channel
+        edit-external-repo        Edit data for an external repo
+        edit-host                 Edit a host
+        edit-permission           Edit a permission description
+        edit-tag                  Alter tag information
+        edit-tag-inheritance      Edit tag inheritance
+        edit-target               Set the name, build_tag, and/or dest_tag of an existing build target to new values
+        edit-user                 Alter user information
+        enable-channel            Mark one or more channels as enabled
+        enable-host               Mark one or more hosts as enabled
+        enable-user               Enable logins by a user
+        free-task                 Free a task
+        grant-cg-access           Add a user to a content generator
+        grant-permission          Grant a permission to a user
+        import                    Import externally built RPMs into the database
+        import-archive            Import an archive file and associate it with a build
+        import-cg                 Import external builds with rich metadata
+        import-sig                Import signatures into the database and write signed RPMs
+        list-signed               List signed copies of rpms
+        lock-tag                  Lock a tag
+        make-task                 Create an arbitrary task
+        prune-signed-copies       Prune signed copies
+        regen-repo                Force a repo to be regenerated
+        remove-external-repo      Remove an external repo from a tag or tags, or remove entirely
+        remove-group              Remove group from tag
+        remove-host-from-channel  Remove a host from a channel
+        remove-pkg                Remove a package from the listing for tag
+        remove-sig                Remove signed RPMs from db and disk
+        remove-tag                Remove a tag
+        remove-tag-inheritance    Remove a tag inheritance link
+        remove-target             Remove a build target
+        restart-hosts             Restart enabled hosts
+        revoke-cg-access          Remove a user from a content generator
+        revoke-permission         Revoke a permission from a user
+        set-build-volume          Move a build to a different volume
+        set-pkg-arches            Set the list of extra arches for a package
+        set-pkg-owner             Set the owner for a package
+        set-pkg-owner-global      Set the owner for a package globally
+        set-task-priority         Set task priority
+        unblock-group-pkg         Unblock a package from a group's package listing
+        unblock-group-req         Unblock a group's requirement listing
+        unblock-pkg               Unblock a package in the listing for tag
+        unlock-tag                Unlock a tag
+        userinfo                  Show information about a user
+        write-signed-rpm          Write signed RPMs to disk
+
+Try "{progname} --help" for help about global options
+Try "{progname} help" to get all available commands
+Try "{progname} <command> --help" for help about the options of a particular command
+Try "{progname} help <category>" to get commands under a particular category
+Available categories are: admin, all, bind, build, download, info, misc, monitor, search
